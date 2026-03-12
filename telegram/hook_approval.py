@@ -3,19 +3,18 @@
 Claude Code PreToolUse Hook — Mobile Approval
 
 위험한 툴 실행 전:
-- Mac idle < 5분 → 자동 승인 (Mac 앞에 있음)
-- Mac idle ≥ 5분 → 텔레그램 승인 요청 → /ok or /no
-- 60초 무응답 → 자동 거절
+- 5분 대기 (Mac에서 볼 기회)
+- 5분 후 텔레그램 승인 요청
+- 응답 올 때까지 무한 대기 (Claude Code 멈춤)
 """
 import json
 import sys
 import time
-import subprocess
 import os
 import re
 from pathlib import Path
 
-# .env 직접 파싱 (dotenv 미설치 환경 대비)
+# .env 직접 파싱
 ENV_FILE = Path(__file__).parent / ".env"
 if ENV_FILE.exists():
     for line in ENV_FILE.read_text().splitlines():
@@ -24,13 +23,13 @@ if ENV_FILE.exists():
             k, v = line.split("=", 1)
             os.environ.setdefault(k.strip(), v.strip())
 
-TOKEN  = os.environ.get("HS_ORCHESTRATOR_TOKEN", "")
+TOKEN   = os.environ.get("HS_ORCHESTRATOR_TOKEN", "")
 CHAT_ID = os.environ.get("HS_CHAT_ID", "")
 
 PENDING_FILE  = Path("/tmp/claude_pending_approval.json")
 RESPONSE_FILE = Path("/tmp/claude_approval_response.txt")
 
-IDLE_THRESHOLD = 300   # 5분 (초)
+WAIT_BEFORE_TELEGRAM = 300  # 5분 대기 후 텔레그램 발송
 
 # ── 위험 패턴 ───────────────────────────────────────────────
 DANGEROUS_BASH = [
@@ -45,25 +44,10 @@ DANGEROUS_BASH = [
     r"DELETE\s+FROM",
     r"truncate\b",
     r"chmod\s+[0-7]*7[0-7]*",
-    r":\s*>\s*\S",   # 파일 덮어쓰기 리다이렉트
+    r":\s*>\s*\S",
 ]
 
 DANGEROUS_WRITE_PATHS = [".env", "credentials", "secrets", "id_rsa", "token"]
-
-
-def get_idle_seconds() -> float:
-    try:
-        result = subprocess.run(
-            ["ioreg", "-c", "IOHIDSystem"],
-            capture_output=True, text=True, timeout=3
-        )
-        for line in result.stdout.split("\n"):
-            if "HIDIdleTime" in line:
-                idle_ns = int(line.split("=")[-1].strip())
-                return idle_ns / 1_000_000_000
-    except Exception:
-        pass
-    return 0.0
 
 
 def is_dangerous(tool_name: str, tool_input: dict) -> tuple[bool, str]:
@@ -106,13 +90,14 @@ def send_telegram(text: str):
 
 
 def wait_for_response() -> str:
+    """응답 올 때까지 무한 대기"""
     RESPONSE_FILE.unlink(missing_ok=True)
     while True:
         if RESPONSE_FILE.exists():
             decision = RESPONSE_FILE.read_text().strip()
             RESPONSE_FILE.unlink(missing_ok=True)
             return decision
-        time.sleep(0.5)
+        time.sleep(1)
 
 
 def main():
@@ -128,12 +113,10 @@ def main():
     if not dangerous:
         sys.exit(0)
 
-    idle = get_idle_seconds()
-    if idle < IDLE_THRESHOLD:
-        # Mac 앞에 있음 — 자동 승인 (터미널에서 직접 확인 가능)
-        sys.exit(0)
+    # 5분 대기 (Mac에서 볼 기회)
+    time.sleep(WAIT_BEFORE_TELEGRAM)
 
-    # Mac idle 5분+ → 텔레그램 전송
+    # 텔레그램 발송
     PENDING_FILE.write_text(json.dumps({
         "tool_name": tool_name,
         "detail": detail,
@@ -151,14 +134,14 @@ def main():
         PENDING_FILE.unlink(missing_ok=True)
         sys.exit(2)
 
+    # 응답 올 때까지 무한 대기
     decision = wait_for_response()
     PENDING_FILE.unlink(missing_ok=True)
 
     if decision == "ok":
         sys.exit(0)
     else:
-        reason = "거절됨" if decision == "no" else f"타임아웃 ({TIMEOUT}초 초과)"
-        print(f"🚫 승인 거절: {reason}", file=sys.stderr)
+        print(f"🚫 승인 거절", file=sys.stderr)
         sys.exit(2)
 
 
