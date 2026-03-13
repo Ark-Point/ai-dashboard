@@ -15,3 +15,16 @@ venv/
 # 임시 파일
 *.tmp
 *.log
+
+# 실무 자료 (PDF, Excel) — GitHub 제외, Google Drive에서 관리
+projects/
+*.pdf
+*.xlsx
+*.xls
+
+# 스크레이핑 아웃풋
+tools/scrape_output/
+*.png
+
+# 봇 로그
+bot.log
