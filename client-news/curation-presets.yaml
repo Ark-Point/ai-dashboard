@@ -1,0 +1,37 @@
+# Weekly Curation Presets
+# 각 프리셋은 에코시스템/주제별 소스와 큐레이션 설정을 정의합니다.
+# 새 프리셋을 추가하려면 아래 형식을 복사하여 작성하세요.
+
+presets:
+  sui:
+    name: "Sui Ecosystem"
+    rss_feeds:
+      - url: "https://blog.sui.io/rss/"
+        label: "Sui 공식 블로그"
+    twitter_handles:
+      - SuiNetwork
+    audience: "한국 리테일 투자자"
+    focus: |
+      투자 관련성 중심으로 큐레이션:
+      1. 가격/투자에 직접 영향: ETF, 토큰 언락, 스테이블코인 출시, 상장
+      2. 기관 채택 시그널: 대형 파트너십, 기관 투자, 규제 관련
+      3. 생태계 성장: TVL 증가, 사용자 증가, 주요 DApp 출시
+      4. 기술 발전: 프로토콜 업그레이드, 새로운 기능
+      5. 일반 커뮤니티/마케팅: 이벤트, 캠페인, 교육 콘텐츠
+    days: 7
+    notion_parent_page_id: "32293ff9-2712-8049-bf8a-f96347604051"
+    max_recommendations: 5
+
+  # 예시: 나중에 추가 가능
+  # aptos:
+  #   name: "Aptos Ecosystem"
+  #   rss_feeds:
+  #     - url: "https://medium.com/feed/aptoslabs"
+  #       label: "Aptos Labs 블로그"
+  #   twitter_handles:
+  #     - Aptos
+  #   audience: "한국 리테일 투자자"
+  #   focus: "투자 관련성 중심 큐레이션"
+  #   days: 7
+  #   notion_parent_page_id: ""
+  #   max_recommendations: 5
