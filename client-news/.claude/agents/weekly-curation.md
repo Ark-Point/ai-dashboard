@@ -1,3 +1,9 @@
+---
+name: weekly-curation
+description: 범용 주간 콘텐츠 큐레이션 에이전트. 프리셋 또는 직접 입력으로 소스를 수집하고, Notion 페이지로 출력한다.
+model: claude-sonnet-4-20250514
+---
+
 # Weekly Curation Agent
 
 범용 주간 콘텐츠 큐레이션 에이전트. 프리셋 또는 직접 입력으로 소스를 수집하고, Notion 페이지로 출력한다.
