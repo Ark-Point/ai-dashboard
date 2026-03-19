@@ -46,7 +46,7 @@ CRON_CMD="cd $REPO_DIR && .venv/bin/python ai-monitor/session_collector.py --hou
 CRON_SCHEDULE="30 9 * * *"  # 매일 09:30
 
 # 기존 cron 제거 후 추가
-(crontab -l 2>/dev/null | grep -v "# ark-ai-monitor"; echo "$CRON_SCHEDULE $CRON_CMD") | crontab -
+(crontab -l 2>/dev/null | grep -v "# ark-ai-monitor" || true; echo "$CRON_SCHEDULE $CRON_CMD") | crontab -
 
 echo ""
 echo "✅ 설치 완료!"
