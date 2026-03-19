@@ -1,0 +1,119 @@
+{
+  "collector_version": "1.0",
+  "collected_at": "2026-03-19T05:23:56.175417+00:00",
+  "username": "kyongeunlee",
+  "period_hours": 24,
+  "summary": {
+    "total_sessions": 4,
+    "total_user_messages": 218,
+    "total_tool_calls": 192,
+    "total_duration_min": 188,
+    "avg_session_min": 47,
+    "top_tools": {
+      "Bash": 48,
+      "Write": 42,
+      "Edit": 24,
+      "Read": 18,
+      "mcp__gdrive__getGoogleSheetContent": 12,
+      "AskUserQuestion": 11,
+      "mcp__gdrive__search": 8,
+      "TodoWrite": 8,
+      "WebFetch": 4,
+      "ToolSearch": 4
+    },
+    "skills_used": {}
+  },
+  "sessions": [
+    {
+      "session_id": "1ee80130-268d-4128-97fb-cfc7287ee6e9",
+      "started_at": "2026-03-19T14:17:17.580000+09:00",
+      "ended_at": "2026-03-19T14:23:54.944000+09:00",
+      "duration_min": 7,
+      "cwd": "~",
+      "user_messages": 30,
+      "assistant_messages": 47,
+      "total_tool_calls": 27,
+      "tools": {
+        "Bash": 21,
+        "WebFetch": 3,
+        "ToolSearch": 1,
+        "Read": 1,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-kyongeunlee"
+    },
+    {
+      "session_id": "5805f619-5d7e-4fac-b879-95292d524e72",
+      "started_at": "2026-03-18T18:04:52.661000+09:00",
+      "ended_at": "2026-03-18T19:18:32.829000+09:00",
+      "duration_min": 74,
+      "cwd": "~",
+      "user_messages": 28,
+      "assistant_messages": 50,
+      "total_tool_calls": 26,
+      "tools": {
+        "Bash": 9,
+        "mcp__gdrive__search": 8,
+        "Read": 2,
+        "Glob": 2,
+        "TodoWrite": 2,
+        "ToolSearch": 1,
+        "AskUserQuestion": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-kyongeunlee"
+    },
+    {
+      "session_id": "5d630377-4e25-4d2d-8ffe-9d5af5803e08",
+      "started_at": "2026-03-18T16:13:53.013000+09:00",
+      "ended_at": "2026-03-18T17:32:35.068000+09:00",
+      "duration_min": 79,
+      "cwd": "~",
+      "user_messages": 133,
+      "assistant_messages": 195,
+      "total_tool_calls": 115,
+      "tools": {
+        "Write": 40,
+        "Edit": 23,
+        "Bash": 14,
+        "Read": 12,
+        "AskUserQuestion": 10,
+        "TodoWrite": 6,
+        "ExitPlanMode": 4,
+        "WebSearch": 2,
+        "EnterPlanMode": 1,
+        "Task": 1,
+        "TaskOutput": 1,
+        "WebFetch": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-kyongeunlee"
+    },
+    {
+      "session_id": "828745ae-8a30-4f24-be66-4140815b4ac4",
+      "started_at": "2026-03-18T16:42:32.867000+09:00",
+      "ended_at": "2026-03-18T17:10:35.290000+09:00",
+      "duration_min": 28,
+      "cwd": "~",
+      "user_messages": 27,
+      "assistant_messages": 44,
+      "total_tool_calls": 24,
+      "tools": {
+        "mcp__gdrive__getGoogleSheetContent": 12,
+        "Bash": 4,
+        "Read": 3,
+        "ToolSearch": 2,
+        "mcp__gdrive__getSpreadsheetInfo": 2,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-kyongeunlee"
+    }
+  ]
+}
