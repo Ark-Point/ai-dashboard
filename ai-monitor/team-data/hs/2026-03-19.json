@@ -1,0 +1,977 @@
+{
+  "collector_version": "1.0",
+  "collected_at": "2026-03-19T01:41:49.959430+00:00",
+  "username": "hs",
+  "period_hours": 24,
+  "summary": {
+    "total_sessions": 51,
+    "total_user_messages": 1106,
+    "total_tool_calls": 994,
+    "total_duration_min": 1489,
+    "avg_session_min": 29,
+    "top_tools": {
+      "Bash": 277,
+      "Read": 272,
+      "Write": 149,
+      "Edit": 105,
+      "mcp__plugin_ouroboros_ouroboros__ouroboros_job_wait": 70,
+      "Glob": 46,
+      "AskUserQuestion": 27,
+      "ToolSearch": 12,
+      "Grep": 11,
+      "Agent": 7
+    },
+    "skills_used": {
+      "ouroboros:run": 1,
+      "ouroboros:interview": 1,
+      "telos:goal": 1,
+      "ouroboros:setup": 1
+    }
+  },
+  "sessions": [
+    {
+      "session_id": "89e760eb-845e-4df1-bb50-15a4c101a6b4",
+      "started_at": "2026-03-18T23:41:43.792000+00:00",
+      "ended_at": "2026-03-19T01:41:47.601000+00:00",
+      "duration_min": 120,
+      "cwd": "~",
+      "user_messages": 66,
+      "assistant_messages": 95,
+      "total_tool_calls": 58,
+      "tools": {
+        "Bash": 31,
+        "Read": 9,
+        "Write": 9,
+        "Agent": 3,
+        "mcp__slack__slack_search_channels": 3,
+        "ToolSearch": 1,
+        "mcp__slack__slack_read_channel": 1,
+        "Grep": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "Explore": 2,
+        "general-purpose": 1
+      },
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "42161019-2d73-42e8-82be-d4c956bc531f",
+      "started_at": "2026-03-18T23:41:14.337000+00:00",
+      "ended_at": "2026-03-18T23:41:29.509000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "4bb67533-8475-4234-a566-65b4850f81ee",
+      "started_at": "2026-03-18T06:11:34.500000+00:00",
+      "ended_at": "2026-03-18T23:58:32.846000+00:00",
+      "duration_min": 1067,
+      "cwd": "~",
+      "user_messages": 136,
+      "assistant_messages": 188,
+      "total_tool_calls": 121,
+      "tools": {
+        "mcp__plugin_ouroboros_ouroboros__ouroboros_job_wait": 70,
+        "Bash": 15,
+        "Read": 8,
+        "Edit": 6,
+        "ToolSearch": 5,
+        "mcp__plugin_ouroboros_ouroboros__ouroboros_start_execute_seed": 5,
+        "Glob": 4,
+        "AskUserQuestion": 2,
+        "mcp__plugin_ouroboros_ouroboros__ouroboros_job_result": 2,
+        "Skill": 1,
+        "mcp__plugin_ouroboros_ouroboros__ouroboros_lateral_think": 1,
+        "mcp__plugin_ouroboros_ouroboros__ouroboros_session_status": 1,
+        "Write": 1
+      },
+      "skills_used": {
+        "ouroboros:run": 1
+      },
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "a52cd30b-70f2-4cab-9dea-e70b1c2a2320",
+      "started_at": "2026-03-18T05:08:35.017000+00:00",
+      "ended_at": "2026-03-18T06:38:30.005000+00:00",
+      "duration_min": 90,
+      "cwd": "~",
+      "user_messages": 54,
+      "assistant_messages": 72,
+      "total_tool_calls": 39,
+      "tools": {
+        "Bash": 16,
+        "AskUserQuestion": 11,
+        "Read": 7,
+        "ToolSearch": 3,
+        "Skill": 1,
+        "Write": 1
+      },
+      "skills_used": {
+        "ouroboros:interview": 1
+      },
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "0365a4e5-2256-4afd-a191-600ad3b7d550",
+      "started_at": "2026-03-18T06:37:09.248000+00:00",
+      "ended_at": "2026-03-18T07:17:01.326000+00:00",
+      "duration_min": 40,
+      "cwd": "~",
+      "user_messages": 34,
+      "assistant_messages": 58,
+      "total_tool_calls": 23,
+      "tools": {
+        "AskUserQuestion": 13,
+        "Bash": 3,
+        "ToolSearch": 2,
+        "Glob": 2,
+        "Read": 1,
+        "Skill": 1,
+        "WebSearch": 1
+      },
+      "skills_used": {
+        "telos:goal": 1
+      },
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "427d721d-2aa9-4f26-b797-188bc4603f41",
+      "started_at": "2026-03-18T07:55:31.942000+00:00",
+      "ended_at": "2026-03-18T07:56:17.755000+00:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 14,
+      "assistant_messages": 17,
+      "total_tool_calls": 13,
+      "tools": {
+        "Read": 7,
+        "Bash": 4,
+        "Glob": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "e6cc7baa-b298-432c-a71e-60bc8d93231e",
+      "started_at": "2026-03-18T07:53:27.529000+00:00",
+      "ended_at": "2026-03-18T07:55:30.706000+00:00",
+      "duration_min": 2,
+      "cwd": "~",
+      "user_messages": 16,
+      "assistant_messages": 28,
+      "total_tool_calls": 15,
+      "tools": {
+        "Read": 7,
+        "Bash": 3,
+        "Edit": 3,
+        "Glob": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "af56f7a1-87d3-4b2e-8491-ec9cf4b1419c",
+      "started_at": "2026-03-18T07:53:27.469000+00:00",
+      "ended_at": "2026-03-18T07:54:32.802000+00:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 6,
+      "assistant_messages": 10,
+      "total_tool_calls": 5,
+      "tools": {
+        "Bash": 3,
+        "Read": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "8ca79e40-5b20-49be-91f2-0537f2b784dd",
+      "started_at": "2026-03-18T07:53:21.025000+00:00",
+      "ended_at": "2026-03-18T07:53:26.196000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "56b03e39-c658-4009-a740-6854997050da",
+      "started_at": "2026-03-18T07:49:58.314000+00:00",
+      "ended_at": "2026-03-18T07:53:19.805000+00:00",
+      "duration_min": 3,
+      "cwd": "~",
+      "user_messages": 19,
+      "assistant_messages": 32,
+      "total_tool_calls": 18,
+      "tools": {
+        "Read": 5,
+        "Bash": 5,
+        "Glob": 4,
+        "Write": 3,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "b3f81746-aa4f-4e9d-94ad-e6dfca9f2f37",
+      "started_at": "2026-03-18T07:49:57.522000+00:00",
+      "ended_at": "2026-03-18T07:52:30.268000+00:00",
+      "duration_min": 3,
+      "cwd": "~",
+      "user_messages": 22,
+      "assistant_messages": 31,
+      "total_tool_calls": 21,
+      "tools": {
+        "Read": 7,
+        "Bash": 6,
+        "Write": 4,
+        "Edit": 3,
+        "Glob": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "0a818cc1-9be1-441b-972c-8f9843e71363",
+      "started_at": "2026-03-18T07:49:57.417000+00:00",
+      "ended_at": "2026-03-18T07:51:33.284000+00:00",
+      "duration_min": 2,
+      "cwd": "~",
+      "user_messages": 19,
+      "assistant_messages": 30,
+      "total_tool_calls": 18,
+      "tools": {
+        "Read": 5,
+        "Bash": 5,
+        "Write": 3,
+        "Glob": 2,
+        "Edit": 2,
+        "Grep": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "17083132-a51b-4a08-a8e2-2c3050687951",
+      "started_at": "2026-03-18T07:49:57.508000+00:00",
+      "ended_at": "2026-03-18T07:51:26.030000+00:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 12,
+      "assistant_messages": 20,
+      "total_tool_calls": 11,
+      "tools": {
+        "Bash": 5,
+        "Read": 3,
+        "Write": 2,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "d46d7684-93bf-4427-b4a8-d82a0209afa5",
+      "started_at": "2026-03-18T07:49:48.655000+00:00",
+      "ended_at": "2026-03-18T07:49:56.925000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "ff0db11f-be6c-4894-a5b3-fed382a0bd4f",
+      "started_at": "2026-03-18T07:49:48.553000+00:00",
+      "ended_at": "2026-03-18T07:49:55.988000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "b164d4ed-16a0-4c31-b11b-5a46041737df",
+      "started_at": "2026-03-18T07:48:19.205000+00:00",
+      "ended_at": "2026-03-18T07:49:47.185000+00:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 11,
+      "assistant_messages": 16,
+      "total_tool_calls": 10,
+      "tools": {
+        "Bash": 3,
+        "Write": 3,
+        "Read": 2,
+        "Edit": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "69b4cf0e-a37a-4ae9-aaec-4cd930af2334",
+      "started_at": "2026-03-18T07:48:15.470000+00:00",
+      "ended_at": "2026-03-18T07:48:17.912000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "fdb704be-d293-4f9a-af30-7c59f25a1715",
+      "started_at": "2026-03-18T07:47:32.610000+00:00",
+      "ended_at": "2026-03-18T07:48:14.144000+00:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 7,
+      "assistant_messages": 9,
+      "total_tool_calls": 6,
+      "tools": {
+        "Bash": 6
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "659880bb-f004-47d7-bda9-74b209f58b40",
+      "started_at": "2026-03-18T07:47:27.714000+00:00",
+      "ended_at": "2026-03-18T07:47:31.230000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "335b2b37-dc5b-461f-8dcf-087993f71622",
+      "started_at": "2026-03-18T07:47:23.164000+00:00",
+      "ended_at": "2026-03-18T07:47:26.106000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "d7bf9276-0d23-4e74-a44b-4cc93960f011",
+      "started_at": "2026-03-18T07:26:27.597000+00:00",
+      "ended_at": "2026-03-18T07:26:51.826000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "5aaa04be-8c27-400b-a8df-b25c427fe246",
+      "started_at": "2026-03-18T07:20:34.635000+00:00",
+      "ended_at": "2026-03-18T07:26:26.426000+00:00",
+      "duration_min": 6,
+      "cwd": "~",
+      "user_messages": 43,
+      "assistant_messages": 66,
+      "total_tool_calls": 42,
+      "tools": {
+        "Read": 21,
+        "Bash": 11,
+        "Edit": 4,
+        "Grep": 3,
+        "Write": 3
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "26f683a5-0a9e-4b32-8fc6-f2c5f1dd1a84",
+      "started_at": "2026-03-18T07:20:31.004000+00:00",
+      "ended_at": "2026-03-18T07:20:33.347000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "4bc9e42a-e6d7-4b6d-af0c-d0c34b56c67e",
+      "started_at": "2026-03-18T07:12:24.831000+00:00",
+      "ended_at": "2026-03-18T07:20:29.453000+00:00",
+      "duration_min": 8,
+      "cwd": "~",
+      "user_messages": 49,
+      "assistant_messages": 75,
+      "total_tool_calls": 48,
+      "tools": {
+        "Write": 16,
+        "Read": 14,
+        "Bash": 10,
+        "Glob": 4,
+        "Edit": 4
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "377e114c-7c47-43ac-9ca4-f5162ae3009b",
+      "started_at": "2026-03-18T07:12:24.708000+00:00",
+      "ended_at": "2026-03-18T07:18:43.899000+00:00",
+      "duration_min": 6,
+      "cwd": "~",
+      "user_messages": 32,
+      "assistant_messages": 51,
+      "total_tool_calls": 31,
+      "tools": {
+        "Bash": 12,
+        "Read": 11,
+        "Write": 7,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "3e91ad2e-d475-495e-b102-3d1de01b7104",
+      "started_at": "2026-03-18T07:12:24.703000+00:00",
+      "ended_at": "2026-03-18T07:18:10.625000+00:00",
+      "duration_min": 6,
+      "cwd": "~",
+      "user_messages": 40,
+      "assistant_messages": 68,
+      "total_tool_calls": 39,
+      "tools": {
+        "Bash": 15,
+        "Read": 13,
+        "Write": 5,
+        "Edit": 5,
+        "Grep": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "b6a77e06-9255-4ebe-ab87-b9ade9f3505b",
+      "started_at": "2026-03-18T07:12:17.305000+00:00",
+      "ended_at": "2026-03-18T07:12:23.262000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "e2f761b1-cffc-42bb-a181-f13989fb0177",
+      "started_at": "2026-03-18T07:06:03.029000+00:00",
+      "ended_at": "2026-03-18T07:12:16.105000+00:00",
+      "duration_min": 6,
+      "cwd": "~",
+      "user_messages": 24,
+      "assistant_messages": 40,
+      "total_tool_calls": 23,
+      "tools": {
+        "Read": 8,
+        "Write": 7,
+        "Bash": 6,
+        "Glob": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "104b1854-4fa1-4462-b5b8-c1cfabfb3219",
+      "started_at": "2026-03-18T07:06:02.759000+00:00",
+      "ended_at": "2026-03-18T07:10:31.832000+00:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 25,
+      "assistant_messages": 43,
+      "total_tool_calls": 24,
+      "tools": {
+        "Read": 11,
+        "Edit": 6,
+        "Write": 3,
+        "Bash": 3,
+        "Glob": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "52fe3e99-e0c2-411c-b720-35b98952a95f",
+      "started_at": "2026-03-18T07:06:02.901000+00:00",
+      "ended_at": "2026-03-18T07:10:26.734000+00:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 15,
+      "assistant_messages": 23,
+      "total_tool_calls": 14,
+      "tools": {
+        "Write": 5,
+        "Bash": 4,
+        "Read": 4,
+        "Glob": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "a23ff6ac-2cce-45a1-ba4c-f795e7d6ab0c",
+      "started_at": "2026-03-18T07:05:50.887000+00:00",
+      "ended_at": "2026-03-18T07:06:01.406000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "f320f845-58c2-43d7-bae6-98ccdeeb2bc1",
+      "started_at": "2026-03-18T07:01:30.711000+00:00",
+      "ended_at": "2026-03-18T07:05:49.665000+00:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 19,
+      "assistant_messages": 31,
+      "total_tool_calls": 18,
+      "tools": {
+        "Bash": 7,
+        "Read": 7,
+        "Write": 2,
+        "Edit": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "6a88aa23-0646-48b6-a636-67754104511b",
+      "started_at": "2026-03-18T07:01:30.679000+00:00",
+      "ended_at": "2026-03-18T07:05:29.412000+00:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 16,
+      "assistant_messages": 24,
+      "total_tool_calls": 15,
+      "tools": {
+        "Bash": 7,
+        "Read": 4,
+        "Write": 2,
+        "Glob": 1,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "f4725727-f3ec-4e29-867c-da8670e93821",
+      "started_at": "2026-03-18T07:01:30.679000+00:00",
+      "ended_at": "2026-03-18T07:05:25.737000+00:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 15,
+      "assistant_messages": 28,
+      "total_tool_calls": 14,
+      "tools": {
+        "Edit": 5,
+        "Read": 4,
+        "Bash": 2,
+        "Agent": 1,
+        "Grep": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "Explore": 1
+      },
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "d63cb517-98be-4bba-bb38-cfa3d3f9689c",
+      "started_at": "2026-03-18T07:01:16.215000+00:00",
+      "ended_at": "2026-03-18T07:01:29.392000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "579c06ca-67a2-4e34-b181-1b7698388980",
+      "started_at": "2026-03-18T07:00:01.795000+00:00",
+      "ended_at": "2026-03-18T07:01:14.891000+00:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 10,
+      "assistant_messages": 13,
+      "total_tool_calls": 9,
+      "tools": {
+        "Bash": 4,
+        "Read": 3,
+        "Glob": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "e503e8fc-a6ad-44a0-8dbc-77a1cb8ee58c",
+      "started_at": "2026-03-18T06:42:42.646000+00:00",
+      "ended_at": "2026-03-18T06:59:59.836000+00:00",
+      "duration_min": 17,
+      "cwd": "~",
+      "user_messages": 61,
+      "assistant_messages": 91,
+      "total_tool_calls": 60,
+      "tools": {
+        "Read": 26,
+        "Bash": 12,
+        "Write": 11,
+        "Edit": 6,
+        "Grep": 3,
+        "Glob": 1,
+        "Agent": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "general": 1
+      },
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "403d8f04-50be-455f-8a4f-b89c54c7883e",
+      "started_at": "2026-03-18T06:42:42.534000+00:00",
+      "ended_at": "2026-03-18T06:58:44.255000+00:00",
+      "duration_min": 16,
+      "cwd": "~",
+      "user_messages": 68,
+      "assistant_messages": 92,
+      "total_tool_calls": 67,
+      "tools": {
+        "Edit": 26,
+        "Read": 23,
+        "Bash": 7,
+        "Write": 6,
+        "Glob": 3,
+        "Agent": 1,
+        "Grep": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "Explore": 1
+      },
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "959a5803-a34a-4379-b988-3f81e4213987",
+      "started_at": "2026-03-18T06:42:42.679000+00:00",
+      "ended_at": "2026-03-18T06:55:21.105000+00:00",
+      "duration_min": 13,
+      "cwd": "~",
+      "user_messages": 61,
+      "assistant_messages": 79,
+      "total_tool_calls": 60,
+      "tools": {
+        "Read": 20,
+        "Bash": 14,
+        "Write": 14,
+        "Edit": 10,
+        "Glob": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "64951e1c-e700-4c64-900c-f2725b8b6809",
+      "started_at": "2026-03-18T06:42:42.504000+00:00",
+      "ended_at": "2026-03-18T06:52:58.031000+00:00",
+      "duration_min": 10,
+      "cwd": "~",
+      "user_messages": 47,
+      "assistant_messages": 65,
+      "total_tool_calls": 46,
+      "tools": {
+        "Read": 14,
+        "Write": 14,
+        "Bash": 13,
+        "Glob": 3,
+        "Edit": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "e693ffee-8c95-4db5-ab40-633ffec14e46",
+      "started_at": "2026-03-18T06:42:42.674000+00:00",
+      "ended_at": "2026-03-18T06:49:56.027000+00:00",
+      "duration_min": 7,
+      "cwd": "~",
+      "user_messages": 26,
+      "assistant_messages": 36,
+      "total_tool_calls": 25,
+      "tools": {
+        "Bash": 11,
+        "Write": 9,
+        "Read": 3,
+        "Edit": 1,
+        "Glob": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "ca687406-fd70-4fca-afa1-f1e6b43fe489",
+      "started_at": "2026-03-18T06:42:43.154000+00:00",
+      "ended_at": "2026-03-18T06:47:39.205000+00:00",
+      "duration_min": 5,
+      "cwd": "~",
+      "user_messages": 21,
+      "assistant_messages": 29,
+      "total_tool_calls": 20,
+      "tools": {
+        "Read": 6,
+        "Bash": 6,
+        "Edit": 6,
+        "Glob": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "ad97cbbe-5ca7-4404-a1ed-882f60cde407",
+      "started_at": "2026-03-18T06:42:42.730000+00:00",
+      "ended_at": "2026-03-18T06:47:00.180000+00:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 27,
+      "assistant_messages": 42,
+      "total_tool_calls": 26,
+      "tools": {
+        "Bash": 9,
+        "Read": 8,
+        "Edit": 4,
+        "Write": 3,
+        "Glob": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "c8ed3f3e-ec34-44e7-a06b-35888ae9417e",
+      "started_at": "2026-03-18T06:42:42.616000+00:00",
+      "ended_at": "2026-03-18T06:45:44.707000+00:00",
+      "duration_min": 3,
+      "cwd": "~",
+      "user_messages": 23,
+      "assistant_messages": 36,
+      "total_tool_calls": 22,
+      "tools": {
+        "Write": 8,
+        "Bash": 7,
+        "Read": 3,
+        "Glob": 2,
+        "Edit": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "4e17de6f-8317-4e25-8c66-995f8d3c0350",
+      "started_at": "2026-03-18T06:42:29.482000+00:00",
+      "ended_at": "2026-03-18T06:42:41.154000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "e9a68d4b-4d3a-4b7d-a785-c1a3a5504f90",
+      "started_at": "2026-03-18T06:42:29.283000+00:00",
+      "ended_at": "2026-03-18T06:42:41.179000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "0bcf30d2-f610-48d5-bde4-00d32ccbe4ae",
+      "started_at": "2026-03-18T06:31:21.162000+00:00",
+      "ended_at": "2026-03-18T06:42:28.038000+00:00",
+      "duration_min": 11,
+      "cwd": "~",
+      "user_messages": 20,
+      "assistant_messages": 22,
+      "total_tool_calls": 18,
+      "tools": {
+        "Bash": 5,
+        "Glob": 4,
+        "Read": 4,
+        "Write": 3,
+        "Edit": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "38f739a0-c1db-4574-b82d-d6f4c21f1b36",
+      "started_at": "2026-03-18T06:31:18.249000+00:00",
+      "ended_at": "2026-03-18T06:31:19.909000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "c5a1a7e7-bd6c-43e2-a0b0-871b34ad7a0a",
+      "started_at": "2026-03-18T06:31:14.136000+00:00",
+      "ended_at": "2026-03-18T06:31:17.017000+00:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "e6465e61-426e-472e-8a1f-7b98d71fd60e",
+      "started_at": "2026-03-18T06:06:49.861000+00:00",
+      "ended_at": "2026-03-18T06:11:29.113000+00:00",
+      "duration_min": 5,
+      "cwd": "~",
+      "user_messages": 18,
+      "assistant_messages": 26,
+      "total_tool_calls": 14,
+      "tools": {
+        "Bash": 7,
+        "Read": 3,
+        "Skill": 1,
+        "Write": 1,
+        "ToolSearch": 1,
+        "AskUserQuestion": 1
+      },
+      "skills_used": {
+        "ouroboros:setup": 1
+      },
+      "agents_used": {},
+      "project": "-Users-hs"
+    },
+    {
+      "session_id": "dc79f9e4-2352-4b8e-8b7a-7ebc3d818d9e",
+      "started_at": "2026-03-18T02:17:03.673000+00:00",
+      "ended_at": "2026-03-18T02:29:34.144000+00:00",
+      "duration_min": 13,
+      "cwd": "~",
+      "user_messages": 14,
+      "assistant_messages": 18,
+      "total_tool_calls": 1,
+      "tools": {
+        "Agent": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "general-purpose": 1
+      },
+      "project": "-Users-hs"
+    }
+  ]
+}
