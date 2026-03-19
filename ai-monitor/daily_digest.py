@@ -180,21 +180,8 @@ def generate_digest(github: dict, slack: dict, team_sessions: dict, report_date:
 
 def _get_display_name(username: str) -> str:
     """시스템 username → 표시명"""
-    # TEAM_MEMBERS는 GitHub login 기반이므로, OS username 매핑 추가
-    os_to_display = {
-        "hs": "HS",
-        "ann": "Ann",
-        "kyongeunlee": "Ann",
-        "teo": "TEO",
-        "freddie": "Freddie",
-        "hook": "Hook",
-        "jesse": "Jesse",
-        "rae": "Rae",
-        "mew": "Mew",
-        "dooyoung": "두영",
-        "harry": "Harry",
-        "uno": "Uno",
-    }
+    from config import OS_USERNAME_MAP
+    os_to_display = OS_USERNAME_MAP
     return os_to_display.get(username.lower(), username)
 
 

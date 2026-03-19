@@ -23,6 +23,22 @@ TEAM_MEMBERS = {
     # "???": "Harry",
 }
 
+# OS username → 표시명 (session_collector가 OS username으로 저장)
+OS_USERNAME_MAP = {
+    "hs": "HS",
+    "kyongeunlee": "Ann",
+    "freddie": "Freddie",
+    "ann": "Ann",
+    "teo": "TEO",
+    "hook": "Hook",
+    "jesse": "Jesse",
+    "rae": "Rae",
+    "mew": "Mew",
+    "dooyoung": "두영",
+    "harry": "Harry",
+    "uno": "Uno",
+}
+
 # GitHub org
 GITHUB_ORG = "Ark-Point"
 
