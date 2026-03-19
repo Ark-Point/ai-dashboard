@@ -85,19 +85,19 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 
 <div class="header">
     <h1>ARK Point AI Native Dashboard</h1>
-    <div class="date">2026-03-19 | AI Native ¿öÅ©ÇÃ·Î¿ì ¸ğ´ÏÅÍ¸µ</div>
+    <div class="date">2026-03-19 | AI Native ì›Œí¬í”Œë¡œìš° ëª¨ë‹ˆí„°ë§</div>
 </div>
 
 <!-- Filters -->
 <div class="filters">
     <div class="filter-group">
-        <label>³¯Â¥:</label>
-        <button class="filter-btn active" onclick="setDateFilter('all')">ÀüÃ¼</button>
+        <label>ë‚ ì§œ:</label>
+        <button class="filter-btn active" onclick="setDateFilter('all')">ì „ì²´</button>
         <div id="dateButtons"></div>
     </div>
     <div class="filter-group">
-        <label>±¸¼º¿ø:</label>
-        <button class="filter-btn active" onclick="setMemberFilter('all')">ÀüÃ¼</button>
+        <label>êµ¬ì„±ì›:</label>
+        <button class="filter-btn active" onclick="setMemberFilter('all')">ì „ì²´</button>
         <div id="memberButtons"></div>
     </div>
 </div>
@@ -108,11 +108,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 <!-- Charts -->
 <div class="charts-grid">
     <div class="chart-card">
-        <h3>±¸¼º¿øº° µµ±¸ È£Ãâ Æ®·»µå</h3>
+        <h3>êµ¬ì„±ì›ë³„ ë„êµ¬ í˜¸ì¶œ íŠ¸ë Œë“œ</h3>
         <canvas id="memberTrendChart"></canvas>
     </div>
     <div class="chart-card">
-        <h3>ÀÏº° ÆÀ ºñ±³</h3>
+        <h3>ì¼ë³„ íŒ€ ë¹„êµ</h3>
         <canvas id="dailyCompareChart"></canvas>
     </div>
 </div>
@@ -123,18 +123,18 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <h3 id="detailTitle"></h3>
     <div class="member-stats" id="detailStats"></div>
     <div class="charts-grid" style="margin-top:1rem">
-        <div class="chart-card"><h3>ÀÏº° È°µ¿</h3><canvas id="detailDailyChart"></canvas></div>
-        <div class="chart-card"><h3>µµ±¸ »ç¿ë ºĞÆ÷</h3><canvas id="detailToolChart"></canvas></div>
+        <div class="chart-card"><h3>ì¼ë³„ í™œë™</h3><canvas id="detailDailyChart"></canvas></div>
+        <div class="chart-card"><h3>ë„êµ¬ ì‚¬ìš© ë¶„í¬</h3><canvas id="detailToolChart"></canvas></div>
     </div>
 </div>
 
 <!-- Members -->
-<h2 class="section-title">±¸¼º¿øº° AI È°¿ë</h2>
+<h2 class="section-title">êµ¬ì„±ì›ë³„ AI í™œìš©</h2>
 <div class="members-grid" id="membersGrid"></div>
 
 <div id="missingSection"></div>
 
-<div class="footer">ARK Point AI Native ¿öÅ©ÇÃ·Î¿ì ¸ğ´ÏÅÍ¸µ ½Ã½ºÅÛ | ÀÚµ¿ »ı¼º</div>
+<div class="footer">ARK Point AI Native ì›Œí¬í”Œë¡œìš° ëª¨ë‹ˆí„°ë§ ì‹œìŠ¤í…œ | ìë™ ìƒì„±</div>
 
 <script>
 // === DATA ===
@@ -238,12 +238,12 @@ function updateDashboard() {
 function renderKPIs(totals, members) {
     const grid = document.getElementById('kpiGrid');
     grid.innerHTML = `
-        <div class="kpi-card"><div class="kpi-value">${totals.sessions}</div><div class="kpi-label">Claude ¼¼¼Ç</div></div>
-        <div class="kpi-card"><div class="kpi-value">${totals.messages}</div><div class="kpi-label">AI ´ëÈ­</div></div>
-        <div class="kpi-card"><div class="kpi-value">${totals.tool_calls}</div><div class="kpi-label">µµ±¸ È£Ãâ</div></div>
-        <div class="kpi-card"><div class="kpi-value">${totals.duration_min}m</div><div class="kpi-label">AI »ç¿ë ½Ã°£</div></div>
-        <div class="kpi-card"><div class="kpi-value">${members.length}</div><div class="kpi-label">Âü¿© ±¸¼º¿ø</div></div>
-        <div class="kpi-card"><div class="kpi-value">${Object.keys(TEAM_MEMBERS).length}</div><div class="kpi-label">ÀüÃ¼ ±¸¼º¿ø</div></div>
+        <div class="kpi-card"><div class="kpi-value">${totals.sessions}</div><div class="kpi-label">Claude ì„¸ì…˜</div></div>
+        <div class="kpi-card"><div class="kpi-value">${totals.messages}</div><div class="kpi-label">AI ëŒ€í™”</div></div>
+        <div class="kpi-card"><div class="kpi-value">${totals.tool_calls}</div><div class="kpi-label">ë„êµ¬ í˜¸ì¶œ</div></div>
+        <div class="kpi-card"><div class="kpi-value">${totals.duration_min}m</div><div class="kpi-label">AI ì‚¬ìš© ì‹œê°„</div></div>
+        <div class="kpi-card"><div class="kpi-value">${members.length}</div><div class="kpi-label">ì°¸ì—¬ êµ¬ì„±ì›</div></div>
+        <div class="kpi-card"><div class="kpi-value">${Object.keys(TEAM_MEMBERS).length}</div><div class="kpi-label">ì „ì²´ êµ¬ì„±ì›</div></div>
     `;
 }
 
@@ -281,12 +281,12 @@ function renderMemberCards(members, dates) {
         card.innerHTML = `
             <div class="member-header"><h3>${esc(m.toUpperCase())}</h3><span class="member-badge">${totals.sessions} sessions</span></div>
             <div class="member-stats">
-                <div class="stat-item"><div class="stat-value">${totals.messages}</div><div class="stat-label">´ëÈ­</div></div>
-                <div class="stat-item"><div class="stat-value">${totals.tool_calls}</div><div class="stat-label">µµ±¸ È£Ãâ</div></div>
-                <div class="stat-item"><div class="stat-value">${totals.duration}m</div><div class="stat-label">ÃÑ ½Ã°£</div></div>
-                <div class="stat-item"><div class="stat-value">${totals.sessions ? Math.round(totals.duration/totals.sessions) : 0}m</div><div class="stat-label">Æò±Õ/¼¼¼Ç</div></div>
+                <div class="stat-item"><div class="stat-value">${totals.messages}</div><div class="stat-label">ëŒ€í™”</div></div>
+                <div class="stat-item"><div class="stat-value">${totals.tool_calls}</div><div class="stat-label">ë„êµ¬ í˜¸ì¶œ</div></div>
+                <div class="stat-item"><div class="stat-value">${totals.duration}m</div><div class="stat-label">ì´ ì‹œê°„</div></div>
+                <div class="stat-item"><div class="stat-value">${totals.sessions ? Math.round(totals.duration/totals.sessions) : 0}m</div><div class="stat-label">í‰ê· /ì„¸ì…˜</div></div>
             </div>
-            <div class="tools-section"><h4>µµ±¸ »ç¿ë</h4>${toolBars}</div>
+            <div class="tools-section"><h4>ë„êµ¬ ì‚¬ìš©</h4>${toolBars}</div>
             ${skillTags ? '<div class="skills">'+skillTags+'</div>' : ''}
         `;
         grid.appendChild(card);
@@ -331,7 +331,7 @@ function renderDailyCompareChart(members, dates) {
 function showDetail(member) {
     const panel = document.getElementById('detailPanel');
     panel.classList.add('visible');
-    document.getElementById('detailTitle').textContent = member.toUpperCase() + ' »ó¼¼';
+    document.getElementById('detailTitle').textContent = member.toUpperCase() + ' ìƒì„¸';
 
     const md = MEMBERS_DAILY[member] || {};
     const dates = Object.keys(md).sort().slice(-7);
@@ -343,10 +343,10 @@ function showDetail(member) {
         if(s) { total.sessions+=s.sessions; total.messages+=s.messages; total.tools+=s.tool_calls; total.duration+=s.duration_min; }
     });
     document.getElementById('detailStats').innerHTML = `
-        <div class="stat-item"><div class="stat-value">${total.sessions}</div><div class="stat-label">¼¼¼Ç (7ÀÏ)</div></div>
-        <div class="stat-item"><div class="stat-value">${total.messages}</div><div class="stat-label">´ëÈ­</div></div>
-        <div class="stat-item"><div class="stat-value">${total.tools}</div><div class="stat-label">µµ±¸ È£Ãâ</div></div>
-        <div class="stat-item"><div class="stat-value">${total.duration}m</div><div class="stat-label">ÃÑ ½Ã°£</div></div>
+        <div class="stat-item"><div class="stat-value">${total.sessions}</div><div class="stat-label">ì„¸ì…˜ (7ì¼)</div></div>
+        <div class="stat-item"><div class="stat-value">${total.messages}</div><div class="stat-label">ëŒ€í™”</div></div>
+        <div class="stat-item"><div class="stat-value">${total.tools}</div><div class="stat-label">ë„êµ¬ í˜¸ì¶œ</div></div>
+        <div class="stat-item"><div class="stat-value">${total.duration}m</div><div class="stat-label">ì´ ì‹œê°„</div></div>
     `;
 
     // Daily chart
@@ -356,8 +356,8 @@ function showDetail(member) {
         data: {
             labels: dates.map(d=>d.slice(5)),
             datasets: [
-                { label:'¼¼¼Ç', data:dates.map(d=>md[d]?.sessions||0), backgroundColor:'#6366f1' },
-                { label:'µµ±¸', data:dates.map(d=>md[d]?.tool_calls||0), backgroundColor:'#22c55e' },
+                { label:'ì„¸ì…˜', data:dates.map(d=>md[d]?.sessions||0), backgroundColor:'#6366f1' },
+                { label:'ë„êµ¬', data:dates.map(d=>md[d]?.tool_calls||0), backgroundColor:'#22c55e' },
             ]
         },
         options: chartOpts(),
@@ -392,7 +392,7 @@ function renderMissing() {
     const missing = [...allNames].filter(n => !participating.has(n));
     const el = document.getElementById('missingSection');
     if (missing.length) {
-        el.innerHTML = `<div class="missing-section"><h4>¹Ì¼öÁı ±¸¼º¿ø</h4><div class="missing-names">${missing.join(', ')}</div><code>cd ~/Documents/ark_point/repos/ark-agents && bash ai-monitor/install.sh</code></div>`;
+        el.innerHTML = `<div class="missing-section"><h4>ë¯¸ìˆ˜ì§‘ êµ¬ì„±ì›</h4><div class="missing-names">${missing.join(', ')}</div><code>cd ~/Documents/ark_point/repos/ark-agents && bash ai-monitor/install.sh</code></div>`;
     } else {
         el.innerHTML = '';
     }
