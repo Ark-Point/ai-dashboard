@@ -7,403 +7,401 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
-    --bg: #0a0a0f;
-    --card: #12121a;
-    --border: #1e1e2e;
-    --text: #e0e0e8;
-    --text-dim: #6b6b7b;
-    --accent: #6366f1;
-    --accent-glow: rgba(99,102,241,0.15);
-    --green: #22c55e;
-    --yellow: #eab308;
-    --blue: #3b82f6;
-    --red: #ef4444;
+    --bg: #0a0a0f; --card: #12121a; --border: #1e1e2e;
+    --text: #e0e0e8; --text-dim: #6b6b7b;
+    --accent: #6366f1; --accent-glow: rgba(99,102,241,0.15);
+    --green: #22c55e; --yellow: #eab308; --blue: #3b82f6; --red: #ef4444;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    padding: 2rem;
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; padding:2rem; }
+.header { text-align:center; margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+.header h1 { font-size:1.8rem; font-weight:700; background:linear-gradient(135deg,#6366f1,#8b5cf6,#a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.header .date { color:var(--text-dim); font-size:0.9rem; }
+
+/* Filters */
+.filters { display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; align-items:center; }
+.filter-group { display:flex; gap:0.4rem; flex-wrap:wrap; align-items:center; }
+.filter-group label { font-size:0.8rem; color:var(--text-dim); margin-right:0.3rem; }
+.filter-btn {
+    background:var(--card); border:1px solid var(--border); border-radius:8px;
+    padding:0.4rem 0.8rem; color:var(--text-dim); cursor:pointer; font-size:0.8rem;
+    transition:all 0.2s;
 }
-.header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
-}
-.header h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.header .date { color: var(--text-dim); margin-top: 0.3rem; font-size: 0.9rem; }
-.kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-.kpi-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.2rem;
-    text-align: center;
-}
-.kpi-card .kpi-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent);
-}
-.kpi-card .kpi-label {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    margin-top: 0.2rem;
-}
-.charts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-.chart-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-}
-.chart-card h3 {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-.section-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 2rem 0 1rem;
-    padding-left: 0.5rem;
-    border-left: 3px solid var(--accent);
-}
-.members-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-.member-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: border-color 0.2s;
-}
-.member-card:hover { border-color: var(--accent); }
-.member-card.high { border-left: 3px solid var(--green); }
-.member-card.mid { border-left: 3px solid var(--yellow); }
-.member-card.low { border-left: 3px solid var(--blue); }
-.member-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.member-header h3 { font-size: 1.1rem; }
-.member-badge {
-    background: var(--accent-glow);
-    color: var(--accent);
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-.member-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-.stat-item { text-align: center; }
-.stat-value { font-size: 1.2rem; font-weight: 700; color: var(--text); }
-.stat-label { font-size: 0.7rem; color: var(--text-dim); }
-.tools-section h4 {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-}
-.tool-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.3rem;
-    font-size: 0.8rem;
-}
-.tool-name { width: 90px; text-align: right; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tool-bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 3px; }
-.tool-bar { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.5s; }
-.tool-count { width: 30px; text-align: right; font-weight: 600; font-size: 0.75rem; }
-.skills { margin-top: 0.8rem; }
-.skill-tag {
-    display: inline-block;
-    background: rgba(34,197,94,0.1);
-    color: var(--green);
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    margin: 0.15rem;
-    font-family: monospace;
-}
-.missing-section {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-}
-.missing-section h4 { color: var(--text-dim); margin-bottom: 0.5rem; }
-.missing-names { color: var(--yellow); margin-bottom: 0.8rem; }
-.missing-section code {
-    display: block;
-    background: var(--bg);
-    padding: 0.8rem;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    color: var(--green);
-    word-break: break-all;
-}
-.empty { color: var(--text-dim); text-align: center; padding: 2rem; }
-.footer {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-}
-@media (max-width: 768px) {
-    .charts-grid { grid-template-columns: 1fr; }
-    .members-grid { grid-template-columns: 1fr; }
-    body { padding: 1rem; }
-}
+.filter-btn:hover { border-color:var(--accent); color:var(--text); }
+.filter-btn.active { background:var(--accent-glow); border-color:var(--accent); color:var(--accent); font-weight:600; }
+
+/* KPI */
+.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:0.8rem; margin-bottom:1.5rem; }
+.kpi-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1rem; text-align:center; }
+.kpi-value { font-size:1.8rem; font-weight:700; color:var(--accent); }
+.kpi-label { font-size:0.75rem; color:var(--text-dim); }
+
+/* Charts */
+.charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem; }
+.chart-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; }
+.chart-card h3 { font-size:0.85rem; color:var(--text-dim); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+/* Members */
+.section-title { font-size:1.1rem; font-weight:600; margin:2rem 0 1rem; padding-left:0.5rem; border-left:3px solid var(--accent); }
+.members-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+.member-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; cursor:pointer; transition:all 0.2s; }
+.member-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+.member-card.selected { border-color:var(--accent); box-shadow:0 0 20px var(--accent-glow); }
+.member-card.high { border-left:3px solid var(--green); }
+.member-card.mid { border-left:3px solid var(--yellow); }
+.member-card.low { border-left:3px solid var(--blue); }
+.member-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+.member-header h3 { font-size:1.1rem; }
+.member-badge { background:var(--accent-glow); color:var(--accent); padding:0.2rem 0.6rem; border-radius:20px; font-size:0.75rem; font-weight:600; }
+.member-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; margin-bottom:1rem; }
+.stat-item { text-align:center; }
+.stat-value { font-size:1.2rem; font-weight:700; }
+.stat-label { font-size:0.7rem; color:var(--text-dim); }
+.tools-section h4 { font-size:0.75rem; color:var(--text-dim); margin-bottom:0.5rem; text-transform:uppercase; }
+.tool-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem; font-size:0.8rem; }
+.tool-name { width:100px; text-align:right; color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tool-bar-bg { flex:1; height:6px; background:var(--border); border-radius:3px; }
+.tool-bar { height:100%; background:var(--accent); border-radius:3px; }
+.tool-count { width:35px; text-align:right; font-weight:600; font-size:0.75rem; }
+.skills { margin-top:0.8rem; }
+.skill-tag { display:inline-block; background:rgba(34,197,94,0.1); color:var(--green); padding:0.15rem 0.5rem; border-radius:4px; font-size:0.75rem; margin:0.15rem; font-family:monospace; }
+
+/* Detail panel */
+.detail-panel { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:2rem; display:none; }
+.detail-panel.visible { display:block; }
+.detail-panel h3 { margin-bottom:1rem; }
+.detail-close { float:right; cursor:pointer; color:var(--text-dim); font-size:1.2rem; }
+.detail-close:hover { color:var(--text); }
+
+.missing-section { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:2rem; }
+.missing-section h4 { color:var(--text-dim); margin-bottom:0.5rem; }
+.missing-names { color:var(--yellow); margin-bottom:0.8rem; }
+.missing-section code { display:block; background:var(--bg); padding:0.8rem; border-radius:6px; font-size:0.8rem; color:var(--green); word-break:break-all; }
+.footer { text-align:center; color:var(--text-dim); font-size:0.75rem; margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border); }
+@media (max-width:768px) { .charts-grid,.members-grid { grid-template-columns:1fr; } body { padding:1rem; } }
 </style>
 </head>
 <body>
+
 <div class="header">
     <h1>ARK Point AI Native Dashboard</h1>
     <div class="date">2026-03-19 | AI Native 워크플로우 모니터링</div>
 </div>
 
-<div class="kpi-grid">
-    <div class="kpi-card">
-        <div class="kpi-value">2</div>
-        <div class="kpi-label">Claude 세션</div>
+<!-- Filters -->
+<div class="filters">
+    <div class="filter-group">
+        <label>날짜:</label>
+        <button class="filter-btn active" onclick="setDateFilter('all')">전체</button>
+        <div id="dateButtons"></div>
     </div>
-    <div class="kpi-card">
-        <div class="kpi-value">103</div>
-        <div class="kpi-label">AI 대화</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-value">84</div>
-        <div class="kpi-label">도구 호출</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-value">140m</div>
-        <div class="kpi-label">총 AI 사용 시간</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-value">0</div>
-        <div class="kpi-label">GitHub 커밋</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-value">0</div>
-        <div class="kpi-label">AI 기여 커밋</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-value">0</div>
-        <div class="kpi-label">#ai-lab 메시지</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-value">2/8</div>
-        <div class="kpi-label">데이터 수집률</div>
+    <div class="filter-group">
+        <label>구성원:</label>
+        <button class="filter-btn active" onclick="setMemberFilter('all')">전체</button>
+        <div id="memberButtons"></div>
     </div>
 </div>
 
+<!-- KPI -->
+<div class="kpi-grid" id="kpiGrid"></div>
+
+<!-- Charts -->
 <div class="charts-grid">
     <div class="chart-card">
-        <h3>Claude 세션 & 도구 호출 트렌드</h3>
-        <canvas id="sessionChart"></canvas>
+        <h3>구성원별 도구 호출 트렌드</h3>
+        <canvas id="memberTrendChart"></canvas>
     </div>
     <div class="chart-card">
-        <h3>GitHub & Slack 활동</h3>
-        <canvas id="activityChart"></canvas>
+        <h3>일별 팀 비교</h3>
+        <canvas id="dailyCompareChart"></canvas>
     </div>
 </div>
 
+<!-- Detail Panel -->
+<div class="detail-panel" id="detailPanel">
+    <span class="detail-close" onclick="closeDetail()">&times;</span>
+    <h3 id="detailTitle"></h3>
+    <div class="member-stats" id="detailStats"></div>
+    <div class="charts-grid" style="margin-top:1rem">
+        <div class="chart-card"><h3>일별 활동</h3><canvas id="detailDailyChart"></canvas></div>
+        <div class="chart-card"><h3>도구 사용 분포</h3><canvas id="detailToolChart"></canvas></div>
+    </div>
+</div>
+
+<!-- Members -->
 <h2 class="section-title">구성원별 AI 활용</h2>
-<div class="members-grid">
-    
-        <div class="member-card high">
-            <div class="member-header">
-                <h3>KYONGEUNLEE</h3>
-                <span class="member-badge">4 sessions</span>
-            </div>
-            <div class="member-stats">
-                <div class="stat-item">
-                    <div class="stat-value">233</div>
-                    <div class="stat-label">대화</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">204</div>
-                    <div class="stat-label">도구 호출</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">193m</div>
-                    <div class="stat-label">총 시간</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">48m</div>
-                    <div class="stat-label">평균/세션</div>
-                </div>
-            </div>
-            <div class="tools-section">
-                <h4>도구 사용</h4>
-                
-                <div class="tool-row">
-                    <span class="tool-name">Bash</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:100.0%"></div></div>
-                    <span class="tool-count">60</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">Write</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:70.0%"></div></div>
-                    <span class="tool-count">42</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">Edit</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:40.0%"></div></div>
-                    <span class="tool-count">24</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">Read</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:30.0%"></div></div>
-                    <span class="tool-count">18</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">mcp__gdrive__getGoogleSheetContent</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:20.0%"></div></div>
-                    <span class="tool-count">12</span>
-                </div>
-            </div>
-            
-        </div>
+<div class="members-grid" id="membersGrid"></div>
 
-        <div class="member-card high">
-            <div class="member-header">
-                <h3>HS</h3>
-                <span class="member-badge">51 sessions</span>
-            </div>
-            <div class="member-stats">
-                <div class="stat-item">
-                    <div class="stat-value">1106</div>
-                    <div class="stat-label">대화</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">994</div>
-                    <div class="stat-label">도구 호출</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">1489m</div>
-                    <div class="stat-label">총 시간</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">29m</div>
-                    <div class="stat-label">평균/세션</div>
-                </div>
-            </div>
-            <div class="tools-section">
-                <h4>도구 사용</h4>
-                
-                <div class="tool-row">
-                    <span class="tool-name">Bash</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:100.0%"></div></div>
-                    <span class="tool-count">277</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">Read</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:98.19494584837545%"></div></div>
-                    <span class="tool-count">272</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">Write</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:53.79061371841155%"></div></div>
-                    <span class="tool-count">149</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">Edit</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:37.90613718411552%"></div></div>
-                    <span class="tool-count">105</span>
-                </div>
-                <div class="tool-row">
-                    <span class="tool-name">ouroboros:ouroboros_job_wait</span>
-                    <div class="tool-bar-bg"><div class="tool-bar" style="width:25.27075812274368%"></div></div>
-                    <span class="tool-count">70</span>
-                </div>
-            </div>
-            <div class="skills"><span class="skill-tag">/ouroboros:run</span> <span class="skill-tag">/ouroboros:interview</span> <span class="skill-tag">/telos:goal</span> <span class="skill-tag">/ouroboros:setup</span></div>
-        </div>
-</div>
+<div id="missingSection"></div>
 
-
-        <div class="missing-section">
-            <h4>미수집 구성원</h4>
-            <div class="missing-names">Hook, Rae, Freddie, Ann, Mew, TEO, Jesse</div>
-            <code>cd ~/Documents/ark_point/repos/ark-agents && bash ai-monitor/install.sh</code>
-        </div>
-
-<div class="footer">
-    ARK Point AI Native 워크플로우 모니터링 시스템 | 자동 생성
-</div>
+<div class="footer">ARK Point AI Native 워크플로우 모니터링 시스템 | 자동 생성</div>
 
 <script>
-const chartOptions = {
-    responsive: true,
-    plugins: { legend: { labels: { color: '#6b6b7b', font: { size: 11 } } } },
-    scales: {
-        x: { ticks: { color: '#6b6b7b' }, grid: { color: '#1e1e2e' } },
-        y: { ticks: { color: '#6b6b7b' }, grid: { color: '#1e1e2e' } }
+// === DATA ===
+const HISTORY = [{"date": "2026-03-12", "generated_at": "2026-03-19T11:02:03.821295+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 6, "messages": 521, "tool_calls": 354, "duration_min": 9603}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-13", "generated_at": "2026-03-19T11:02:03.821918+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 9, "messages": 527, "tool_calls": 362, "duration_min": 14771}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-14", "generated_at": "2026-03-19T11:02:03.822041+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-15", "generated_at": "2026-03-19T11:02:03.822205+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 3, "messages": 50, "tool_calls": 35, "duration_min": 5}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-16", "generated_at": "2026-03-19T11:02:03.822284+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 5, "messages": 41, "tool_calls": 21, "duration_min": 7}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-17", "generated_at": "2026-03-19T11:02:03.822357+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 3, "messages": 15, "tool_calls": 11, "duration_min": 77}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-18", "generated_at": "2026-03-19T11:02:03.822430+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 49, "messages": 1039, "tool_calls": 936, "duration_min": 1354}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-19", "generated_at": "2026-03-19T06:50:37.214425+00:00", "claude_sessions": {"Ann": {"sessions": 4, "messages": 233, "tool_calls": 204, "duration_min": 193}, "HS": {"sessions": 51, "messages": 1106, "tool_calls": 994, "duration_min": 1489}, "Freddie": {"sessions": 6, "messages": 510, "tool_calls": 410, "duration_min": 804}}, "github": {"total_commits": 12, "ai_commits": 3, "active_members": 1}, "slack": {"total_messages": 8, "ai_mentions": 6, "active_users": 3}}];
+const MEMBERS_DAILY = {"Ann": {"2026-03-19": {"sessions": 4, "messages": 233, "tool_calls": 204, "duration_min": 193, "avg_session_min": 48, "top_tools": {"Bash": 60, "Write": 42, "Edit": 24, "Read": 18, "mcp__gdrive__getGoogleSheetContent": 12, "AskUserQuestion": 11, "mcp__gdrive__search": 8, "TodoWrite": 8, "WebFetch": 4, "ToolSearch": 4}, "skills_used": {}}}, "HS": {"2026-03-19": {"sessions": 51, "messages": 1106, "tool_calls": 994, "duration_min": 1489, "avg_session_min": 29, "top_tools": {"Bash": 277, "Read": 272, "Write": 149, "Edit": 105, "mcp__plugin_ouroboros_ouroboros__ouroboros_job_wait": 70, "Glob": 46, "AskUserQuestion": 27, "ToolSearch": 12, "Grep": 11, "Agent": 7}, "skills_used": {"ouroboros:run": 1, "ouroboros:interview": 1, "telos:goal": 1, "ouroboros:setup": 1}}}, "Freddie": {"2026-03-19": {"sessions": 6, "messages": 510, "tool_calls": 410, "duration_min": 804, "avg_session_min": 134, "top_tools": {"Bash": 124, "Read": 77, "Edit": 50, "Write": 48, "TaskUpdate": 31, "Agent": 27, "TaskOutput": 11, "TaskCreate": 11, "Glob": 10, "ToolSearch": 9}, "skills_used": {"youtube-summarize": 1, "conductor:new-track": 1}}}, "hs": {"2026-03-12": {"sessions": 6, "messages": 521, "tool_calls": 354, "duration_min": 9603, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-13": {"sessions": 9, "messages": 527, "tool_calls": 362, "duration_min": 14771, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-15": {"sessions": 3, "messages": 50, "tool_calls": 35, "duration_min": 5, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-16": {"sessions": 5, "messages": 41, "tool_calls": 21, "duration_min": 7, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-17": {"sessions": 3, "messages": 15, "tool_calls": 11, "duration_min": 77, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-18": {"sessions": 49, "messages": 1039, "tool_calls": 936, "duration_min": 1354, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-19": {"sessions": 51, "messages": 1106, "tool_calls": 994, "duration_min": 1489, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}}, "ann": {"2026-03-19": {"sessions": 4, "messages": 233, "tool_calls": 204, "duration_min": 193, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}}, "freddie": {"2026-03-19": {"sessions": 6, "messages": 510, "tool_calls": 410, "duration_min": 804, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}}};
+const ALL_DATES = ["2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19"];
+const TEAM_MEMBERS = {"hslee-byte": "HS", "annnzel": "Ann", "teo-hash": "TEO", "ghks18g": "Freddie", "uno-515": "Hook", "jesseorbit": "Jesse", "RaeOfJune": "Rae", "Dev-Arkpoint": "Mew"};
+const COLORS = ['#6366f1','#22c55e','#eab308','#3b82f6','#ef4444','#a855f7','#f97316','#06b6d4','#ec4899','#14b8a6'];
+
+let currentDateFilter = 'all';
+let currentMemberFilter = 'all';
+let memberTrendChart = null;
+let dailyCompareChart = null;
+let detailDailyChart = null;
+let detailToolChart = null;
+
+// === INIT ===
+function init() {
+    renderDateButtons();
+    renderMemberButtons();
+    updateDashboard();
+}
+
+function renderDateButtons() {
+    const container = document.getElementById('dateButtons');
+    ALL_DATES.slice(-7).forEach(d => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.textContent = d.slice(5);
+        btn.onclick = () => setDateFilter(d);
+        container.appendChild(btn);
+    });
+}
+
+function renderMemberButtons() {
+    const container = document.getElementById('memberButtons');
+    Object.keys(MEMBERS_DAILY).forEach(m => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.textContent = m.toUpperCase();
+        btn.dataset.member = m;
+        btn.onclick = () => setMemberFilter(m);
+        container.appendChild(btn);
+    });
+}
+
+function setDateFilter(d) {
+    currentDateFilter = d;
+    document.querySelectorAll('.filters .filter-group:first-child .filter-btn').forEach(b => b.classList.remove('active'));
+    if (d === 'all') {
+        document.querySelector('.filters .filter-group:first-child .filter-btn').classList.add('active');
+    } else {
+        document.querySelectorAll('#dateButtons .filter-btn').forEach(b => {
+            if (b.textContent === d.slice(5)) b.classList.add('active');
+        });
     }
-};
+    updateDashboard();
+}
 
-new Chart(document.getElementById('sessionChart'), {
-    type: 'line',
-    data: {
-        labels: ["03-12", "03-13", "03-14", "03-15", "03-16", "03-17", "03-18", "03-19"],
-        datasets: [
-            { label: '세션', data: [6, 9, 0, 3, 5, 3, 49, 2], borderColor: '#6366f1', backgroundColor: 'rgba(99,102,241,0.1)', fill: true, tension: 0.3 },
-            { label: '도구 호출', data: [354, 362, 0, 35, 21, 11, 936, 84], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', fill: true, tension: 0.3 }
-        ]
-    },
-    options: chartOptions
-});
+function setMemberFilter(m) {
+    currentMemberFilter = m;
+    document.querySelectorAll('.filters .filter-group:last-child .filter-btn').forEach(b => b.classList.remove('active'));
+    if (m === 'all') {
+        document.querySelector('.filters .filter-group:last-child .filter-btn').classList.add('active');
+    } else {
+        document.querySelectorAll('#memberButtons .filter-btn').forEach(b => {
+            if (b.dataset.member === m) b.classList.add('active');
+        });
+    }
+    updateDashboard();
+}
 
-new Chart(document.getElementById('activityChart'), {
-    type: 'bar',
-    data: {
-        labels: ["03-12", "03-13", "03-14", "03-15", "03-16", "03-17", "03-18", "03-19"],
-        datasets: [
-            { label: '커밋', data: [0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: '#3b82f6' },
-            { label: 'AI 커밋', data: [0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: '#8b5cf6' },
-            { label: 'Slack', data: [0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: '#eab308' }
-        ]
-    },
-    options: chartOptions
-});
+function getFilteredData() {
+    const members = currentMemberFilter === 'all' ? Object.keys(MEMBERS_DAILY) : [currentMemberFilter];
+    const dates = currentDateFilter === 'all' ? ALL_DATES : [currentDateFilter];
+    let totals = { sessions:0, messages:0, tool_calls:0, duration_min:0 };
+    members.forEach(m => {
+        const md = MEMBERS_DAILY[m] || {};
+        dates.forEach(d => {
+            const s = md[d];
+            if (s) {
+                totals.sessions += s.sessions;
+                totals.messages += s.messages;
+                totals.tool_calls += s.tool_calls;
+                totals.duration_min += s.duration_min;
+            }
+        });
+    });
+    return { members, dates, totals };
+}
+
+function updateDashboard() {
+    const { members, dates, totals } = getFilteredData();
+    renderKPIs(totals, members);
+    renderMemberCards(members, dates);
+    renderMemberTrendChart(members, dates);
+    renderDailyCompareChart(members, dates);
+    renderMissing(members);
+}
+
+function renderKPIs(totals, members) {
+    const grid = document.getElementById('kpiGrid');
+    grid.innerHTML = `
+        <div class="kpi-card"><div class="kpi-value">${totals.sessions}</div><div class="kpi-label">Claude 세션</div></div>
+        <div class="kpi-card"><div class="kpi-value">${totals.messages}</div><div class="kpi-label">AI 대화</div></div>
+        <div class="kpi-card"><div class="kpi-value">${totals.tool_calls}</div><div class="kpi-label">도구 호출</div></div>
+        <div class="kpi-card"><div class="kpi-value">${totals.duration_min}m</div><div class="kpi-label">AI 사용 시간</div></div>
+        <div class="kpi-card"><div class="kpi-value">${members.length}</div><div class="kpi-label">참여 구성원</div></div>
+        <div class="kpi-card"><div class="kpi-value">${Object.keys(TEAM_MEMBERS).length}</div><div class="kpi-label">전체 구성원</div></div>
+    `;
+}
+
+function renderMemberCards(members, dates) {
+    const grid = document.getElementById('membersGrid');
+    grid.innerHTML = '';
+    members.forEach(m => {
+        const md = MEMBERS_DAILY[m] || {};
+        let totals = { sessions:0, messages:0, tool_calls:0, duration:0, tools:{}, skills:{} };
+        dates.forEach(d => {
+            const s = md[d];
+            if (s) {
+                totals.sessions += s.sessions;
+                totals.messages += s.messages;
+                totals.tool_calls += s.tool_calls;
+                totals.duration += s.duration_min;
+                Object.entries(s.top_tools || {}).forEach(([t,c]) => { totals.tools[t] = (totals.tools[t]||0) + c; });
+                Object.entries(s.skills_used || {}).forEach(([s2,c]) => { totals.skills[s2] = (totals.skills[s2]||0) + c; });
+            }
+        });
+
+        const level = totals.tool_calls > 50 ? 'high' : totals.tool_calls > 10 ? 'mid' : 'low';
+        const toolEntries = Object.entries(totals.tools).sort((a,b) => b[1]-a[1]).slice(0,5);
+        const maxTool = toolEntries.length ? Math.max(...toolEntries.map(e=>e[1])) || 1 : 1;
+        const toolBars = toolEntries.map(([t,c]) => {
+            const short = t.replace('mcp__plugin_ouroboros_ouroboros__','ouroboros:');
+            const pct = c/maxTool*100;
+            return `<div class="tool-row"><span class="tool-name">${esc(short)}</span><div class="tool-bar-bg"><div class="tool-bar" style="width:${pct}%"></div></div><span class="tool-count">${c}</span></div>`;
+        }).join('');
+        const skillTags = Object.keys(totals.skills).map(s => `<span class="skill-tag">/${esc(s)}</span>`).join(' ');
+
+        const card = document.createElement('div');
+        card.className = `member-card ${level}`;
+        card.onclick = () => showDetail(m);
+        card.innerHTML = `
+            <div class="member-header"><h3>${esc(m.toUpperCase())}</h3><span class="member-badge">${totals.sessions} sessions</span></div>
+            <div class="member-stats">
+                <div class="stat-item"><div class="stat-value">${totals.messages}</div><div class="stat-label">대화</div></div>
+                <div class="stat-item"><div class="stat-value">${totals.tool_calls}</div><div class="stat-label">도구 호출</div></div>
+                <div class="stat-item"><div class="stat-value">${totals.duration}m</div><div class="stat-label">총 시간</div></div>
+                <div class="stat-item"><div class="stat-value">${totals.sessions ? Math.round(totals.duration/totals.sessions) : 0}m</div><div class="stat-label">평균/세션</div></div>
+            </div>
+            <div class="tools-section"><h4>도구 사용</h4>${toolBars}</div>
+            ${skillTags ? '<div class="skills">'+skillTags+'</div>' : ''}
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function renderMemberTrendChart(members, dates) {
+    const ctx = document.getElementById('memberTrendChart');
+    if (memberTrendChart) memberTrendChart.destroy();
+    const displayDates = currentDateFilter === 'all' ? ALL_DATES.slice(-7) : dates;
+    const datasets = members.map((m, i) => ({
+        label: m.toUpperCase(),
+        data: displayDates.map(d => (MEMBERS_DAILY[m]||{})[d]?.tool_calls || 0),
+        borderColor: COLORS[i % COLORS.length],
+        backgroundColor: COLORS[i % COLORS.length] + '20',
+        fill: true, tension: 0.3,
+    }));
+    memberTrendChart = new Chart(ctx, {
+        type: 'line',
+        data: { labels: displayDates.map(d => d.slice(5)), datasets },
+        options: chartOpts(),
+    });
+}
+
+function renderDailyCompareChart(members, dates) {
+    const ctx = document.getElementById('dailyCompareChart');
+    if (dailyCompareChart) dailyCompareChart.destroy();
+    const displayDates = currentDateFilter === 'all' ? ALL_DATES.slice(-7) : dates;
+    const datasets = members.map((m, i) => ({
+        label: m.toUpperCase(),
+        data: displayDates.map(d => (MEMBERS_DAILY[m]||{})[d]?.sessions || 0),
+        backgroundColor: COLORS[i % COLORS.length],
+    }));
+    dailyCompareChart = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: displayDates.map(d => d.slice(5)), datasets },
+        options: chartOpts(),
+    });
+}
+
+// === DETAIL VIEW ===
+function showDetail(member) {
+    const panel = document.getElementById('detailPanel');
+    panel.classList.add('visible');
+    document.getElementById('detailTitle').textContent = member.toUpperCase() + ' 상세';
+
+    const md = MEMBERS_DAILY[member] || {};
+    const dates = Object.keys(md).sort().slice(-7);
+
+    // Stats
+    let total = { sessions:0, messages:0, tools:0, duration:0 };
+    dates.forEach(d => {
+        const s = md[d];
+        if(s) { total.sessions+=s.sessions; total.messages+=s.messages; total.tools+=s.tool_calls; total.duration+=s.duration_min; }
+    });
+    document.getElementById('detailStats').innerHTML = `
+        <div class="stat-item"><div class="stat-value">${total.sessions}</div><div class="stat-label">세션 (7일)</div></div>
+        <div class="stat-item"><div class="stat-value">${total.messages}</div><div class="stat-label">대화</div></div>
+        <div class="stat-item"><div class="stat-value">${total.tools}</div><div class="stat-label">도구 호출</div></div>
+        <div class="stat-item"><div class="stat-value">${total.duration}m</div><div class="stat-label">총 시간</div></div>
+    `;
+
+    // Daily chart
+    if(detailDailyChart) detailDailyChart.destroy();
+    detailDailyChart = new Chart(document.getElementById('detailDailyChart'), {
+        type:'bar',
+        data: {
+            labels: dates.map(d=>d.slice(5)),
+            datasets: [
+                { label:'세션', data:dates.map(d=>md[d]?.sessions||0), backgroundColor:'#6366f1' },
+                { label:'도구', data:dates.map(d=>md[d]?.tool_calls||0), backgroundColor:'#22c55e' },
+            ]
+        },
+        options: chartOpts(),
+    });
+
+    // Tool chart
+    let allTools = {};
+    dates.forEach(d => {
+        Object.entries(md[d]?.top_tools||{}).forEach(([t,c]) => { allTools[t]=(allTools[t]||0)+c; });
+    });
+    const topTools = Object.entries(allTools).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    if(detailToolChart) detailToolChart.destroy();
+    detailToolChart = new Chart(document.getElementById('detailToolChart'), {
+        type:'doughnut',
+        data: {
+            labels: topTools.map(([t])=>t.replace('mcp__plugin_ouroboros_ouroboros__','ouroboros:').slice(0,20)),
+            datasets: [{ data:topTools.map(([,c])=>c), backgroundColor:COLORS }]
+        },
+        options: { responsive:true, plugins:{ legend:{ position:'right', labels:{ color:'#6b6b7b', font:{size:10} } } } }
+    });
+
+    panel.scrollIntoView({ behavior:'smooth' });
+}
+
+function closeDetail() {
+    document.getElementById('detailPanel').classList.remove('visible');
+}
+
+function renderMissing() {
+    const participating = new Set(Object.keys(MEMBERS_DAILY).map(m=>m.toUpperCase()));
+    const allNames = new Set(Object.values(TEAM_MEMBERS));
+    const missing = [...allNames].filter(n => !participating.has(n));
+    const el = document.getElementById('missingSection');
+    if (missing.length) {
+        el.innerHTML = `<div class="missing-section"><h4>미수집 구성원</h4><div class="missing-names">${missing.join(', ')}</div><code>cd ~/Documents/ark_point/repos/ark-agents && bash ai-monitor/install.sh</code></div>`;
+    } else {
+        el.innerHTML = '';
+    }
+}
+
+function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function chartOpts() { return { responsive:true, plugins:{legend:{labels:{color:'#6b6b7b',font:{size:11}}}}, scales:{x:{ticks:{color:'#6b6b7b'},grid:{color:'#1e1e2e'}},y:{ticks:{color:'#6b6b7b'},grid:{color:'#1e1e2e'}}} }; }
+
+init();
 </script>
 </body>
 </html>
