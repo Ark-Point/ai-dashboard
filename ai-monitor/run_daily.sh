@@ -26,4 +26,9 @@ fi
 cp "$SCRIPT_DIR/dashboard.html" "$DASH_REPO/index.html"
 cd "$DASH_REPO" && git add index.html && git commit -m "dashboard: $(date +%Y-%m-%d)" && git push >> "$LOG" 2>&1
 
+# 5. 매주 금요일이면 주간 리포트
+if [ "$(date +%u)" = "5" ]; then
+    python "$SCRIPT_DIR/weekly_report.py" >> "$LOG" 2>&1
+fi
+
 echo "=== done ===" >> "$LOG"
