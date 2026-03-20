@@ -21,7 +21,7 @@ def load_history() -> list[dict]:
         return []
     records = []
     for f in sorted(history_dir.glob("*.json")):
-        with open(f) as fh:
+        with open(f, encoding="utf-8") as fh:
             records.append(json.load(fh))
     return records
 
@@ -41,7 +41,7 @@ def load_all_team_data() -> dict:
             raw[display_name] = {}
         for f in sorted(user_dir.glob("*.json")):
             date_str = f.stem
-            with open(f) as fh:
+            with open(f, encoding="utf-8") as fh:
                 data = json.load(fh)
                 if date_str in raw[display_name]:
                     # 같은 사람 데이터 병합
@@ -82,12 +82,11 @@ def generate_html(history: list[dict], all_team_data: dict) -> str:
     for record in history:
         d = record.get("date", "")
         for member, stats in record.get("claude_sessions", {}).items():
-            # 표시명으로 통일 (HS, Ann, Freddie 등)
-            display = OS_USERNAME_MAP.get(member.lower(), member)
-            if display not in members_daily:
-                members_daily[display] = {}
-            if d not in members_daily[display]:
-                members_daily[display][d] = {
+            member_lower = member.lower()
+            if member_lower not in members_daily:
+                members_daily[member_lower] = {}
+            if d not in members_daily[member_lower]:
+                members_daily[member_lower][d] = {
                     "sessions": stats.get("sessions", 0),
                     "messages": stats.get("messages", 0),
                     "tool_calls": stats.get("tool_calls", 0),
@@ -518,7 +517,7 @@ def main():
     html = generate_html(history, team_data)
 
     output = Path(__file__).parent / "dashboard.html"
-    with open(output, "w") as f:
+    with open(output, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"[dashboard] 생성 완료: {output}")
 
