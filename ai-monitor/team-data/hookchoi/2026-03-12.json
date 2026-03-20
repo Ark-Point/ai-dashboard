@@ -1,26 +1,61 @@
 {
   "collector_version": "1.1",
-  "collected_at": "2026-03-20T01:51:54.749709+00:00",
+  "collected_at": "2026-03-20T01:56:58.132659+00:00",
   "username": "hookchoi",
   "period_hours": 2160,
   "summary": {
-    "total_sessions": 2,
-    "total_user_messages": 31,
-    "total_tool_calls": 25,
-    "total_duration_min": 75,
-    "avg_session_min": 38,
+    "total_sessions": 4,
+    "total_user_messages": 39,
+    "total_tool_calls": 29,
+    "total_duration_min": 83,
+    "avg_session_min": 21,
     "top_tools": {
-      "Bash": 18,
-      "Read": 4,
+      "Bash": 20,
+      "Read": 5,
+      "Edit": 2,
       "Write": 1,
-      "Edit": 1,
       "Agent": 1
     },
     "skills_used": {}
   },
   "sessions": [
     {
+      "session_id": "1229f6d1-3ea3-4e93-9cfd-10d89980abbd",
+      "date": "2026-03-12",
+      "started_at": "2026-03-12T08:37:13.407000+09:00",
+      "ended_at": "2026-03-12T08:37:13.707000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 0,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "c5d9e2bf-bc28-4e03-9608-a290fbc4b7ea",
+      "date": "2026-03-12",
+      "started_at": "2026-03-12T08:50:34.032000+09:00",
+      "ended_at": "2026-03-12T08:59:02.608000+09:00",
+      "duration_min": 8,
+      "cwd": "~",
+      "user_messages": 7,
+      "assistant_messages": 9,
+      "total_tool_calls": 4,
+      "tools": {
+        "Bash": 2,
+        "Read": 1,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
       "session_id": "5032d329-be83-46b2-a37a-e0d3e0ad0ce7",
+      "date": "2026-03-12",
       "started_at": "2026-03-12T09:44:53.082000+09:00",
       "ended_at": "2026-03-12T10:26:33.603000+09:00",
       "duration_min": 42,
@@ -40,6 +75,7 @@
     },
     {
       "session_id": "e9d42f09-1309-4901-bb0e-83b6e426fcfd",
+      "date": "2026-03-12",
       "started_at": "2026-03-12T08:54:41.073000+09:00",
       "ended_at": "2026-03-12T09:27:32.578000+09:00",
       "duration_min": 33,

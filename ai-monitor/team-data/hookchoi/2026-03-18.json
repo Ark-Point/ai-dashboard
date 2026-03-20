@@ -1,0 +1,97 @@
+{
+  "collector_version": "1.1",
+  "collected_at": "2026-03-20T01:56:58.132659+00:00",
+  "username": "hookchoi",
+  "period_hours": 2160,
+  "summary": {
+    "total_sessions": 3,
+    "total_user_messages": 377,
+    "total_tool_calls": 306,
+    "total_duration_min": 965,
+    "avg_session_min": 322,
+    "top_tools": {
+      "Bash": 143,
+      "Read": 79,
+      "Edit": 58,
+      "Grep": 12,
+      "Write": 6,
+      "WebSearch": 3,
+      "ToolSearch": 2,
+      "mcp__claude-in-chrome__tabs_context_mcp": 2,
+      "Agent": 1
+    },
+    "skills_used": {}
+  },
+  "sessions": [
+    {
+      "session_id": "e6442604-42c4-46fb-b45b-bd27cbb5848a",
+      "date": "2026-03-18",
+      "started_at": "2026-03-18T09:47:46.368000+09:00",
+      "ended_at": "2026-03-18T14:45:49.547000+09:00",
+      "duration_min": 298,
+      "cwd": "~",
+      "user_messages": 144,
+      "assistant_messages": 232,
+      "total_tool_calls": 126,
+      "tools": {
+        "Read": 40,
+        "Edit": 37,
+        "Bash": 35,
+        "Grep": 10,
+        "Write": 1,
+        "ToolSearch": 1,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1,
+        "Agent": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "general": 1
+      },
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "1229f6d1-3ea3-4e93-9cfd-10d89980abbd",
+      "date": "2026-03-18",
+      "started_at": "2026-03-18T11:03:08.739000+09:00",
+      "ended_at": "2026-03-18T16:13:31.316000+09:00",
+      "duration_min": 310,
+      "cwd": "~",
+      "user_messages": 82,
+      "assistant_messages": 117,
+      "total_tool_calls": 61,
+      "tools": {
+        "Read": 23,
+        "Edit": 19,
+        "Bash": 12,
+        "WebSearch": 3,
+        "Grep": 2,
+        "Write": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "10d5d1da-8d8c-4f3e-a1e2-a78cfe5ff504",
+      "date": "2026-03-18",
+      "started_at": "2026-03-18T09:34:01.037000+09:00",
+      "ended_at": "2026-03-18T15:30:52.157000+09:00",
+      "duration_min": 357,
+      "cwd": "~",
+      "user_messages": 151,
+      "assistant_messages": 214,
+      "total_tool_calls": 119,
+      "tools": {
+        "Bash": 96,
+        "Read": 16,
+        "Write": 3,
+        "Edit": 2,
+        "ToolSearch": 1,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    }
+  ]
+}

@@ -1,29 +1,100 @@
 {
   "collector_version": "1.1",
-  "collected_at": "2026-03-20T01:51:54.749709+00:00",
+  "collected_at": "2026-03-20T01:56:58.131658+00:00",
   "username": "hookchoi",
   "period_hours": 2160,
   "summary": {
-    "total_sessions": 1,
-    "total_user_messages": 70,
-    "total_tool_calls": 64,
-    "total_duration_min": 19,
-    "avg_session_min": 19,
+    "total_sessions": 6,
+    "total_user_messages": 308,
+    "total_tool_calls": 273,
+    "total_duration_min": 237,
+    "avg_session_min": 40,
     "top_tools": {
-      "Write": 15,
-      "Read": 14,
-      "Bash": 9,
-      "TaskUpdate": 8,
-      "Edit": 8,
-      "TaskCreate": 4,
-      "TaskOutput": 4,
-      "Task": 2
+      "Bash": 108,
+      "Read": 49,
+      "Write": 44,
+      "Edit": 22,
+      "TaskUpdate": 20,
+      "TaskOutput": 9,
+      "Task": 6,
+      "TaskCreate": 5,
+      "Glob": 5,
+      "mcp__claude-in-chrome__tabs_context_mcp": 3
     },
     "skills_used": {}
   },
   "sessions": [
     {
+      "session_id": "19d9ec1b-79ce-4808-9953-b11f79c042ec",
+      "date": "2026-02-24",
+      "started_at": "2026-02-24T00:55:39.841000+09:00",
+      "ended_at": "2026-02-24T02:36:11.404000+09:00",
+      "duration_min": 101,
+      "cwd": "~",
+      "user_messages": 34,
+      "assistant_messages": 66,
+      "total_tool_calls": 32,
+      "tools": {
+        "Bash": 18,
+        "Read": 7,
+        "Task": 3,
+        "TaskUpdate": 3,
+        "TaskCreate": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "3593da79-773a-47ca-b996-f3e9b24353ac",
+      "date": "2026-02-24",
+      "started_at": "2026-02-24T01:32:29.410000+09:00",
+      "ended_at": "2026-02-24T02:37:14.377000+09:00",
+      "duration_min": 65,
+      "cwd": "~",
+      "user_messages": 80,
+      "assistant_messages": 133,
+      "total_tool_calls": 75,
+      "tools": {
+        "Bash": 47,
+        "Read": 15,
+        "Write": 5,
+        "Edit": 3,
+        "Glob": 3,
+        "mcp__claude-in-chrome__tabs_context_mcp": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "377c1e0c-3f2e-4dd2-b89f-994183d76357",
+      "date": "2026-02-24",
+      "started_at": "2026-02-24T01:07:47.112000+09:00",
+      "ended_at": "2026-02-24T01:52:53.302000+09:00",
+      "duration_min": 45,
+      "cwd": "~",
+      "user_messages": 115,
+      "assistant_messages": 156,
+      "total_tool_calls": 97,
+      "tools": {
+        "Bash": 33,
+        "Write": 23,
+        "Read": 12,
+        "Edit": 11,
+        "TaskUpdate": 9,
+        "TaskOutput": 5,
+        "Glob": 2,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1,
+        "TaskStop": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
       "session_id": "1f417512-e1c8-40cf-adf5-122a10afde2f",
+      "date": "2026-02-24",
       "started_at": "2026-02-24T01:12:48.239000+09:00",
       "ended_at": "2026-02-24T01:32:10.707000+09:00",
       "duration_min": 19,
@@ -40,6 +111,43 @@
         "TaskCreate": 4,
         "TaskOutput": 4,
         "Task": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "99cd327a-747c-4d2f-b838-f88ff8269ed1",
+      "date": "2026-02-24",
+      "started_at": "2026-02-24T01:23:03.201000+09:00",
+      "ended_at": "2026-02-24T01:24:26.891000+09:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 3,
+      "assistant_messages": 3,
+      "total_tool_calls": 1,
+      "tools": {
+        "Bash": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "6d7e7cd0-67ba-4eba-8ac3-0faa4c8673f0",
+      "date": "2026-02-24",
+      "started_at": "2026-02-24T01:06:38.356000+09:00",
+      "ended_at": "2026-02-24T01:12:48.242000+09:00",
+      "duration_min": 6,
+      "cwd": "~",
+      "user_messages": 6,
+      "assistant_messages": 8,
+      "total_tool_calls": 4,
+      "tools": {
+        "Task": 1,
+        "Read": 1,
+        "Write": 1,
+        "ExitPlanMode": 1
       },
       "skills_used": {},
       "agents_used": {},
