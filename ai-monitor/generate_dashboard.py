@@ -82,11 +82,12 @@ def generate_html(history: list[dict], all_team_data: dict) -> str:
     for record in history:
         d = record.get("date", "")
         for member, stats in record.get("claude_sessions", {}).items():
-            member_lower = member.lower()
-            if member_lower not in members_daily:
-                members_daily[member_lower] = {}
-            if d not in members_daily[member_lower]:
-                members_daily[member_lower][d] = {
+            # 표시명으로 통일 (HS, Ann, Freddie 등)
+            display = OS_USERNAME_MAP.get(member.lower(), member)
+            if display not in members_daily:
+                members_daily[display] = {}
+            if d not in members_daily[display]:
+                members_daily[display][d] = {
                     "sessions": stats.get("sessions", 0),
                     "messages": stats.get("messages", 0),
                     "tool_calls": stats.get("tool_calls", 0),
