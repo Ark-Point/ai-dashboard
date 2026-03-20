@@ -227,12 +227,14 @@ function getFilteredData() {
 }
 
 function updateDashboard() {
+    const scrollY = window.scrollY;
     const { members, dates, totals } = getFilteredData();
     renderKPIs(totals, members);
     renderMemberCards(members, dates);
     renderMemberTrendChart(members, dates);
     renderDailyCompareChart(members, dates);
     renderMissing(members);
+    requestAnimationFrame(() => window.scrollTo(0, scrollY));
 }
 
 function renderKPIs(totals, members) {
