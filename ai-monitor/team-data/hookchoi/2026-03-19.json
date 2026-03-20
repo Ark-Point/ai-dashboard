@@ -1,87 +1,141 @@
 {
-  "collector_version": "1.0",
-  "collected_at": "2026-03-19T08:35:34.615523+00:00",
+  "collector_version": "1.1",
+  "collected_at": "2026-03-20T01:51:54.749709+00:00",
   "username": "hookchoi",
-  "period_hours": 24,
+  "period_hours": 2160,
   "summary": {
-    "total_sessions": 4,
-    "total_user_messages": 33,
-    "total_tool_calls": 21,
-    "total_duration_min": 5,
-    "avg_session_min": 1,
+    "total_sessions": 5,
+    "total_user_messages": 1095,
+    "total_tool_calls": 819,
+    "total_duration_min": 2769,
+    "avg_session_min": 554,
     "top_tools": {
-      "Bash": 15,
-      "Read": 3,
-      "Agent": 1,
-      "Grep": 1,
-      "Edit": 1
+      "Bash": 389,
+      "Edit": 180,
+      "Read": 158,
+      "Write": 39,
+      "Agent": 23,
+      "Grep": 22,
+      "ToolSearch": 3,
+      "Skill": 2,
+      "mcp__claude-in-chrome__tabs_context_mcp": 1,
+      "WebSearch": 1
     },
-    "skills_used": {}
+    "skills_used": {
+      "update-config": 1,
+      "gov-script": 1
+    }
   },
   "sessions": [
     {
-      "session_id": "2782315a-bdc6-4fb2-aeb8-db09a1b3ffea",
-      "started_at": "2026-03-19T14:41:34.862000+09:00",
-      "ended_at": "2026-03-19T14:41:37.867000+09:00",
-      "duration_min": 0,
+      "session_id": "9193eb66-e422-4402-8c17-26e13f8fdd13",
+      "started_at": "2026-03-19T16:33:13.062000+09:00",
+      "ended_at": "2026-03-20T10:51:52.321000+09:00",
+      "duration_min": 1099,
       "cwd": "~",
-      "user_messages": 3,
-      "assistant_messages": 0,
-      "total_tool_calls": 0,
-      "tools": {},
-      "skills_used": {},
-      "agents_used": {},
-      "project": "-data-hookchoi"
-    },
-    {
-      "session_id": "6082abb9-d45f-4ebd-b637-0027c4f04794",
-      "started_at": "2026-03-19T14:26:50.698000+09:00",
-      "ended_at": "2026-03-19T14:26:54.344000+09:00",
-      "duration_min": 0,
-      "cwd": "~",
-      "user_messages": 3,
-      "assistant_messages": 0,
-      "total_tool_calls": 0,
-      "tools": {},
-      "skills_used": {},
-      "agents_used": {},
-      "project": "-data-hookchoi"
-    },
-    {
-      "session_id": "ca253311-3304-4073-b9fa-e009d365842b",
-      "started_at": "2026-03-19T13:34:55.720000+09:00",
-      "ended_at": "2026-03-19T13:34:55.720000+09:00",
-      "duration_min": 0,
-      "cwd": "~",
-      "user_messages": 3,
-      "assistant_messages": 0,
-      "total_tool_calls": 0,
-      "tools": {},
-      "skills_used": {},
-      "agents_used": {},
-      "project": "-data-hookchoi"
-    },
-    {
-      "session_id": "2b385cf2-e9bf-49f8-bda3-87db025a3b48",
-      "started_at": "2026-03-19T14:27:49.482000+09:00",
-      "ended_at": "2026-03-19T14:32:33.456000+09:00",
-      "duration_min": 5,
-      "cwd": "~/projects/01-hook/20260316-srt-fairy",
-      "user_messages": 24,
-      "assistant_messages": 35,
-      "total_tool_calls": 21,
+      "user_messages": 179,
+      "assistant_messages": 275,
+      "total_tool_calls": 135,
       "tools": {
-        "Bash": 15,
-        "Read": 3,
+        "Bash": 104,
+        "Edit": 15,
+        "Read": 11,
+        "ToolSearch": 2,
         "Agent": 1,
         "Grep": 1,
-        "Edit": 1
+        "mcp__claude-in-chrome__tabs_context_mcp": 1
       },
       "skills_used": {},
       "agents_used": {
         "Explore": 1
       },
-      "project": "-data-hookchoi-projects-01-hook-20260316-srt-fairy"
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "1483a05c-5433-42d8-bf72-b18190a24aae",
+      "started_at": "2026-03-19T14:33:21.999000+09:00",
+      "ended_at": "2026-03-20T10:39:53.145000+09:00",
+      "duration_min": 1207,
+      "cwd": "~",
+      "user_messages": 596,
+      "assistant_messages": 856,
+      "total_tool_calls": 477,
+      "tools": {
+        "Bash": 223,
+        "Read": 125,
+        "Edit": 75,
+        "Write": 24,
+        "Agent": 18,
+        "Grep": 12
+      },
+      "skills_used": {},
+      "agents_used": {
+        "Explore": 2,
+        "general": 16
+      },
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "bc245c95-e76f-4269-aafd-791abf2cba1f",
+      "started_at": "2026-03-19T18:08:32.775000+09:00",
+      "ended_at": "2026-03-19T23:57:34.393000+09:00",
+      "duration_min": 349,
+      "cwd": "~",
+      "user_messages": 233,
+      "assistant_messages": 314,
+      "total_tool_calls": 203,
+      "tools": {
+        "Edit": 87,
+        "Bash": 62,
+        "Read": 21,
+        "Write": 15,
+        "Grep": 9,
+        "Agent": 4,
+        "Skill": 2,
+        "ToolSearch": 1,
+        "WebSearch": 1,
+        "Glob": 1
+      },
+      "skills_used": {
+        "update-config": 1,
+        "gov-script": 1
+      },
+      "agents_used": {
+        "Explore": 2,
+        "general-purpose": 2
+      },
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "d04dd25a-6f1b-4cb2-ad54-0f0f9a5da4c8",
+      "started_at": "2026-03-19T13:06:17.928000+09:00",
+      "ended_at": "2026-03-19T14:56:28.249000+09:00",
+      "duration_min": 110,
+      "cwd": "~",
+      "user_messages": 83,
+      "assistant_messages": 86,
+      "total_tool_calls": 4,
+      "tools": {
+        "Edit": 3,
+        "Read": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "b214703e-04a2-4804-97e1-219369cebfac",
+      "started_at": "2026-03-19T09:03:39.996000+09:00",
+      "ended_at": "2026-03-19T09:07:43.633000+09:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 4,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
     }
   ]
 }

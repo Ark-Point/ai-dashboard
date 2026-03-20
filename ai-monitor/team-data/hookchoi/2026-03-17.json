@@ -1,0 +1,104 @@
+{
+  "collector_version": "1.1",
+  "collected_at": "2026-03-20T01:51:54.749709+00:00",
+  "username": "hookchoi",
+  "period_hours": 2160,
+  "summary": {
+    "total_sessions": 4,
+    "total_user_messages": 248,
+    "total_tool_calls": 193,
+    "total_duration_min": 1503,
+    "avg_session_min": 376,
+    "top_tools": {
+      "Bash": 145,
+      "Read": 31,
+      "Write": 8,
+      "Edit": 4,
+      "ToolSearch": 2,
+      "Glob": 2,
+      "mcp__claude-in-chrome__tabs_context_mcp": 1
+    },
+    "skills_used": {
+      "gov-proposal": 1
+    }
+  },
+  "sessions": [
+    {
+      "session_id": "10d5d1da-8d8c-4f3e-a1e2-a78cfe5ff504",
+      "started_at": "2026-03-17T16:15:55.791000+09:00",
+      "ended_at": "2026-03-18T15:30:52.157000+09:00",
+      "duration_min": 1395,
+      "cwd": "~",
+      "user_messages": 176,
+      "assistant_messages": 249,
+      "total_tool_calls": 132,
+      "tools": {
+        "Bash": 106,
+        "Read": 19,
+        "Write": 3,
+        "Edit": 2,
+        "ToolSearch": 1,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "47196966-15a8-472d-9c42-2e6aa8901da5",
+      "started_at": "2026-03-17T15:13:25.231000+09:00",
+      "ended_at": "2026-03-17T15:21:02.136000+09:00",
+      "duration_min": 8,
+      "cwd": "~",
+      "user_messages": 13,
+      "assistant_messages": 16,
+      "total_tool_calls": 10,
+      "tools": {
+        "Bash": 7,
+        "Write": 1,
+        "Read": 1,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "78132525-9447-4cd9-9a59-1a03d89a51f6",
+      "started_at": "2026-03-17T11:08:50.813000+09:00",
+      "ended_at": "2026-03-17T11:08:55.204000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "b0420c9c-3787-4af9-9073-78543fc4b064",
+      "started_at": "2026-03-17T00:28:45.281000+09:00",
+      "ended_at": "2026-03-17T02:08:42.063000+09:00",
+      "duration_min": 100,
+      "cwd": "~",
+      "user_messages": 58,
+      "assistant_messages": 85,
+      "total_tool_calls": 51,
+      "tools": {
+        "Bash": 32,
+        "Read": 11,
+        "Write": 4,
+        "Glob": 2,
+        "ToolSearch": 1,
+        "Edit": 1
+      },
+      "skills_used": {
+        "gov-proposal": 1
+      },
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    }
+  ]
+}

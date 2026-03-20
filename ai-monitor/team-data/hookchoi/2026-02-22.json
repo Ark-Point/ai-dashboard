@@ -1,0 +1,130 @@
+{
+  "collector_version": "1.1",
+  "collected_at": "2026-03-20T01:51:54.749709+00:00",
+  "username": "hookchoi",
+  "period_hours": 2160,
+  "summary": {
+    "total_sessions": 4,
+    "total_user_messages": 588,
+    "total_tool_calls": 543,
+    "total_duration_min": 13362,
+    "avg_session_min": 3340,
+    "top_tools": {
+      "Read": 157,
+      "Edit": 111,
+      "Bash": 85,
+      "Write": 59,
+      "TaskUpdate": 47,
+      "TaskCreate": 26,
+      "Grep": 20,
+      "Glob": 14,
+      "Task": 12,
+      "EnterPlanMode": 3
+    },
+    "skills_used": {}
+  },
+  "sessions": [
+    {
+      "session_id": "362c47fe-78f9-4385-96dc-f98d8e2df51b",
+      "started_at": "2026-02-22T10:13:50.659000+09:00",
+      "ended_at": "2026-03-02T15:34:22.922000+09:00",
+      "duration_min": 11841,
+      "cwd": "~",
+      "user_messages": 202,
+      "assistant_messages": 291,
+      "total_tool_calls": 189,
+      "tools": {
+        "Write": 39,
+        "Read": 36,
+        "Edit": 33,
+        "Bash": 21,
+        "TaskUpdate": 21,
+        "TaskCreate": 13,
+        "Glob": 13,
+        "Task": 5,
+        "Grep": 2,
+        "EnterPlanMode": 2,
+        "ExitPlanMode": 2,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1,
+        "AskUserQuestion": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "afee567f-68b2-47cb-810e-b655db4564de",
+      "started_at": "2026-02-22T12:12:41.343000+09:00",
+      "ended_at": "2026-02-23T11:29:56.801000+09:00",
+      "duration_min": 1397,
+      "cwd": "~",
+      "user_messages": 176,
+      "assistant_messages": 279,
+      "total_tool_calls": 162,
+      "tools": {
+        "Read": 71,
+        "Edit": 34,
+        "Bash": 17,
+        "TaskUpdate": 12,
+        "Write": 10,
+        "Grep": 9,
+        "TaskCreate": 6,
+        "Task": 2,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "86a9b23d-926d-46d7-883b-bd37cdd46360",
+      "started_at": "2026-02-22T09:01:27.886000+09:00",
+      "ended_at": "2026-02-22T10:13:50.660000+09:00",
+      "duration_min": 72,
+      "cwd": "~",
+      "user_messages": 165,
+      "assistant_messages": 263,
+      "total_tool_calls": 152,
+      "tools": {
+        "Edit": 44,
+        "Read": 41,
+        "Bash": 40,
+        "Grep": 9,
+        "TaskUpdate": 6,
+        "TaskCreate": 3,
+        "Task": 2,
+        "Glob": 1,
+        "TaskOutput": 1,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1,
+        "AskUserQuestion": 1,
+        "EnterPlanMode": 1,
+        "Write": 1,
+        "ExitPlanMode": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "3762c83b-4808-4bad-a65b-0c774204f19f",
+      "started_at": "2026-02-22T09:05:30.159000+09:00",
+      "ended_at": "2026-02-22T09:57:34.873000+09:00",
+      "duration_min": 52,
+      "cwd": "~",
+      "user_messages": 45,
+      "assistant_messages": 59,
+      "total_tool_calls": 40,
+      "tools": {
+        "Read": 9,
+        "Write": 9,
+        "TaskUpdate": 8,
+        "Bash": 7,
+        "TaskCreate": 4,
+        "Task": 3
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    }
+  ]
+}

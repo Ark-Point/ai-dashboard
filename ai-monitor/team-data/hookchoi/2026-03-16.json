@@ -1,0 +1,118 @@
+{
+  "collector_version": "1.1",
+  "collected_at": "2026-03-20T01:51:54.749709+00:00",
+  "username": "hookchoi",
+  "period_hours": 2160,
+  "summary": {
+    "total_sessions": 4,
+    "total_user_messages": 531,
+    "total_tool_calls": 456,
+    "total_duration_min": 11356,
+    "avg_session_min": 2839,
+    "top_tools": {
+      "Bash": 168,
+      "Read": 102,
+      "Edit": 97,
+      "Grep": 49,
+      "Write": 13,
+      "AskUserQuestion": 11,
+      "ToolSearch": 5,
+      "TaskOutput": 4,
+      "mcp__claude-in-chrome__tabs_context_mcp": 3,
+      "Agent": 3
+    },
+    "skills_used": {}
+  },
+  "sessions": [
+    {
+      "session_id": "e6442604-42c4-46fb-b45b-bd27cbb5848a",
+      "started_at": "2026-03-16T08:59:20.696000+09:00",
+      "ended_at": "2026-03-20T10:10:59.939000+09:00",
+      "duration_min": 5832,
+      "cwd": "~",
+      "user_messages": 195,
+      "assistant_messages": 305,
+      "total_tool_calls": 164,
+      "tools": {
+        "Read": 55,
+        "Bash": 45,
+        "Edit": 45,
+        "Grep": 13,
+        "Write": 3,
+        "ToolSearch": 1,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1,
+        "Agent": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "general": 1
+      },
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "b92258d0-b055-4fc1-9d4c-5abe46d986d6",
+      "started_at": "2026-03-16T23:13:47.035000+09:00",
+      "ended_at": "2026-03-19T23:57:25.654000+09:00",
+      "duration_min": 4364,
+      "cwd": "~",
+      "user_messages": 245,
+      "assistant_messages": 359,
+      "total_tool_calls": 224,
+      "tools": {
+        "Bash": 77,
+        "Edit": 48,
+        "Read": 40,
+        "Grep": 36,
+        "AskUserQuestion": 11,
+        "ToolSearch": 4,
+        "TaskOutput": 4,
+        "mcp__claude-in-chrome__tabs_context_mcp": 2,
+        "Write": 1,
+        "mcp__claude-in-chrome__navigate": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "1d714819-2ac3-47eb-9853-5460fc422c83",
+      "started_at": "2026-03-16T20:28:12.297000+09:00",
+      "ended_at": "2026-03-17T14:46:45.370000+09:00",
+      "duration_min": 1099,
+      "cwd": "~",
+      "user_messages": 51,
+      "assistant_messages": 63,
+      "total_tool_calls": 34,
+      "tools": {
+        "Bash": 18,
+        "Write": 8,
+        "Read": 7,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "530120f7-5218-4107-bb0e-44c677aad1d6",
+      "started_at": "2026-03-16T20:09:12.740000+09:00",
+      "ended_at": "2026-03-16T21:10:06.018000+09:00",
+      "duration_min": 61,
+      "cwd": "~",
+      "user_messages": 40,
+      "assistant_messages": 60,
+      "total_tool_calls": 34,
+      "tools": {
+        "Bash": 28,
+        "Edit": 3,
+        "Agent": 2,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "general": 2
+      },
+      "project": "C--Users-hookchoi"
+    }
+  ]
+}
