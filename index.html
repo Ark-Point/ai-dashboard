@@ -92,15 +92,17 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 
 <div class="header">
     <h1>ARK Point AI Native Dashboard</h1>
-    <div class="date">2026-03-20 | AI Native 워크플로우 모니터링</div>
+    <div class="date">2026-03-21 | AI Native 워크플로우 모니터링</div>
 </div>
 
 <!-- Filters -->
 <div class="filters">
     <div class="filter-group">
-        <label>날짜:</label>
-        <button class="filter-btn active" onclick="setDateFilter('all')">전체</button>
-        <div id="dateButtons"></div>
+        <label>기간:</label>
+        <button class="filter-btn active" onclick="setPeriod(7)">7일</button>
+        <button class="filter-btn" onclick="setPeriod(30)">30일</button>
+        <button class="filter-btn" onclick="setPeriod(90)">90일</button>
+        <button class="filter-btn" onclick="setPeriod(0)">전체</button>
     </div>
     <div class="filter-group">
         <label>구성원:</label>
@@ -108,6 +110,10 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
         <div id="memberButtons"></div>
     </div>
 </div>
+
+<!-- Leaderboard -->
+<h2 class="section-title">리더보드</h2>
+<div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))" id="leaderboard"></div>
 
 <!-- KPI -->
 <div class="kpi-grid" id="kpiGrid"></div>
@@ -135,18 +141,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     </div>
 </div>
 
-<!-- Leaderboard -->
-<h2 class="section-title">리더보드</h2>
-<div class="filters" id="lbFilters" style="margin-bottom:1rem">
-    <div class="filter-group">
-        <label>기간:</label>
-        <button class="filter-btn active" onclick="setLbPeriod(7)">7일</button>
-        <button class="filter-btn" onclick="setLbPeriod(30)">30일</button>
-        <button class="filter-btn" onclick="setLbPeriod(90)">90일</button>
-    </div>
-</div>
-<div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))" id="leaderboard"></div>
-
 <!-- Members -->
 <h2 class="section-title">구성원별 AI 활용</h2>
 <div class="members-grid" id="membersGrid"></div>
@@ -165,8 +159,8 @@ const COLORS = ['#6366f1','#22c55e','#eab308','#3b82f6','#ef4444','#a855f7','#f9
 const MEDALS = ['🥇','🥈','🥉'];
 const fmt = n => Number(n).toLocaleString();
 const fmtH = m => { const h=m/60; return h>=1 ? h%1===0?h+'시간':h.toFixed(1)+'시간' : m+'분'; };
-let lbDays = 7;
 
+let currentPeriod = 7;
 let currentDateFilter = 'all';
 let currentMemberFilter = 'all';
 let memberTrendChart = null;
@@ -176,21 +170,23 @@ let detailToolChart = null;
 
 // === INIT ===
 function init() {
-    renderDateButtons();
     renderMemberButtons();
-    updateDashboard();
-    renderLeaderboard();
+    updateAll();
 }
 
-function renderDateButtons() {
-    const container = document.getElementById('dateButtons');
-    ALL_DATES.slice(-7).forEach(d => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.textContent = d.slice(5);
-        btn.onclick = () => setDateFilter(d);
-        container.appendChild(btn);
+function setPeriod(days) {
+    currentPeriod = days;
+    document.querySelectorAll('.filters .filter-group:first-child .filter-btn').forEach(b => {
+        const label = days === 0 ? '전체' : days+'일';
+        b.classList.toggle('active', b.textContent === label);
     });
+    updateAll();
+}
+
+function updateAll() {
+    currentDateFilter = currentPeriod === 0 ? 'all' : 'period';
+    updateDashboard();
+    renderLeaderboard();
 }
 
 function renderMemberButtons() {
@@ -205,35 +201,27 @@ function renderMemberButtons() {
     });
 }
 
-function setDateFilter(d) {
-    currentDateFilter = d;
-    document.querySelectorAll('.filters .filter-group:first-child .filter-btn').forEach(b => b.classList.remove('active'));
-    if (d === 'all') {
-        document.querySelector('.filters .filter-group:first-child .filter-btn').classList.add('active');
-    } else {
-        document.querySelectorAll('#dateButtons .filter-btn').forEach(b => {
-            if (b.textContent === d.slice(5)) b.classList.add('active');
-        });
-    }
-    updateDashboard();
-}
-
 function setMemberFilter(m) {
     currentMemberFilter = m;
-    document.querySelectorAll('.filters .filter-group:last-child .filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filters .filter-group:nth-child(2) .filter-btn').forEach(b => b.classList.remove('active'));
     if (m === 'all') {
-        document.querySelector('.filters .filter-group:last-child .filter-btn').classList.add('active');
+        document.querySelector('.filters .filter-group:nth-child(2) .filter-btn').classList.add('active');
     } else {
         document.querySelectorAll('#memberButtons .filter-btn').forEach(b => {
             if (b.dataset.member === m) b.classList.add('active');
         });
     }
-    updateDashboard();
+    updateAll();
+}
+
+function getPeriodDates() {
+    if (currentPeriod === 0) return ALL_DATES;
+    return ALL_DATES.slice(-currentPeriod);
 }
 
 function getFilteredData() {
     const members = currentMemberFilter === 'all' ? Object.keys(MEMBERS_DAILY) : [currentMemberFilter];
-    const dates = currentDateFilter === 'all' ? ALL_DATES : [currentDateFilter];
+    const dates = getPeriodDates();
     let totals = { sessions:0, messages:0, tool_calls:0, duration_min:0 };
     members.forEach(m => {
         const md = MEMBERS_DAILY[m] || {};
@@ -320,7 +308,7 @@ function renderMemberCards(members, dates) {
 function renderMemberTrendChart(members, dates) {
     const ctx = document.getElementById('memberTrendChart');
     if (memberTrendChart) memberTrendChart.destroy();
-    const displayDates = currentDateFilter === 'all' ? ALL_DATES.slice(-7) : dates;
+    const displayDates = getPeriodDates();
     const datasets = members.map((m, i) => ({
         label: m.toUpperCase(),
         data: displayDates.map(d => (MEMBERS_DAILY[m]||{})[d]?.tool_calls || 0),
@@ -338,7 +326,7 @@ function renderMemberTrendChart(members, dates) {
 function renderDailyCompareChart(members, dates) {
     const ctx = document.getElementById('dailyCompareChart');
     if (dailyCompareChart) dailyCompareChart.destroy();
-    const displayDates = currentDateFilter === 'all' ? ALL_DATES.slice(-7) : dates;
+    const displayDates = getPeriodDates();
     const datasets = members.map((m, i) => ({
         label: m.toUpperCase(),
         data: displayDates.map(d => (MEMBERS_DAILY[m]||{})[d]?.sessions || 0),
@@ -410,12 +398,6 @@ function closeDetail() {
     document.getElementById('detailPanel').classList.remove('visible');
 }
 
-function setLbPeriod(days) {
-    lbDays = days;
-    document.querySelectorAll('#lbFilters .filter-btn').forEach(b => b.classList.toggle('active', b.textContent===days+'일'));
-    renderLeaderboard();
-}
-
 function getMemberTotals(member, dates) {
     const md = MEMBERS_DAILY[member] || {};
     let t = {sessions:0, messages:0, tool_calls:0, duration:0, tools:{}, skills:{}};
@@ -431,7 +413,7 @@ function getMemberTotals(member, dates) {
 }
 
 function renderLeaderboard() {
-    const dates = ALL_DATES.slice(-lbDays);
+    const dates = getPeriodDates();
     const members = Object.keys(MEMBERS_DAILY);
     const stats = members.map(m => {
         const t = getMemberTotals(m, dates);
