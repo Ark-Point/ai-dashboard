@@ -59,8 +59,13 @@ def load_all_team_data() -> dict:
 def generate_html(history: list[dict], all_team_data: dict) -> str:
     today = date.today().isoformat()
 
-    # 모든 날짜 수집
-    all_dates = sorted(set(r.get("date", "") for r in history))
+    # 모든 날짜 수집 (history + team-data)
+    all_dates_set = set(r.get("date", "") for r in history)
+    for username, date_data in all_team_data.items():
+        for d in date_data.keys():
+            all_dates_set.add(d)
+    all_dates_set.discard("")
+    all_dates = sorted(all_dates_set)
 
     # 구성원별 일별 데이터 구조화 (JS용)
     members_daily = {}
@@ -167,6 +172,13 @@ body {{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; back
 .tool-bar-bg {{ flex:1; height:6px; background:var(--border); border-radius:3px; }}
 .tool-bar {{ height:100%; background:var(--accent); border-radius:3px; }}
 .tool-count {{ width:35px; text-align:right; font-weight:600; font-size:0.75rem; }}
+.efficiency {{ display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; margin-top:0.8rem; padding-top:0.8rem; border-top:1px solid var(--border); }}
+.eff-item {{ text-align:center; }}
+.eff-value {{ font-size:1rem; font-weight:700; }}
+.eff-value.good {{ color:var(--green); }}
+.eff-value.mid {{ color:var(--yellow); }}
+.eff-value.low {{ color:var(--red); }}
+.eff-label {{ font-size:0.65rem; color:var(--text-dim); }}
 .skills {{ margin-top:0.8rem; }}
 .skill-tag {{ display:inline-block; background:rgba(34,197,94,0.1); color:var(--green); padding:0.15rem 0.5rem; border-radius:4px; font-size:0.75rem; margin:0.15rem; font-family:monospace; }}
 
@@ -331,12 +343,14 @@ function getFilteredData() {{
 }}
 
 function updateDashboard() {{
+    const scrollY = window.scrollY;
     const {{ members, dates, totals }} = getFilteredData();
     renderKPIs(totals, members);
     renderMemberCards(members, dates);
     renderMemberTrendChart(members, dates);
     renderDailyCompareChart(members, dates);
     renderMissing(members);
+    requestAnimationFrame(() => window.scrollTo(0, scrollY));
 }}
 
 function renderKPIs(totals, members) {{
@@ -379,6 +393,15 @@ function renderMemberCards(members, dates) {{
         }}).join('');
         const skillTags = Object.keys(totals.skills).map(s => `<span class="skill-tag">/${{esc(s)}}</span>`).join(' ');
 
+        // 효율성 지표
+        const toolRatio = totals.messages ? (totals.tool_calls / totals.messages).toFixed(1) : '0';
+        const toolRatioClass = toolRatio >= 1.0 ? 'good' : toolRatio >= 0.5 ? 'mid' : 'low';
+        const editWrite = (totals.tools['Edit']||0) + (totals.tools['Write']||0);
+        const outputRate = totals.tool_calls ? Math.round(editWrite / totals.tool_calls * 100) : 0;
+        const outputClass = outputRate >= 30 ? 'good' : outputRate >= 15 ? 'mid' : 'low';
+        const avgSession = totals.sessions ? Math.round(totals.duration / totals.sessions) : 0;
+        const avgClass = avgSession > 0 && avgSession <= 120 ? 'good' : avgSession <= 300 ? 'mid' : 'low';
+
         const card = document.createElement('div');
         card.className = `member-card ${{level}}`;
         card.onclick = () => showDetail(m);
@@ -388,7 +411,12 @@ function renderMemberCards(members, dates) {{
                 <div class="stat-item"><div class="stat-value">${{totals.messages}}</div><div class="stat-label">대화</div></div>
                 <div class="stat-item"><div class="stat-value">${{totals.tool_calls}}</div><div class="stat-label">도구 호출</div></div>
                 <div class="stat-item"><div class="stat-value">${{totals.duration}}m</div><div class="stat-label">총 시간</div></div>
-                <div class="stat-item"><div class="stat-value">${{totals.sessions ? Math.round(totals.duration/totals.sessions) : 0}}m</div><div class="stat-label">평균/세션</div></div>
+                <div class="stat-item"><div class="stat-value">${{avgSession}}m</div><div class="stat-label">평균/세션</div></div>
+            </div>
+            <div class="efficiency">
+                <div class="eff-item"><div class="eff-value ${{toolRatioClass}}">${{toolRatio}}x</div><div class="eff-label">도구/대화 비율</div></div>
+                <div class="eff-item"><div class="eff-value ${{outputClass}}">${{outputRate}}%</div><div class="eff-label">산출물 비율</div></div>
+                <div class="eff-item"><div class="eff-value ${{avgClass}}">${{Object.keys(totals.skills).length}}</div><div class="eff-label">스킬 활용</div></div>
             </div>
             <div class="tools-section"><h4>도구 사용</h4>${{toolBars}}</div>
             ${{skillTags ? '<div class="skills">'+skillTags+'</div>' : ''}}

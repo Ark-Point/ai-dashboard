@@ -31,6 +31,7 @@ OS_USERNAME_MAP = {
     "ann": "Ann",
     "teo": "TEO",
     "hook": "Hook",
+    "hookchoi": "Hook",
     "jesse": "Jesse",
     "rae": "Rae",
     "mew": "Mew",
