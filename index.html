@@ -111,9 +111,10 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
 <div class="filters">
     <div class="filter-group">
         <span class="filter-label">Period</span>
+        <button class="filter-btn" onclick="setPeriod(1)">24h</button>
+        <button class="filter-btn" onclick="setPeriod(3)">3d</button>
         <button class="filter-btn active" onclick="setPeriod(7)">7d</button>
         <button class="filter-btn" onclick="setPeriod(30)">30d</button>
-        <button class="filter-btn" onclick="setPeriod(90)">90d</button>
         <button class="filter-btn" onclick="setPeriod(0)">All</button>
     </div>
     <div class="filter-group">
@@ -181,7 +182,7 @@ function init() {
 function setPeriod(days) {
     currentPeriod = days;
     document.querySelectorAll('.filters .filter-group:first-child .filter-btn').forEach(b => {
-        const labels = {7:'7d',30:'30d',90:'90d',0:'All'};
+        const labels = {1:'24h',3:'3d',7:'7d',30:'30d',0:'All'};
         b.classList.toggle('active', b.textContent === labels[days]);
     });
     updateAll();
