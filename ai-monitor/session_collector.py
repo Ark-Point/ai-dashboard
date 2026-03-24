@@ -283,6 +283,72 @@ def save_and_push(daily_data: dict[str, dict], repo_path: str | None = None):
         filepaths.append(str(filepath))
         print(f"[collector] 저장: {filepath}")
 
+    # 통합 data.json 생성 (대시보드용)
+    try:
+        from config import OS_USERNAME_MAP
+        team_data_dir = Path(repo_path) / "ai-monitor" / "team-data"
+        merged = {}
+        for user_dir in team_data_dir.iterdir():
+            if not user_dir.is_dir():
+                continue
+            display_name = OS_USERNAME_MAP.get(user_dir.name.lower(), user_dir.name)
+            if display_name not in merged:
+                merged[display_name] = {}
+            for f in sorted(user_dir.glob("*.json")):
+                date_str = f.stem
+                with open(f, encoding="utf-8") as fh:
+                    d = json.load(fh)
+                s = d.get("summary", {})
+                if date_str in merged[display_name]:
+                    ex = merged[display_name][date_str]
+                    ex["sessions"] += s.get("total_sessions", 0)
+                    ex["messages"] += s.get("total_user_messages", 0)
+                    ex["tool_calls"] += s.get("total_tool_calls", 0)
+                    ex["duration_min"] += s.get("total_duration_min", 0)
+                    for t, c in s.get("top_tools", {}).items():
+                        ex["top_tools"][t] = ex["top_tools"].get(t, 0) + c
+                    for sk, c in s.get("skills_used", {}).items():
+                        ex["skills_used"][sk] = ex["skills_used"].get(sk, 0) + c
+                else:
+                    merged[display_name][date_str] = {
+                        "sessions": s.get("total_sessions", 0),
+                        "messages": s.get("total_user_messages", 0),
+                        "tool_calls": s.get("total_tool_calls", 0),
+                        "duration_min": s.get("total_duration_min", 0),
+                        "avg_session_min": s.get("avg_session_min", 0),
+                        "top_tools": dict(s.get("top_tools", {})),
+                        "skills_used": dict(s.get("skills_used", {})),
+                    }
+        # history에서도 병합
+        history_dir = Path(repo_path) / "ai-monitor" / "history"
+        history_list = []
+        if history_dir.exists():
+            for f in sorted(history_dir.glob("*.json")):
+                with open(f, encoding="utf-8") as fh:
+                    rec = json.load(fh)
+                history_list.append(rec)
+                for name, info in rec.get("claude_sessions", {}).items():
+                    dn = OS_USERNAME_MAP.get(name.lower(), name)
+                    if dn not in merged:
+                        merged[dn] = {}
+                    if rec["date"] not in merged[dn]:
+                        merged[dn][rec["date"]] = {
+                            "sessions": info.get("sessions", 0),
+                            "messages": info.get("messages", 0),
+                            "tool_calls": info.get("tool_calls", 0),
+                            "duration_min": info.get("duration_min", 0),
+                            "avg_session_min": 0, "top_tools": {}, "skills_used": {},
+                        }
+        all_dates = sorted(set(d for m in merged.values() for d in m.keys()))
+        data_json = {"members_daily": merged, "all_dates": all_dates, "history": history_list}
+        data_json_path = Path(repo_path) / "data.json"
+        with open(data_json_path, "w", encoding="utf-8") as fh:
+            json.dump(data_json, fh, ensure_ascii=False)
+        filepaths.append(str(data_json_path))
+        print(f"[collector] 통합 data.json 생성")
+    except Exception as e:
+        print(f"[collector] data.json 생성 실패 (무시): {e}")
+
     # git add + commit + push
     try:
         for fp in filepaths:

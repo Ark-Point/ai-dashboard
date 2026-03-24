@@ -157,89 +157,16 @@ const TEAM_MEMBERS = {"hslee-byte": "HS", "annnzel": "Ann", "teo-hash": "TEO", "
 const OS_USERNAME_MAP = {"hs":"HS","kyongeunlee":"Ann","freddie":"Freddie","ann":"Ann","teo":"TEO","hook":"Hook","hookchoi":"Hook","jesse":"Jesse","rae":"Rae","mew":"Mew","dooyoung":"두영","harry":"Harry","uno":"Uno"};
 const COLORS = ['#6366f1','#22c55e','#eab308','#3b82f6','#ef4444','#a855f7','#f97316','#06b6d4','#ec4899','#14b8a6'];
 
-// === 동적 데이터 로딩 ===
+// === 동적 데이터 로딩 (data.json 하나만 fetch) ===
 async function loadData() {
-    document.querySelector('.date').textContent = new Date().toISOString().slice(0,10) + ' | AI Native 워크플로우 모니터링 (로딩중...)';
+    document.querySelector('.date').textContent = new Date().toISOString().slice(0,10) + ' | 로딩중...';
     try {
-        // 1) team-data 디렉토리에서 유저 목록 가져오기
-        const teamDirRes = await fetch(`${API_BASE}/ai-monitor/team-data`);
-        const teamDirs = await teamDirRes.json();
-        const userDirs = teamDirs.filter(d => d.type === 'dir');
-
-        // 2) 각 유저별 JSON 파일 목록 가져오기 & 데이터 로드
-        const allDatesSet = new Set();
-        for (const userDir of userDirs) {
-            const osUsername = userDir.name;
-            const displayName = OS_USERNAME_MAP[osUsername.toLowerCase()] || osUsername;
-
-            const filesRes = await fetch(`${API_BASE}/ai-monitor/team-data/${osUsername}`);
-            const files = await filesRes.json();
-            const jsonFiles = files.filter(f => f.name.endsWith('.json'));
-
-            // 병렬로 JSON 파일들 fetch
-            const dataPromises = jsonFiles.map(async f => {
-                const res = await fetch(`${RAW_BASE}/ai-monitor/team-data/${osUsername}/${f.name}`);
-                return { date: f.name.replace('.json',''), data: await res.json() };
-            });
-            const results = await Promise.all(dataPromises);
-
-            if (!MEMBERS_DAILY[displayName]) MEMBERS_DAILY[displayName] = {};
-            for (const { date, data } of results) {
-                allDatesSet.add(date);
-                const s = data.summary || {};
-                if (MEMBERS_DAILY[displayName][date]) {
-                    // 같은 사람 데이터 병합
-                    const existing = MEMBERS_DAILY[displayName][date];
-                    existing.sessions += s.total_sessions || 0;
-                    existing.messages += s.total_user_messages || 0;
-                    existing.tool_calls += s.total_tool_calls || 0;
-                    existing.duration_min += s.total_duration_min || 0;
-                    Object.entries(s.top_tools || {}).forEach(([t,c]) => { existing.top_tools[t] = (existing.top_tools[t]||0) + c; });
-                    Object.entries(s.skills_used || {}).forEach(([sk,c]) => { existing.skills_used[sk] = (existing.skills_used[sk]||0) + c; });
-                } else {
-                    MEMBERS_DAILY[displayName][date] = {
-                        sessions: s.total_sessions || 0,
-                        messages: s.total_user_messages || 0,
-                        tool_calls: s.total_tool_calls || 0,
-                        duration_min: s.total_duration_min || 0,
-                        avg_session_min: s.avg_session_min || 0,
-                        top_tools: { ...(s.top_tools || {}) },
-                        skills_used: { ...(s.skills_used || {}) },
-                    };
-                }
-            }
-        }
-
-        // 3) history 디렉토리에서도 로드 (과거 데이터)
-        try {
-            const histDirRes = await fetch(`${API_BASE}/ai-monitor/history`);
-            const histFiles = await histDirRes.json();
-            const histJsons = histFiles.filter(f => f.name.endsWith('.json'));
-            const histPromises = histJsons.map(async f => {
-                const res = await fetch(`${RAW_BASE}/ai-monitor/history/${f.name}`);
-                return await res.json();
-            });
-            HISTORY = await Promise.all(histPromises);
-            // history에서 날짜 및 세션 데이터 병합
-            for (const rec of HISTORY) {
-                allDatesSet.add(rec.date);
-                for (const [name, info] of Object.entries(rec.claude_sessions || {})) {
-                    const displayName = OS_USERNAME_MAP[name.toLowerCase()] || name;
-                    if (!MEMBERS_DAILY[displayName]) MEMBERS_DAILY[displayName] = {};
-                    if (!MEMBERS_DAILY[displayName][rec.date]) {
-                        MEMBERS_DAILY[displayName][rec.date] = {
-                            sessions: info.sessions || 0,
-                            messages: info.messages || 0,
-                            tool_calls: info.tool_calls || 0,
-                            duration_min: info.duration_min || 0,
-                            avg_session_min: 0, top_tools: {}, skills_used: {},
-                        };
-                    }
-                }
-            }
-        } catch(e) { console.log('history 로드 스킵:', e); }
-
-        ALL_DATES = [...allDatesSet].sort();
+        const res = await fetch(`${RAW_BASE}/data.json?t=${Date.now()}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        MEMBERS_DAILY = data.members_daily || {};
+        ALL_DATES = data.all_dates || [];
+        HISTORY = data.history || [];
         document.querySelector('.date').textContent = new Date().toISOString().slice(0,10) + ' | AI Native 워크플로우 모니터링';
     } catch(e) {
         console.error('데이터 로딩 실패:', e);
