@@ -1,21 +1,22 @@
 {
   "collector_version": "1.1",
-  "collected_at": "2026-03-24T13:03:04.343686+00:00",
+  "collected_at": "2026-03-24T13:22:16.763830+00:00",
   "username": "hookchoi",
-  "period_hours": 168,
+  "period_hours": 720,
   "summary": {
     "total_sessions": 1,
-    "total_user_messages": 105,
-    "total_tool_calls": 77,
-    "total_duration_min": 319,
-    "avg_session_min": 319,
+    "total_user_messages": 146,
+    "total_tool_calls": 103,
+    "total_duration_min": 338,
+    "avg_session_min": 338,
     "top_tools": {
-      "Bash": 49,
+      "Bash": 74,
       "Read": 12,
       "Edit": 12,
       "Agent": 2,
       "ToolSearch": 1,
-      "mcp__claude-in-chrome__tabs_context_mcp": 1
+      "mcp__claude-in-chrome__tabs_context_mcp": 1,
+      "Write": 1
     },
     "skills_used": {}
   },
@@ -24,19 +25,20 @@
       "session_id": "8820c656-9af0-455a-bcd8-14efc7262684",
       "date": "2026-03-24",
       "started_at": "2026-03-24T16:43:48.266000+09:00",
-      "ended_at": "2026-03-24T22:03:00.202000+09:00",
-      "duration_min": 319,
+      "ended_at": "2026-03-24T22:22:12.594000+09:00",
+      "duration_min": 338,
       "cwd": "~",
-      "user_messages": 105,
-      "assistant_messages": 163,
-      "total_tool_calls": 77,
+      "user_messages": 146,
+      "assistant_messages": 225,
+      "total_tool_calls": 103,
       "tools": {
-        "Bash": 49,
+        "Bash": 74,
         "Read": 12,
         "Edit": 12,
         "Agent": 2,
         "ToolSearch": 1,
-        "mcp__claude-in-chrome__tabs_context_mcp": 1
+        "mcp__claude-in-chrome__tabs_context_mcp": 1,
+        "Write": 1
       },
       "skills_used": {},
       "agents_used": {
