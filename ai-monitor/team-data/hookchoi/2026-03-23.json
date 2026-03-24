@@ -1,0 +1,481 @@
+{
+  "collector_version": "1.1",
+  "collected_at": "2026-03-24T12:27:29.403484+00:00",
+  "username": "hookchoi",
+  "period_hours": 168,
+  "summary": {
+    "total_sessions": 24,
+    "total_user_messages": 745,
+    "total_tool_calls": 563,
+    "total_duration_min": 2865,
+    "avg_session_min": 119,
+    "top_tools": {
+      "Bash": 322,
+      "Read": 138,
+      "Edit": 33,
+      "Write": 21,
+      "Agent": 10,
+      "ToolSearch": 10,
+      "TaskOutput": 8,
+      "WebFetch": 6,
+      "mcp__claude-in-chrome__tabs_context_mcp": 4,
+      "Grep": 3
+    },
+    "skills_used": {
+      "folder-setup": 2,
+      "gov-evaluate": 1
+    }
+  },
+  "sessions": [
+    {
+      "session_id": "960e233b-0a55-4f6f-b56f-0ca82a7887c2",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T21:02:05.100000+09:00",
+      "ended_at": "2026-03-23T22:05:46.934000+09:00",
+      "duration_min": 64,
+      "cwd": "~",
+      "user_messages": 31,
+      "assistant_messages": 31,
+      "total_tool_calls": 15,
+      "tools": {
+        "Read": 6,
+        "Bash": 5,
+        "Write": 3,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "e482d4b6-aa89-4acb-acc5-b67045706056",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:07:52.361000+09:00",
+      "ended_at": "2026-03-23T19:59:32.998000+09:00",
+      "duration_min": 652,
+      "cwd": "~",
+      "user_messages": 253,
+      "assistant_messages": 332,
+      "total_tool_calls": 215,
+      "tools": {
+        "Bash": 114,
+        "Read": 60,
+        "Edit": 21,
+        "Agent": 9,
+        "Write": 5,
+        "TaskOutput": 4,
+        "ToolSearch": 1,
+        "Skill": 1
+      },
+      "skills_used": {
+        "folder-setup": 1
+      },
+      "agents_used": {
+        "Explore": 2,
+        "general-purpose": 7
+      },
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "5dea1078-b665-4f4c-84e0-71ed60e07276",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:11:23.536000+09:00",
+      "ended_at": "2026-03-23T19:59:32.378000+09:00",
+      "duration_min": 648,
+      "cwd": "~",
+      "user_messages": 71,
+      "assistant_messages": 94,
+      "total_tool_calls": 59,
+      "tools": {
+        "Bash": 44,
+        "Read": 5,
+        "Edit": 3,
+        "ToolSearch": 2,
+        "TaskOutput": 2,
+        "Grep": 1,
+        "Write": 1,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "f47aa845-1ed4-453b-9c26-c7fc817a3f81",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T16:12:21.459000+09:00",
+      "ended_at": "2026-03-23T19:15:56.521000+09:00",
+      "duration_min": 184,
+      "cwd": "~",
+      "user_messages": 21,
+      "assistant_messages": 23,
+      "total_tool_calls": 13,
+      "tools": {
+        "Bash": 10,
+        "Skill": 1,
+        "Read": 1,
+        "Write": 1
+      },
+      "skills_used": {
+        "gov-evaluate": 1
+      },
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "2feebcd5-62d0-40eb-abe7-de067dfc5123",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T15:16:38.358000+09:00",
+      "ended_at": "2026-03-23T15:43:27.038000+09:00",
+      "duration_min": 27,
+      "cwd": "~",
+      "user_messages": 50,
+      "assistant_messages": 61,
+      "total_tool_calls": 48,
+      "tools": {
+        "Read": 40,
+        "Bash": 8
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "9bb829d0-605f-4b87-8abb-f0940c09a867",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T15:06:50.915000+09:00",
+      "ended_at": "2026-03-23T15:06:50.915000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 2,
+      "assistant_messages": 0,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "1db01d8b-e505-407d-bb42-ea303ffb4ba0",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:50:09.696000+09:00",
+      "ended_at": "2026-03-23T15:05:44.949000+09:00",
+      "duration_min": 316,
+      "cwd": "~",
+      "user_messages": 41,
+      "assistant_messages": 54,
+      "total_tool_calls": 34,
+      "tools": {
+        "Bash": 23,
+        "Read": 5,
+        "TaskOutput": 2,
+        "Glob": 1,
+        "ToolSearch": 1,
+        "Grep": 1,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "ecdecbe1-2794-4dc2-84ae-f208f0adc6ec",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T10:48:24.159000+09:00",
+      "ended_at": "2026-03-23T15:04:54.089000+09:00",
+      "duration_min": 256,
+      "cwd": "~",
+      "user_messages": 126,
+      "assistant_messages": 182,
+      "total_tool_calls": 82,
+      "tools": {
+        "Bash": 59,
+        "Read": 10,
+        "Write": 8,
+        "mcp__claude-in-chrome__tabs_context_mcp": 2,
+        "Edit": 2,
+        "ToolSearch": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "58dbf287-b715-4e07-91dc-229595c89d15",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T14:26:41.595000+09:00",
+      "ended_at": "2026-03-23T14:27:02.006000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "a7e5d678-d25e-49c6-b7f1-4d4320363f0b",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T13:19:31.481000+09:00",
+      "ended_at": "2026-03-23T13:22:10+09:00",
+      "duration_min": 3,
+      "cwd": "~",
+      "user_messages": 17,
+      "assistant_messages": 23,
+      "total_tool_calls": 14,
+      "tools": {
+        "Bash": 13,
+        "Agent": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "Explore": 1
+      },
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "f6278d64-eed7-4d99-b217-95e089ffe4e0",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:44:33.756000+09:00",
+      "ended_at": "2026-03-23T13:19:25.235000+09:00",
+      "duration_min": 215,
+      "cwd": "~",
+      "user_messages": 10,
+      "assistant_messages": 12,
+      "total_tool_calls": 6,
+      "tools": {
+        "Bash": 3,
+        "Read": 2,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "bc245c95-e76f-4269-aafd-791abf2cba1f",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:27:30.571000+09:00",
+      "ended_at": "2026-03-23T13:00:51.322000+09:00",
+      "duration_min": 213,
+      "cwd": "~",
+      "user_messages": 33,
+      "assistant_messages": 41,
+      "total_tool_calls": 25,
+      "tools": {
+        "Bash": 14,
+        "WebFetch": 5,
+        "WebSearch": 3,
+        "ToolSearch": 2,
+        "Grep": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "71716590-944f-4e0d-a09c-58a172c7b294",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:00:53.306000+09:00",
+      "ended_at": "2026-03-23T12:57:58.774000+09:00",
+      "duration_min": 237,
+      "cwd": "~",
+      "user_messages": 24,
+      "assistant_messages": 38,
+      "total_tool_calls": 15,
+      "tools": {
+        "Bash": 15
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "1229f6d1-3ea3-4e93-9cfd-10d89980abbd",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:45:13.068000+09:00",
+      "ended_at": "2026-03-23T09:49:27.023000+09:00",
+      "duration_min": 4,
+      "cwd": "~",
+      "user_messages": 4,
+      "assistant_messages": 5,
+      "total_tool_calls": 2,
+      "tools": {
+        "Bash": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "1257fcdd-95dc-4e2f-87aa-df91b3408f36",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T09:18:20.340000+09:00",
+      "ended_at": "2026-03-23T09:18:20.340000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 3,
+      "assistant_messages": 0,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "e88642cb-e072-4a20-b693-1c0a2db40adb",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T08:58:34.434000+09:00",
+      "ended_at": "2026-03-23T08:58:34.434000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 3,
+      "assistant_messages": 0,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "12c32954-cc50-4c33-b169-b6d1ec35795c",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T00:01:50.603000+09:00",
+      "ended_at": "2026-03-23T00:47:16.145000+09:00",
+      "duration_min": 45,
+      "cwd": "~",
+      "user_messages": 42,
+      "assistant_messages": 55,
+      "total_tool_calls": 29,
+      "tools": {
+        "Bash": 12,
+        "Edit": 4,
+        "ToolSearch": 3,
+        "Write": 3,
+        "Read": 3,
+        "AskUserQuestion": 1,
+        "Glob": 1,
+        "WebFetch": 1,
+        "mcp__claude-in-chrome__tabs_context_mcp": 1
+      },
+      "skills_used": {
+        "folder-setup": 1
+      },
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "78620a64-5b5a-4edb-af9d-721f50c7f91f",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T00:00:22.821000+09:00",
+      "ended_at": "2026-03-23T00:01:48.656000+09:00",
+      "duration_min": 1,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi"
+    },
+    {
+      "session_id": "9f6884fe-57c2-4c65-8985-fee18812b21c",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T13:18:52.166000+09:00",
+      "ended_at": "2026-03-23T13:18:58.102000+09:00",
+      "duration_min": 0,
+      "cwd": "~\\projects\\01-hook\\gov-slack-bot",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi-projects-01-hook-gov-slack-bot"
+    },
+    {
+      "session_id": "c1cf9092-b335-4dd4-b128-d0ce92c0621d",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T13:12:20.412000+09:00",
+      "ended_at": "2026-03-23T13:12:25.145000+09:00",
+      "duration_min": 0,
+      "cwd": "~\\projects\\01-hook\\gov-slack-bot",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi-projects-01-hook-gov-slack-bot"
+    },
+    {
+      "session_id": "f3852141-750d-4939-9191-b9555912dc1c",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T12:56:29.193000+09:00",
+      "ended_at": "2026-03-23T12:56:45.118000+09:00",
+      "duration_min": 0,
+      "cwd": "~\\projects\\01-hook\\gov-slack-bot",
+      "user_messages": 3,
+      "assistant_messages": 6,
+      "total_tool_calls": 2,
+      "tools": {
+        "Read": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi-projects-01-hook-gov-slack-bot"
+    },
+    {
+      "session_id": "84f5fd63-38ec-45c8-97e8-76ee038fbbfc",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T12:52:23.325000+09:00",
+      "ended_at": "2026-03-23T12:52:38.094000+09:00",
+      "duration_min": 0,
+      "cwd": "~\\projects\\01-hook\\gov-slack-bot",
+      "user_messages": 3,
+      "assistant_messages": 5,
+      "total_tool_calls": 2,
+      "tools": {
+        "Read": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi-projects-01-hook-gov-slack-bot"
+    },
+    {
+      "session_id": "f67585c1-5938-4130-8128-7054cc976979",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T11:15:26.974000+09:00",
+      "ended_at": "2026-03-23T11:15:45.339000+09:00",
+      "duration_min": 0,
+      "cwd": "~\\projects\\01-hook\\gov-slack-bot",
+      "user_messages": 3,
+      "assistant_messages": 5,
+      "total_tool_calls": 2,
+      "tools": {
+        "Read": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi-projects-01-hook-gov-slack-bot"
+    },
+    {
+      "session_id": "63661923-fabd-421d-b92e-458029f93a9c",
+      "date": "2026-03-23",
+      "started_at": "2026-03-23T11:15:04.445000+09:00",
+      "ended_at": "2026-03-23T11:15:07.219000+09:00",
+      "duration_min": 0,
+      "cwd": "~\\projects\\01-hook\\gov-slack-bot",
+      "user_messages": 1,
+      "assistant_messages": 1,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-hookchoi-projects-01-hook-gov-slack-bot"
+    }
+  ]
+}
