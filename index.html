@@ -5,145 +5,163 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARK Point AI Native Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg: #0a0a0f; --card: #12121a; --border: #1e1e2e;
-    --text: #e0e0e8; --text-dim: #6b6b7b;
-    --accent: #6366f1; --accent-glow: rgba(99,102,241,0.15);
-    --green: #22c55e; --yellow: #eab308; --blue: #3b82f6; --red: #ef4444;
+    --bg: #fafbfc; --surface: #ffffff; --surface-dim: #f3f4f6;
+    --border: #e5e7eb; --border-light: #f0f1f3;
+    --text: #18181b; --text-secondary: #52525b; --text-tertiary: #a1a1aa;
+    --accent: #059669; --accent-light: #ecfdf5;
+    --serif: 'Source Serif 4', serif; --sans: 'Inter', sans-serif; --mono: 'JetBrains Mono', monospace;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; padding:2rem; }
-.header { text-align:center; margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
-.header h1 { font-size:1.8rem; font-weight:700; background:linear-gradient(135deg,#6366f1,#8b5cf6,#a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.header .date { color:var(--text-dim); font-size:0.9rem; }
-
-/* Filters */
-.filters { display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; align-items:center; }
-.filter-group { display:flex; gap:0.4rem; flex-wrap:wrap; align-items:center; }
-.filter-group label { font-size:0.8rem; color:var(--text-dim); margin-right:0.3rem; }
-.filter-btn {
-    background:var(--card); border:1px solid var(--border); border-radius:8px;
-    padding:0.4rem 0.8rem; color:var(--text-dim); cursor:pointer; font-size:0.8rem;
-    transition:all 0.2s;
-}
-.filter-btn:hover { border-color:var(--accent); color:var(--text); }
-.filter-btn.active { background:var(--accent-glow); border-color:var(--accent); color:var(--accent); font-weight:600; }
-
-/* KPI */
-.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:0.8rem; margin-bottom:1.5rem; }
-.kpi-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1rem; text-align:center; }
-.kpi-value { font-size:1.8rem; font-weight:700; color:var(--accent); }
-.kpi-label { font-size:0.75rem; color:var(--text-dim); }
-
-/* Charts */
-.charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem; }
-.chart-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; }
-.chart-card h3 { font-size:0.85rem; color:var(--text-dim); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.05em; }
-
-/* Members */
-.section-title { font-size:1.1rem; font-weight:600; margin:2rem 0 1rem; padding-left:0.5rem; border-left:3px solid var(--accent); }
-.members-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; margin-bottom:2rem; }
-.member-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; cursor:pointer; transition:all 0.2s; }
-.member-card:hover { border-color:var(--accent); transform:translateY(-2px); }
-.member-card.selected { border-color:var(--accent); box-shadow:0 0 20px var(--accent-glow); }
-.member-card.high { border-left:3px solid var(--green); }
-.member-card.mid { border-left:3px solid var(--yellow); }
-.member-card.low { border-left:3px solid var(--blue); }
-.member-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
-.member-header h3 { font-size:1.1rem; }
-.member-badge { background:var(--accent-glow); color:var(--accent); padding:0.2rem 0.6rem; border-radius:20px; font-size:0.75rem; font-weight:600; }
-.member-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; margin-bottom:1rem; }
-.stat-item { text-align:center; }
-.stat-value { font-size:1.2rem; font-weight:700; }
-.stat-label { font-size:0.7rem; color:var(--text-dim); }
-.tools-section h4 { font-size:0.75rem; color:var(--text-dim); margin-bottom:0.5rem; text-transform:uppercase; }
-.tool-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem; font-size:0.8rem; }
-.tool-name { width:100px; text-align:right; color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.tool-bar-bg { flex:1; height:6px; background:var(--border); border-radius:3px; }
-.tool-bar { height:100%; background:var(--accent); border-radius:3px; }
-.tool-count { width:35px; text-align:right; font-weight:600; font-size:0.75rem; }
-.skills { margin-top:0.8rem; }
-.skill-tag { display:inline-block; background:rgba(34,197,94,0.1); color:var(--green); padding:0.15rem 0.5rem; border-radius:4px; font-size:0.75rem; margin:0.15rem; font-family:monospace; }
-
-/* Detail panel */
-.detail-panel { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:2rem; display:none; }
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+.container { max-width:1200px; margin:0 auto; padding:3rem 2rem 4rem; }
+.header { margin-bottom:3.5rem; }
+.header-eyebrow { font-family:var(--mono); font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem; }
+.header-title { font-family:var(--serif); font-size:clamp(2.2rem,5vw,3.4rem); font-weight:700; color:var(--text); line-height:1.1; text-wrap:balance; letter-spacing:-0.025em; }
+.header-meta { display:flex; gap:1.5rem; margin-top:1rem; font-family:var(--mono); font-size:0.72rem; color:var(--text-tertiary); }
+.header-rule { width:100%; height:2px; background:var(--text); margin-top:1.5rem; }
+.header-rule-thin { width:100%; height:1px; background:var(--border); margin-top:4px; }
+.filters { display:flex; gap:2rem; margin-bottom:3rem; flex-wrap:wrap; align-items:center; }
+.filter-group { display:flex; gap:2px; align-items:center; }
+.filter-label { font-family:var(--mono); font-size:0.65rem; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.06em; margin-right:0.6rem; }
+.filter-btn { background:transparent; border:1px solid var(--border); border-radius:0; padding:0.4rem 0.75rem; color:var(--text-secondary); cursor:pointer; font-family:var(--mono); font-size:0.7rem; transition:color 0.15s,background 0.15s,border-color 0.15s; }
+.filter-btn:first-of-type { border-radius:4px 0 0 4px; }
+.filter-btn:last-of-type { border-radius:0 4px 4px 0; }
+.filter-btn + .filter-btn { border-left:none; }
+.filter-btn:hover { color:var(--text); background:var(--surface-dim); }
+.filter-btn.active { background:var(--text); color:var(--bg); border-color:var(--text); font-weight:600; }
+#memberButtons { display:contents; }
+#memberButtons .filter-btn:first-of-type { border-left:none; }
+.kpi-hero { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; }
+.kpi-hero-card { padding:2rem 0; border-bottom:1px solid var(--border); }
+.kpi-hero-value { font-family:var(--serif); font-size:clamp(3rem,6vw,4.5rem); font-weight:700; line-height:1; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; }
+.kpi-hero-value .unit { font-size:0.5em; color:var(--text-secondary); }
+.kpi-hero-label { font-family:var(--mono); font-size:0.68rem; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.05em; margin-top:0.5rem; }
+.kpi-hero-card.positive .kpi-hero-value { color:var(--accent); }
+.kpi-hero-card.warning .kpi-hero-value { color:var(--text-secondary); }
+.kpi-hero-card.danger .kpi-hero-value { color:var(--text-tertiary); }
+.kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:3.5rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.kpi-cell { padding:1.2rem 1.2rem 1.2rem 0; border-right:1px solid var(--border-light); }
+.kpi-cell:last-child { border-right:none; }
+.kpi-cell-value { font-family:var(--mono); font-size:1.4rem; font-weight:600; color:var(--text); font-variant-numeric:tabular-nums; line-height:1; }
+.kpi-cell-label { font-size:0.7rem; color:var(--text-tertiary); margin-top:0.3rem; }
+.section-label { font-family:var(--mono); font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-tertiary); margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid var(--border); }
+.lb-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; margin-bottom:3.5rem; }
+.lb-block-title { font-size:0.85rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
+.lb-block-desc { font-size:0.7rem; color:var(--text-tertiary); margin-bottom:0.8rem; }
+.lb-row { display:flex; align-items:baseline; padding:0.5rem 0; border-bottom:1px solid var(--border-light); }
+.lb-row:last-child { border-bottom:none; }
+.lb-rank { font-family:var(--mono); font-size:0.72rem; font-weight:600; color:var(--text-tertiary); width:1.8rem; }
+.lb-row:first-child .lb-rank { color:var(--accent); }
+.lb-name { flex:1; font-size:0.85rem; font-weight:500; color:var(--text); }
+.lb-value { font-family:var(--mono); font-weight:600; font-size:0.85rem; color:var(--text); font-variant-numeric:tabular-nums; }
+.charts-row { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:3.5rem; }
+.chart-block { border:1px solid var(--border); background:var(--surface); padding:1.5rem; border-radius:4px; }
+.chart-block h3 { font-family:var(--mono); font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-tertiary); margin-bottom:1rem; }
+.detail-panel { border:1px solid var(--border); background:var(--surface); padding:2rem; margin-bottom:3.5rem; display:none; border-radius:4px; }
 .detail-panel.visible { display:block; }
-.detail-panel h3 { margin-bottom:1rem; }
-.detail-close { float:right; cursor:pointer; color:var(--text-dim); font-size:1.2rem; }
+.detail-panel h3 { font-family:var(--serif); font-size:1.4rem; margin-bottom:1.2rem; }
+.detail-close { float:right; cursor:pointer; color:var(--text-tertiary); font-size:1.2rem; padding:0.2rem; }
 .detail-close:hover { color:var(--text); }
-
-.missing-section { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:2rem; }
-.missing-section h4 { color:var(--text-dim); margin-bottom:0.5rem; }
-.missing-names { color:var(--yellow); margin-bottom:0.8rem; }
-.missing-section code { display:block; background:var(--bg); padding:0.8rem; border-radius:6px; font-size:0.8rem; color:var(--green); word-break:break-all; }
-.footer { text-align:center; color:var(--text-dim); font-size:0.75rem; margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border); }
-@media (max-width:768px) { .charts-grid,.members-grid { grid-template-columns:1fr; } body { padding:1rem; } }
+.detail-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.members-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:3.5rem; }
+.member-card { background:var(--surface); padding:1.5rem; cursor:pointer; transition:background 0.15s; position:relative; }
+@media (prefers-reduced-motion:reduce) { .member-card,.filter-btn { transition:none; } }
+.member-card:hover { background:var(--surface-dim); }
+.level-indicator { position:absolute; top:0; left:0; width:3px; height:100%; }
+.member-card.high .level-indicator { background:var(--accent); }
+.member-card.mid .level-indicator { background:var(--text-tertiary); }
+.member-card.low .level-indicator { background:var(--border); }
+.member-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1rem; }
+.member-header h3 { font-size:0.95rem; font-weight:700; }
+.member-badge { font-family:var(--mono); font-size:0.65rem; color:var(--text-tertiary); }
+.member-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0.4rem; margin-bottom:1rem; }
+.stat-value { font-family:var(--mono); font-size:1rem; font-weight:600; font-variant-numeric:tabular-nums; line-height:1.2; }
+.stat-label { font-size:0.6rem; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.04em; }
+.tools-section h4 { font-size:0.6rem; color:var(--text-tertiary); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.06em; font-family:var(--mono); font-weight:600; }
+.tool-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem; }
+.tool-name { width:90px; text-align:right; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-family:var(--mono); font-size:0.65rem; }
+.tool-bar-bg { flex:1; height:3px; background:var(--border-light); border-radius:1.5px; }
+.tool-bar { height:100%; background:var(--accent); border-radius:1.5px; }
+.tool-count { width:32px; text-align:right; font-family:var(--mono); font-weight:600; font-size:0.65rem; color:var(--text-secondary); font-variant-numeric:tabular-nums; }
+.skills { margin-top:0.8rem; }
+.skill-tag { display:inline-block; background:var(--accent-light); color:var(--accent); padding:0.15rem 0.45rem; font-size:0.65rem; margin:0.12rem; font-family:var(--mono); border-radius:2px; }
+.missing-block { border:1px dashed var(--border); padding:1.5rem; margin-bottom:3.5rem; border-radius:4px; }
+.missing-block h4 { font-family:var(--mono); font-size:0.68rem; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.5rem; }
+.missing-names { color:var(--accent); font-weight:500; margin-bottom:0.6rem; }
+.missing-block code { display:block; background:var(--surface-dim); padding:0.7rem 1rem; font-family:var(--mono); font-size:0.72rem; color:var(--accent); border-radius:2px; }
+.footer { text-align:left; color:var(--text-tertiary); font-size:0.65rem; font-family:var(--mono); padding-top:1.5rem; border-top:1px solid var(--border); letter-spacing:0.04em; }
+@media (max-width:768px) { .container { padding:1.5rem 1rem; } .kpi-hero { grid-template-columns:1fr; gap:0; } .kpi-row { grid-template-columns:repeat(2,1fr); } .charts-row { grid-template-columns:1fr; } .members-grid { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>ARK Point AI Native Dashboard</h1>
-    <div class="date">2026-03-25 | AI Native 워크플로우 모니터링</div>
-</div>
+<div class="container">
+<header class="header">
+    <div class="header-eyebrow">ARK Point</div>
+    <h1 class="header-title">AI Native Dashboard</h1>
+    <div class="header-meta"><span>2026-03-25</span><span>Auto-generated</span></div>
+    <div class="header-rule"></div>
+    <div class="header-rule-thin"></div>
+</header>
 
-<!-- Filters -->
 <div class="filters">
     <div class="filter-group">
-        <label>날짜:</label>
-        <button class="filter-btn active" onclick="setDateFilter('all')">전체</button>
-        <div id="dateButtons"></div>
+        <span class="filter-label">Period</span>
+        <button class="filter-btn" onclick="setPeriod(1)">24h</button>
+        <button class="filter-btn" onclick="setPeriod(3)">3d</button>
+        <button class="filter-btn active" onclick="setPeriod(7)">7d</button>
+        <button class="filter-btn" onclick="setPeriod(30)">30d</button>
+        <button class="filter-btn" onclick="setPeriod(0)">All</button>
     </div>
     <div class="filter-group">
-        <label>구성원:</label>
-        <button class="filter-btn active" onclick="setMemberFilter('all')">전체</button>
+        <span class="filter-label">Member</span>
+        <button class="filter-btn active" onclick="setMemberFilter('all')">All</button>
         <div id="memberButtons"></div>
     </div>
 </div>
 
-<!-- KPI -->
-<div class="kpi-grid" id="kpiGrid"></div>
+<div class="kpi-hero" id="kpiHero"></div>
+<div class="kpi-row" id="kpiRow"></div>
 
-<!-- Charts -->
-<div class="charts-grid">
-    <div class="chart-card">
-        <h3>구성원별 도구 호출 트렌드</h3>
-        <canvas id="memberTrendChart"></canvas>
-    </div>
-    <div class="chart-card">
-        <h3>일별 팀 비교</h3>
-        <canvas id="dailyCompareChart"></canvas>
-    </div>
+<div class="section-label">Leaderboard</div>
+<div class="lb-grid" id="leaderboard"></div>
+
+<div class="charts-row">
+    <div class="chart-block"><h3>Tool calls by member</h3><canvas id="memberTrendChart"></canvas></div>
+    <div class="chart-block"><h3>Daily sessions</h3><canvas id="dailyCompareChart"></canvas></div>
 </div>
 
-<!-- Detail Panel -->
 <div class="detail-panel" id="detailPanel">
     <span class="detail-close" onclick="closeDetail()">&times;</span>
     <h3 id="detailTitle"></h3>
-    <div class="member-stats" id="detailStats"></div>
-    <div class="charts-grid" style="margin-top:1rem">
-        <div class="chart-card"><h3>일별 활동</h3><canvas id="detailDailyChart"></canvas></div>
-        <div class="chart-card"><h3>도구 사용 분포</h3><canvas id="detailToolChart"></canvas></div>
+    <div class="detail-stats" id="detailStats"></div>
+    <div class="charts-row" style="margin-bottom:0">
+        <div class="chart-block"><h3>Daily Activity</h3><canvas id="detailDailyChart"></canvas></div>
+        <div class="chart-block"><h3>Tool Distribution</h3><canvas id="detailToolChart"></canvas></div>
     </div>
 </div>
 
-<!-- Members -->
-<h2 class="section-title">구성원별 AI 활용</h2>
+<div class="section-label">Member Activity</div>
 <div class="members-grid" id="membersGrid"></div>
-
 <div id="missingSection"></div>
-
-<div class="footer">ARK Point AI Native 워크플로우 모니터링 시스템 | 자동 생성</div>
+<footer class="footer">ARK Point AI Native Workflow Monitor</footer>
+</div>
 
 <script>
 // === DATA ===
 const HISTORY = [{"date": "2026-03-12", "generated_at": "2026-03-19T11:02:03.821295+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 6, "messages": 521, "tool_calls": 354, "duration_min": 9603}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-13", "generated_at": "2026-03-19T11:02:03.821918+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 9, "messages": 527, "tool_calls": 362, "duration_min": 14771}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-14", "generated_at": "2026-03-19T11:02:03.822041+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-15", "generated_at": "2026-03-19T11:02:03.822205+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 3, "messages": 50, "tool_calls": 35, "duration_min": 5}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-16", "generated_at": "2026-03-19T11:02:03.822284+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 5, "messages": 41, "tool_calls": 21, "duration_min": 7}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-17", "generated_at": "2026-03-19T11:02:03.822357+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 3, "messages": 15, "tool_calls": 11, "duration_min": 77}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-18", "generated_at": "2026-03-19T11:02:03.822430+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 49, "messages": 1039, "tool_calls": 936, "duration_min": 1354}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}, {"date": "2026-03-19", "generated_at": "2026-03-19T11:02:03.822503+09:00", "timezone": "KST (UTC+9)", "claude_sessions": {"HS": {"sessions": 2, "messages": 103, "tool_calls": 84, "duration_min": 140}}, "github": {"total_commits": 0, "ai_commits": 0, "active_members": 0}, "slack": {"total_messages": 0, "ai_mentions": 0, "active_users": 0}}];
-const MEMBERS_DAILY = {"hookchoi": {"2026-03-19": {"sessions": 5, "messages": 416, "tool_calls": 265, "duration_min": 4967, "avg_session_min": 993, "top_tools": {"Bash": 116, "Read": 67, "Edit": 51, "Grep": 13, "Agent": 8, "Write": 7, "ToolSearch": 2, "mcp__claude-in-chrome__tabs_context_mcp": 1}, "skills_used": {}}}, "Ann": {"2026-03-19": {"sessions": 4, "messages": 233, "tool_calls": 204, "duration_min": 193, "avg_session_min": 48, "top_tools": {"Bash": 60, "Write": 42, "Edit": 24, "Read": 18, "mcp__gdrive__getGoogleSheetContent": 12, "AskUserQuestion": 11, "mcp__gdrive__search": 8, "TodoWrite": 8, "WebFetch": 4, "ToolSearch": 4}, "skills_used": {}}}, "HS": {"2026-03-19": {"sessions": 51, "messages": 1106, "tool_calls": 994, "duration_min": 1489, "avg_session_min": 29, "top_tools": {"Bash": 277, "Read": 272, "Write": 149, "Edit": 105, "mcp__plugin_ouroboros_ouroboros__ouroboros_job_wait": 70, "Glob": 46, "AskUserQuestion": 27, "ToolSearch": 12, "Grep": 11, "Agent": 7}, "skills_used": {"ouroboros:run": 1, "ouroboros:interview": 1, "telos:goal": 1, "ouroboros:setup": 1}}}, "Freddie": {"2026-03-19": {"sessions": 6, "messages": 510, "tool_calls": 410, "duration_min": 804, "avg_session_min": 134, "top_tools": {"Bash": 124, "Read": 77, "Edit": 50, "Write": 48, "TaskUpdate": 31, "Agent": 27, "TaskOutput": 11, "TaskCreate": 11, "Glob": 10, "ToolSearch": 9}, "skills_used": {"youtube-summarize": 1, "conductor:new-track": 1}}}, "jessesung": {"2026-03-25": {"sessions": 7, "messages": 352, "tool_calls": 300, "duration_min": 5790, "avg_session_min": 827, "top_tools": {"Bash": 123, "Read": 55, "Write": 40, "Edit": 31, "Agent": 13, "TaskUpdate": 12, "TaskCreate": 6, "ToolSearch": 5, "Grep": 4, "Glob": 3}, "skills_used": {"ralph-loop": 2, "loop": 1}}}, "hs": {"2026-03-12": {"sessions": 6, "messages": 521, "tool_calls": 354, "duration_min": 9603, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-13": {"sessions": 9, "messages": 527, "tool_calls": 362, "duration_min": 14771, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-15": {"sessions": 3, "messages": 50, "tool_calls": 35, "duration_min": 5, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-16": {"sessions": 5, "messages": 41, "tool_calls": 21, "duration_min": 7, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-17": {"sessions": 3, "messages": 15, "tool_calls": 11, "duration_min": 77, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-18": {"sessions": 49, "messages": 1039, "tool_calls": 936, "duration_min": 1354, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-19": {"sessions": 2, "messages": 103, "tool_calls": 84, "duration_min": 140, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}}};
-const ALL_DATES = ["2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19"];
+const MEMBERS_DAILY = {"HS": {"2026-03-19": {"sessions": 51, "messages": 1106, "tool_calls": 994, "duration_min": 1489, "avg_session_min": 29, "top_tools": {"Bash": 277, "Read": 272, "Write": 149, "Edit": 105, "mcp__plugin_ouroboros_ouroboros__ouroboros_job_wait": 70, "Glob": 46, "AskUserQuestion": 27, "ToolSearch": 12, "Grep": 11, "Agent": 7}, "skills_used": {"ouroboros:run": 1, "ouroboros:interview": 1, "telos:goal": 1, "ouroboros:setup": 1}}, "2026-03-24": {"sessions": 305, "messages": 6393, "tool_calls": 5673, "duration_min": 3617, "avg_session_min": 12, "top_tools": {"Bash": 1927, "Read": 1660, "Glob": 552, "Edit": 478, "ToolSearch": 308, "mcp__plugin_ouroboros_ouroboros__ouroboros_job_wait": 275, "Write": 170, "Grep": 130, "WebSearch": 31, "WebFetch": 29}, "skills_used": {"ouroboros:ralph": 2, "nopal": 1}}, "2026-03-12": {"sessions": 6, "messages": 521, "tool_calls": 354, "duration_min": 9603, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-13": {"sessions": 9, "messages": 527, "tool_calls": 362, "duration_min": 14771, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-15": {"sessions": 3, "messages": 50, "tool_calls": 35, "duration_min": 5, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-16": {"sessions": 5, "messages": 41, "tool_calls": 21, "duration_min": 7, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-17": {"sessions": 3, "messages": 15, "tool_calls": 11, "duration_min": 77, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}, "2026-03-18": {"sessions": 49, "messages": 1039, "tool_calls": 936, "duration_min": 1354, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}}, "Freddie": {"2026-03-19": {"sessions": 6, "messages": 510, "tool_calls": 410, "duration_min": 804, "avg_session_min": 134, "top_tools": {"Bash": 124, "Read": 77, "Edit": 50, "Write": 48, "TaskUpdate": 31, "Agent": 27, "TaskOutput": 11, "TaskCreate": 11, "Glob": 10, "ToolSearch": 9}, "skills_used": {"youtube-summarize": 1, "conductor:new-track": 1}}, "2026-03-23": {"sessions": 16, "messages": 805, "tool_calls": 643, "duration_min": 343, "avg_session_min": 21, "top_tools": {"Bash": 238, "Read": 133, "Edit": 125, "Agent": 25, "SendMessage": 20, "ToolSearch": 18, "TaskUpdate": 17, "Glob": 12, "Write": 11, "Grep": 11}, "skills_used": {}}, "2026-03-24": {"sessions": 8, "messages": 817, "tool_calls": 586, "duration_min": 447, "avg_session_min": 56, "top_tools": {"Read": 129, "Bash": 90, "SendMessage": 83, "Edit": 74, "TaskUpdate": 59, "TaskCreate": 30, "Agent": 29, "Write": 23, "ToolSearch": 17, "Glob": 13}, "skills_used": {"conductor:setup": 1, "conductor:new-track": 1, "conductor:status": 2, "update-config": 1}}}, "Rae": {"2026-03-23": {"sessions": 1, "messages": 31, "tool_calls": 18, "duration_min": 153, "avg_session_min": 153, "top_tools": {"Bash": 7, "Glob": 3, "Read": 3, "Write": 2, "ToolSearch": 1, "WebFetch": 1, "Edit": 1}, "skills_used": {}}}, "Jesse": {"2026-03-22": {"sessions": 1, "messages": 3, "tool_calls": 3, "duration_min": 0, "avg_session_min": 0, "top_tools": {"Bash": 3}, "skills_used": {}}, "2026-03-24": {"sessions": 3, "messages": 182, "tool_calls": 145, "duration_min": 334, "avg_session_min": 111, "top_tools": {"Write": 37, "Bash": 24, "Read": 23, "Edit": 17, "Agent": 14, "TaskUpdate": 12, "TaskCreate": 6, "ToolSearch": 5, "WebFetch": 2, "Skill": 2}, "skills_used": {"loop": 1, "ralph-loop": 1}}}, "Mew": {"2026-03-23": {"sessions": 0, "messages": 0, "tool_calls": 0, "duration_min": 0, "avg_session_min": 0, "top_tools": {}, "skills_used": {}}}, "Hook": {"2026-02-12": {"sessions": 1, "messages": 34, "tool_calls": 30, "duration_min": 38, "avg_session_min": 38, "top_tools": {"Task": 10, "TaskUpdate": 7, "Bash": 4, "TaskCreate": 4, "Read": 2, "Write": 2, "Glob": 1}, "skills_used": {}}, "2026-02-18": {"sessions": 3, "messages": 356, "tool_calls": 308, "duration_min": 135, "avg_session_min": 45, "top_tools": {"Bash": 70, "Read": 58, "Edit": 54, "Write": 53, "TaskUpdate": 20, "TaskCreate": 10, "Task": 9, "AskUserQuestion": 8, "TaskStop": 7, "Grep": 5}, "skills_used": {}}, "2026-02-19": {"sessions": 7, "messages": 824, "tool_calls": 671, "duration_min": 315, "avg_session_min": 45, "top_tools": {"Bash": 239, "Edit": 209, "Read": 144, "Write": 26, "Grep": 13, "Task": 10, "AskUserQuestion": 5, "TaskUpdate": 4, "mcp__claude-in-chrome__tabs_context_mcp": 4, "TaskOutput": 3}, "skills_used": {}}, "2026-02-20": {"sessions": 3, "messages": 295, "tool_calls": 256, "duration_min": 530, "avg_session_min": 177, "top_tools": {"Read": 86, "Bash": 56, "Edit": 51, "Write": 18, "TaskUpdate": 13, "TaskCreate": 9, "Task": 8, "TaskOutput": 8, "Glob": 6, "mcp__claude-in-chrome__tabs_context_mcp": 1}, "skills_used": {}}, "2026-02-21": {"sessions": 9, "messages": 474, "tool_calls": 417, "duration_min": 506, "avg_session_min": 56, "top_tools": {"Bash": 159, "Read": 69, "Edit": 61, "Write": 35, "TaskUpdate": 20, "Task": 13, "TaskCreate": 10, "Grep": 7, "mcp__claude-in-chrome__tabs_context_mcp": 7, "AskUserQuestion": 6}, "skills_used": {}}, "2026-02-22": {"sessions": 7, "messages": 644, "tool_calls": 585, "duration_min": 992, "avg_session_min": 142, "top_tools": {"Read": 161, "Bash": 124, "Edit": 102, "Write": 64, "TaskUpdate": 48, "TaskCreate": 27, "Grep": 19, "Glob": 14, "Task": 11, "mcp__claude-in-chrome__tabs_context_mcp": 3}, "skills_used": {}}, "2026-02-23": {"sessions": 15, "messages": 758, "tool_calls": 662, "duration_min": 883, "avg_session_min": 59, "top_tools": {"Bash": 173, "Read": 138, "Write": 137, "TaskUpdate": 54, "Edit": 51, "TaskCreate": 29, "Task": 15, "Glob": 8, "TaskStop": 7, "mcp__claude-in-chrome__tabs_context_mcp": 7}, "skills_used": {}}, "2026-02-24": {"sessions": 6, "messages": 308, "tool_calls": 273, "duration_min": 237, "avg_session_min": 40, "top_tools": {"Bash": 108, "Read": 49, "Write": 44, "Edit": 22, "TaskUpdate": 20, "TaskOutput": 9, "Task": 6, "TaskCreate": 5, "Glob": 5, "mcp__claude-in-chrome__tabs_context_mcp": 3}, "skills_used": {}}, "2026-02-25": {"sessions": 7, "messages": 196, "tool_calls": 134, "duration_min": 1528, "avg_session_min": 218, "top_tools": {"Bash": 53, "Read": 31, "WebSearch": 16, "Write": 12, "Task": 8, "Edit": 7, "Grep": 3, "WebFetch": 2, "AskUserQuestion": 1, "Glob": 1}, "skills_used": {}}, "2026-02-26": {"sessions": 10, "messages": 417, "tool_calls": 357, "duration_min": 871, "avg_session_min": 87, "top_tools": {"Read": 93, "Edit": 81, "Bash": 77, "Grep": 36, "TaskUpdate": 16, "Write": 11, "WebFetch": 11, "TaskCreate": 8, "Task": 7, "WebSearch": 7}, "skills_used": {}}, "2026-02-27": {"sessions": 8, "messages": 128, "tool_calls": 86, "duration_min": 859, "avg_session_min": 107, "top_tools": {"Bash": 32, "Read": 18, "Edit": 12, "Write": 11, "Grep": 4, "TaskOutput": 3, "TaskStop": 2, "mcp__claude-in-chrome__tabs_context_mcp": 1, "EnterPlanMode": 1, "Task": 1}, "skills_used": {}}, "2026-02-28": {"sessions": 5, "messages": 95, "tool_calls": 82, "duration_min": 45, "avg_session_min": 9, "top_tools": {"Read": 27, "Edit": 24, "Bash": 13, "Write": 8, "TaskOutput": 4, "Task": 3, "Glob": 1, "EnterPlanMode": 1, "ExitPlanMode": 1}, "skills_used": {}}, "2026-03-02": {"sessions": 7, "messages": 390, "tool_calls": 336, "duration_min": 1104, "avg_session_min": 158, "top_tools": {"Edit": 100, "Read": 98, "Bash": 35, "TaskUpdate": 30, "Write": 19, "TaskCreate": 15, "WebFetch": 9, "Task": 7, "Grep": 7, "mcp__claude-in-chrome__tabs_context_mcp": 5}, "skills_used": {}}, "2026-03-03": {"sessions": 12, "messages": 1490, "tool_calls": 1379, "duration_min": 540, "avg_session_min": 45, "top_tools": {"Read": 345, "Edit": 335, "Bash": 266, "Grep": 143, "TaskUpdate": 100, "Agent": 54, "TaskCreate": 54, "Write": 25, "mcp__claude-in-chrome__tabs_context_mcp": 10, "TaskOutput": 9}, "skills_used": {"simplify": 3}}, "2026-03-04": {"sessions": 8, "messages": 770, "tool_calls": 708, "duration_min": 360, "avg_session_min": 45, "top_tools": {"Read": 178, "Bash": 176, "Edit": 88, "Write": 74, "TaskUpdate": 60, "Grep": 49, "TaskCreate": 30, "Glob": 21, "Agent": 16, "EnterPlanMode": 5}, "skills_used": {}}, "2026-03-05": {"sessions": 5, "messages": 259, "tool_calls": 206, "duration_min": 653, "avg_session_min": 131, "top_tools": {"Bash": 56, "Edit": 56, "Read": 41, "Grep": 14, "ToolSearch": 13, "Glob": 9, "Write": 9, "WebFetch": 3, "AskUserQuestion": 2, "mcp__claude-in-chrome__tabs_context_mcp": 2}, "skills_used": {}}, "2026-03-06": {"sessions": 13, "messages": 432, "tool_calls": 354, "duration_min": 1660, "avg_session_min": 128, "top_tools": {"Edit": 115, "Bash": 81, "Read": 74, "Write": 31, "ToolSearch": 25, "WebFetch": 12, "Glob": 6, "Agent": 6, "mcp__claude-in-chrome__tabs_context_mcp": 3, "Grep": 1}, "skills_used": {"simplify": 1}}, "2026-03-09": {"sessions": 3, "messages": 456, "tool_calls": 420, "duration_min": 135, "avg_session_min": 45, "top_tools": {"Edit": 145, "Bash": 138, "Read": 109, "Write": 15, "Agent": 6, "ToolSearch": 4, "Grep": 2, "Glob": 1}, "skills_used": {}}, "2026-03-10": {"sessions": 9, "messages": 108, "tool_calls": 85, "duration_min": 763, "avg_session_min": 85, "top_tools": {"Bash": 36, "Write": 31, "Read": 8, "Edit": 8, "Agent": 2}, "skills_used": {}}, "2026-03-11": {"sessions": 11, "messages": 486, "tool_calls": 379, "duration_min": 314, "avg_session_min": 29, "top_tools": {"Bash": 159, "Read": 55, "Edit": 46, "WebSearch": 46, "Write": 38, "Agent": 13, "ToolSearch": 7, "AskUserQuestion": 5, "Grep": 4, "Glob": 3}, "skills_used": {"gov-fit": 1}}, "2026-03-12": {"sessions": 4, "messages": 39, "tool_calls": 29, "duration_min": 83, "avg_session_min": 21, "top_tools": {"Bash": 20, "Read": 5, "Edit": 2, "Write": 1, "Agent": 1}, "skills_used": {}}, "2026-03-13": {"sessions": 13, "messages": 262, "tool_calls": 191, "duration_min": 389, "avg_session_min": 30, "top_tools": {"Read": 52, "Bash": 52, "Edit": 40, "Write": 11, "Grep": 11, "TodoWrite": 11, "Glob": 4, "ToolSearch": 3, "WebSearch": 2, "Agent": 2}, "skills_used": {"keybindings-help": 1, "simplify": 1}}, "2026-03-16": {"sessions": 6, "messages": 462, "tool_calls": 374, "duration_min": 1082, "avg_session_min": 180, "top_tools": {"Bash": 166, "Edit": 117, "Read": 33, "Write": 18, "Agent": 10, "AskUserQuestion": 8, "TaskOutput": 7, "ToolSearch": 4, "WebSearch": 4, "Grep": 3}, "skills_used": {"qa": 1}}, "2026-03-17": {"sessions": 8, "messages": 359, "tool_calls": 309, "duration_min": 600, "avg_session_min": 75, "top_tools": {"Bash": 118, "Read": 67, "Edit": 52, "Grep": 36, "Write": 20, "Glob": 7, "AskUserQuestion": 3, "ToolSearch": 3, "mcp__claude-in-chrome__tabs_context_mcp": 2, "mcp__claude-in-chrome__navigate": 1}, "skills_used": {"gov-proposal": 1}}, "2026-03-18": {"sessions": 3, "messages": 377, "tool_calls": 306, "duration_min": 135, "avg_session_min": 45, "top_tools": {"Bash": 143, "Read": 79, "Edit": 58, "Grep": 12, "Write": 6, "WebSearch": 3, "ToolSearch": 2, "mcp__claude-in-chrome__tabs_context_mcp": 2, "Agent": 1}, "skills_used": {}}, "2026-03-19": {"sessions": 7, "messages": 709, "tool_calls": 509, "duration_min": 315, "avg_session_min": 45, "top_tools": {"Bash": 209, "Edit": 124, "Read": 109, "Write": 32, "Agent": 15, "Grep": 14, "ToolSearch": 2, "Skill": 2, "WebSearch": 1, "Glob": 1}, "skills_used": {"update-config": 1, "gov-script": 1}}, "2026-03-20": {"sessions": 6, "messages": 656, "tool_calls": 507, "duration_min": 270, "avg_session_min": 45, "top_tools": {"Bash": 298, "Edit": 82, "Read": 77, "Agent": 21, "Write": 14, "Grep": 11, "ToolSearch": 2, "mcp__claude-in-chrome__tabs_context_mcp": 2}, "skills_used": {"folder-setup": 4, "gov-ppt": 1}}}, "TEO": {"2026-03-20": {"sessions": 6, "messages": 234, "tool_calls": 182, "duration_min": 360, "avg_session_min": 60, "top_tools": {"Bash": 106, "Read": 22, "WebFetch": 16, "TodoWrite": 10, "Edit": 9, "Write": 9, "WebSearch": 8, "Glob": 1, "AskUserQuestion": 1}, "skills_used": {}}, "2026-03-21": {"sessions": 12, "messages": 577, "tool_calls": 398, "duration_min": 720, "avg_session_min": 60, "top_tools": {"Bash": 153, "Read": 63, "Write": 50, "TodoWrite": 31, "Edit": 26, "WebFetch": 25, "Glob": 13, "ToolSearch": 12, "Skill": 4, "mcp__Claude_in_Chrome__navigate": 3}, "skills_used": {"anthropic-skills:schedule": 1, "update-config": 2, "telegram:configure": 1}}, "2026-03-22": {"sessions": 1, "messages": 1, "tool_calls": 1, "duration_min": 0, "avg_session_min": 0, "top_tools": {"Bash": 1}, "skills_used": {}}, "2026-03-23": {"sessions": 4, "messages": 150, "tool_calls": 138, "duration_min": 92, "avg_session_min": 23, "top_tools": {"mcp__Claude_in_Chrome__computer": 46, "mcp__Claude_in_Chrome__javascript_tool": 39, "Bash": 26, "Edit": 6, "TodoWrite": 5, "Glob": 4, "Write": 3, "Read": 3, "mcp__Claude_in_Chrome__navigate": 2, "mcp__Claude_in_Chrome__read_console_messages": 2}, "skills_used": {}}, "2026-03-24": {"sessions": 3, "messages": 335, "tool_calls": 267, "duration_min": 821, "avg_session_min": 274, "top_tools": {"Bash": 65, "mcp__Claude_in_Chrome__computer": 56, "Read": 25, "Glob": 18, "WebSearch": 17, "Edit": 11, "WebFetch": 9, "Write": 8, "Agent": 8, "TaskOutput": 8}, "skills_used": {"recall": 4}}}, "Ann": {"2026-03-19": {"sessions": 4, "messages": 233, "tool_calls": 204, "duration_min": 193, "avg_session_min": 48, "top_tools": {"Bash": 60, "Write": 42, "Edit": 24, "Read": 18, "mcp__gdrive__getGoogleSheetContent": 12, "AskUserQuestion": 11, "mcp__gdrive__search": 8, "TodoWrite": 8, "WebFetch": 4, "ToolSearch": 4}, "skills_used": {}}, "2026-03-20": {"sessions": 10, "messages": 530, "tool_calls": 459, "duration_min": 600, "avg_session_min": 60, "top_tools": {"Bash": 141, "Write": 42, "ToolSearch": 30, "Read": 29, "Edit": 27, "TodoWrite": 27, "WebFetch": 21, "mcp__notion__API-patch-block-children": 20, "AskUserQuestion": 20, "WebSearch": 17}, "skills_used": {"clarify:vague": 1}}, "2026-03-22": {"sessions": 3, "messages": 1482, "tool_calls": 489, "duration_min": 90, "avg_session_min": 30, "top_tools": {"Bash": 120, "Edit": 77, "TodoWrite": 47, "Read": 44, "mcp__notion__API-delete-a-block": 42, "mcp__notion__API-get-block-children": 28, "WebFetch": 26, "mcp__notion__API-patch-block-children": 21, "Glob": 16, "ToolSearch": 15}, "skills_used": {"find-skills": 1, "social-media-marketing": 1, "proposal": 1, "critique": 1}}, "2026-03-23": {"sessions": 6, "messages": 994, "tool_calls": 315, "duration_min": 180, "avg_session_min": 30, "top_tools": {"Bash": 103, "Read": 70, "Edit": 34, "TodoWrite": 27, "Write": 14, "Grep": 11, "Glob": 9, "mcp__gdrive__getGoogleSheetContent": 8, "mcp__notion__API-get-block-children": 7, "AskUserQuestion": 6}, "skills_used": {}}, "2026-03-24": {"sessions": 12, "messages": 1837, "tool_calls": 1561, "duration_min": 869, "avg_session_min": 72, "top_tools": {"Bash": 353, "Read": 270, "Edit": 205, "TodoWrite": 117, "mcp__gdrive__getGoogleSheetContent": 82, "Write": 78, "WebFetch": 50, "mcp__gdrive__formatGoogleSheetCells": 46, "mcp__gdrive__updateGoogleSheet": 46, "ToolSearch": 37}, "skills_used": {"pptx": 2}}, "2026-03-25": {"sessions": 9, "messages": 1629, "tool_calls": 1405, "duration_min": 773, "avg_session_min": 86, "top_tools": {"Bash": 324, "Read": 227, "Edit": 185, "TodoWrite": 103, "mcp__gdrive__getGoogleSheetContent": 88, "Write": 70, "WebFetch": 49, "mcp__gdrive__formatGoogleSheetCells": 46, "mcp__gdrive__updateGoogleSheet": 46, "ToolSearch": 31}, "skills_used": {"pptx": 2}}}};
+const ALL_DATES = ["2026-02-12", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-24", "2026-03-25"];
 const TEAM_MEMBERS = {"hslee-byte": "HS", "annnzel": "Ann", "teo-hash": "TEO", "ghks18g": "Freddie", "uno-515": "Hook", "jesseorbit": "Jesse", "RaeOfJune": "Rae", "Dev-Arkpoint": "Mew"};
-const COLORS = ['#6366f1','#22c55e','#eab308','#3b82f6','#ef4444','#a855f7','#f97316','#06b6d4','#ec4899','#14b8a6'];
+const PALETTE = ['#059669','#0284c7','#d97706','#7c3aed','#dc2626','#ea580c','#0d9488','#c026d3','#4f46e5','#16a34a'];
+const fmt = n => Number(n).toLocaleString();
+const fmtH = m => { const h=m/60; return h>=1 ? (h%1===0?h+'h':h.toFixed(1)+'h') : m+'m'; };
 
+let currentPeriod = 7;
 let currentDateFilter = 'all';
 let currentMemberFilter = 'all';
 let memberTrendChart = null;
@@ -151,22 +169,29 @@ let dailyCompareChart = null;
 let detailDailyChart = null;
 let detailToolChart = null;
 
-// === INIT ===
+Chart.defaults.color = '#a1a1aa';
+Chart.defaults.borderColor = '#e5e7eb';
+Chart.defaults.font.family = "'JetBrains Mono', monospace";
+Chart.defaults.font.size = 10;
+
 function init() {
-    renderDateButtons();
     renderMemberButtons();
-    updateDashboard();
+    updateAll();
 }
 
-function renderDateButtons() {
-    const container = document.getElementById('dateButtons');
-    ALL_DATES.slice(-7).forEach(d => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.textContent = d.slice(5);
-        btn.onclick = () => setDateFilter(d);
-        container.appendChild(btn);
+function setPeriod(days) {
+    currentPeriod = days;
+    document.querySelectorAll('.filters .filter-group:first-child .filter-btn').forEach(b => {
+        const labels = {1:'24h',3:'3d',7:'7d',30:'30d',0:'All'};
+        b.classList.toggle('active', b.textContent === labels[days]);
     });
+    updateAll();
+}
+
+function updateAll() {
+    currentDateFilter = currentPeriod === 0 ? 'all' : 'period';
+    updateDashboard();
+    renderLeaderboard();
 }
 
 function renderMemberButtons() {
@@ -174,45 +199,41 @@ function renderMemberButtons() {
     Object.keys(MEMBERS_DAILY).forEach(m => {
         const btn = document.createElement('button');
         btn.className = 'filter-btn';
-        btn.textContent = m.toUpperCase();
+        btn.textContent = m;
         btn.dataset.member = m;
         btn.onclick = () => setMemberFilter(m);
         container.appendChild(btn);
     });
 }
 
-function setDateFilter(d) {
-    currentDateFilter = d;
-    document.querySelectorAll('.filters .filter-group:first-child .filter-btn').forEach(b => b.classList.remove('active'));
-    if (d === 'all') {
-        document.querySelector('.filters .filter-group:first-child .filter-btn').classList.add('active');
-    } else {
-        document.querySelectorAll('#dateButtons .filter-btn').forEach(b => {
-            if (b.textContent === d.slice(5)) b.classList.add('active');
-        });
-    }
-    updateDashboard();
-}
-
 function setMemberFilter(m) {
     currentMemberFilter = m;
-    document.querySelectorAll('.filters .filter-group:last-child .filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filters .filter-group:nth-child(2) .filter-btn').forEach(b => b.classList.remove('active'));
     if (m === 'all') {
-        document.querySelector('.filters .filter-group:last-child .filter-btn').classList.add('active');
+        document.querySelector('.filters .filter-group:nth-child(2) .filter-btn').classList.add('active');
     } else {
         document.querySelectorAll('#memberButtons .filter-btn').forEach(b => {
             if (b.dataset.member === m) b.classList.add('active');
         });
     }
-    updateDashboard();
+    updateAll();
+}
+
+function getPeriodDates() {
+    if (currentPeriod === 0) return ALL_DATES;
+    return ALL_DATES.slice(-currentPeriod);
 }
 
 function getFilteredData() {
     const members = currentMemberFilter === 'all' ? Object.keys(MEMBERS_DAILY) : [currentMemberFilter];
-    const dates = currentDateFilter === 'all' ? ALL_DATES : [currentDateFilter];
+    const dates = getPeriodDates();
     let totals = { sessions:0, messages:0, tool_calls:0, duration_min:0 };
+    const ADVANCED_TOOLS = ['agent','skill','mcp','enterplanmode','exitplanmode'];
+    let advancedCalls = 0;
+    let activeMemberSet = new Set();
     members.forEach(m => {
         const md = MEMBERS_DAILY[m] || {};
+        let hasActivity = false;
         dates.forEach(d => {
             const s = md[d];
             if (s) {
@@ -220,31 +241,41 @@ function getFilteredData() {
                 totals.messages += s.messages;
                 totals.tool_calls += s.tool_calls;
                 totals.duration_min += s.duration_min;
+                hasActivity = true;
+                Object.entries(s.top_tools || {}).forEach(([t,c]) => {
+                    if (ADVANCED_TOOLS.some(a => t.toLowerCase().includes(a)) || t.toLowerCase().startsWith('mcp_')) advancedCalls += c;
+                });
+                Object.values(s.skills_used || {}).forEach(c => { advancedCalls += c; });
             }
         });
+        if (hasActivity) activeMemberSet.add(m);
     });
-    return { members, dates, totals };
+    const totalMembers = Object.keys(TEAM_MEMBERS).length;
+    const activeRate = totalMembers ? Math.round(activeMemberSet.size / totalMembers * 100) : 0;
+    const depthRate = totals.tool_calls ? Math.round(advancedCalls / totals.tool_calls * 100) : 0;
+    return { members, dates, totals, activeRate, depthRate, activeCount: activeMemberSet.size, totalMembers };
 }
 
 function updateDashboard() {
-    const { members, dates, totals } = getFilteredData();
-    renderKPIs(totals, members);
+    const { members, dates, totals, activeRate, depthRate, activeCount, totalMembers } = getFilteredData();
+    renderKPIs(totals, members, activeRate, depthRate, activeCount, totalMembers);
     renderMemberCards(members, dates);
     renderMemberTrendChart(members, dates);
     renderDailyCompareChart(members, dates);
     renderMissing(members);
 }
 
-function renderKPIs(totals, members) {
-    const grid = document.getElementById('kpiGrid');
-    grid.innerHTML = `
-        <div class="kpi-card"><div class="kpi-value">${totals.sessions}</div><div class="kpi-label">Claude 세션</div></div>
-        <div class="kpi-card"><div class="kpi-value">${totals.messages}</div><div class="kpi-label">AI 대화</div></div>
-        <div class="kpi-card"><div class="kpi-value">${totals.tool_calls}</div><div class="kpi-label">도구 호출</div></div>
-        <div class="kpi-card"><div class="kpi-value">${totals.duration_min}m</div><div class="kpi-label">AI 사용 시간</div></div>
-        <div class="kpi-card"><div class="kpi-value">${members.length}</div><div class="kpi-label">참여 구성원</div></div>
-        <div class="kpi-card"><div class="kpi-value">${Object.keys(TEAM_MEMBERS).length}</div><div class="kpi-label">전체 구성원</div></div>
-    `;
+function renderKPIs(totals, members, activeRate, depthRate, activeCount, totalMembers) {
+    const rc = activeRate>=80?'positive':activeRate>=50?'warning':'danger';
+    const dc = depthRate>=30?'positive':depthRate>=10?'warning':'danger';
+    document.getElementById('kpiHero').innerHTML = `
+        <div class="kpi-hero-card ${rc}"><div class="kpi-hero-value">${activeRate}<span class="unit">%</span></div><div class="kpi-hero-label">Team Active Rate (${activeCount} / ${totalMembers})</div></div>
+        <div class="kpi-hero-card ${dc}"><div class="kpi-hero-value">${depthRate}<span class="unit">%</span></div><div class="kpi-hero-label">AI Depth (Advanced / Total)</div></div>`;
+    document.getElementById('kpiRow').innerHTML = `
+        <div class="kpi-cell"><div class="kpi-cell-value">${fmt(totals.sessions)}</div><div class="kpi-cell-label">Sessions</div></div>
+        <div class="kpi-cell"><div class="kpi-cell-value">${fmt(totals.messages)}</div><div class="kpi-cell-label">Conversations</div></div>
+        <div class="kpi-cell"><div class="kpi-cell-value">${fmt(totals.tool_calls)}</div><div class="kpi-cell-label">Tool Calls</div></div>
+        <div class="kpi-cell"><div class="kpi-cell-value">${fmtH(totals.duration_min)}</div><div class="kpi-cell-label">AI Time</div></div>`;
 }
 
 function renderMemberCards(members, dates) {
@@ -271,7 +302,7 @@ function renderMemberCards(members, dates) {
         const toolBars = toolEntries.map(([t,c]) => {
             const short = t.replace('mcp__plugin_ouroboros_ouroboros__','ouroboros:');
             const pct = c/maxTool*100;
-            return `<div class="tool-row"><span class="tool-name">${esc(short)}</span><div class="tool-bar-bg"><div class="tool-bar" style="width:${pct}%"></div></div><span class="tool-count">${c}</span></div>`;
+            return `<div class="tool-row"><span class="tool-name">${esc(short)}</span><div class="tool-bar-bg"><div class="tool-bar" style="width:${pct}%"></div></div><span class="tool-count">${fmt(c)}</span></div>`;
         }).join('');
         const skillTags = Object.keys(totals.skills).map(s => `<span class="skill-tag">/${esc(s)}</span>`).join(' ');
 
@@ -279,14 +310,15 @@ function renderMemberCards(members, dates) {
         card.className = `member-card ${level}`;
         card.onclick = () => showDetail(m);
         card.innerHTML = `
-            <div class="member-header"><h3>${esc(m.toUpperCase())}</h3><span class="member-badge">${totals.sessions} sessions</span></div>
+            <div class="level-indicator"></div>
+            <div class="member-header"><h3>${esc(m)}</h3><span class="member-badge">${totals.sessions} sessions</span></div>
             <div class="member-stats">
-                <div class="stat-item"><div class="stat-value">${totals.messages}</div><div class="stat-label">대화</div></div>
-                <div class="stat-item"><div class="stat-value">${totals.tool_calls}</div><div class="stat-label">도구 호출</div></div>
-                <div class="stat-item"><div class="stat-value">${totals.duration}m</div><div class="stat-label">총 시간</div></div>
-                <div class="stat-item"><div class="stat-value">${totals.sessions ? Math.round(totals.duration/totals.sessions) : 0}m</div><div class="stat-label">평균/세션</div></div>
+                <div class="stat-item"><div class="stat-value">${fmt(totals.messages)}</div><div class="stat-label">Conv</div></div>
+                <div class="stat-item"><div class="stat-value">${fmt(totals.tool_calls)}</div><div class="stat-label">Tools</div></div>
+                <div class="stat-item"><div class="stat-value">${fmtH(totals.duration)}</div><div class="stat-label">Time</div></div>
+                <div class="stat-item"><div class="stat-value">${fmtH(totals.sessions ? Math.round(totals.duration/totals.sessions) : 0)}</div><div class="stat-label">Avg</div></div>
             </div>
-            <div class="tools-section"><h4>도구 사용</h4>${toolBars}</div>
+            <div class="tools-section"><h4>Top Tools</h4>${toolBars}</div>
             ${skillTags ? '<div class="skills">'+skillTags+'</div>' : ''}
         `;
         grid.appendChild(card);
@@ -296,13 +328,13 @@ function renderMemberCards(members, dates) {
 function renderMemberTrendChart(members, dates) {
     const ctx = document.getElementById('memberTrendChart');
     if (memberTrendChart) memberTrendChart.destroy();
-    const displayDates = currentDateFilter === 'all' ? ALL_DATES.slice(-7) : dates;
+    const displayDates = getPeriodDates();
     const datasets = members.map((m, i) => ({
-        label: m.toUpperCase(),
+        label: m,
         data: displayDates.map(d => (MEMBERS_DAILY[m]||{})[d]?.tool_calls || 0),
-        borderColor: COLORS[i % COLORS.length],
-        backgroundColor: COLORS[i % COLORS.length] + '20',
-        fill: true, tension: 0.3,
+        borderColor: PALETTE[i % PALETTE.length],
+        backgroundColor: PALETTE[i % PALETTE.length] + '18',
+        fill: true, tension: 0.3, borderWidth: 1.5, pointRadius: 0, pointHitRadius: 8,
     }));
     memberTrendChart = new Chart(ctx, {
         type: 'line',
@@ -314,11 +346,13 @@ function renderMemberTrendChart(members, dates) {
 function renderDailyCompareChart(members, dates) {
     const ctx = document.getElementById('dailyCompareChart');
     if (dailyCompareChart) dailyCompareChart.destroy();
-    const displayDates = currentDateFilter === 'all' ? ALL_DATES.slice(-7) : dates;
+    const displayDates = getPeriodDates();
     const datasets = members.map((m, i) => ({
-        label: m.toUpperCase(),
+        label: m,
         data: displayDates.map(d => (MEMBERS_DAILY[m]||{})[d]?.sessions || 0),
-        backgroundColor: COLORS[i % COLORS.length],
+        backgroundColor: PALETTE[i % PALETTE.length] + '90',
+        borderColor: PALETTE[i % PALETTE.length],
+        borderWidth: 1, borderRadius: 2,
     }));
     dailyCompareChart = new Chart(ctx, {
         type: 'bar',
@@ -331,7 +365,7 @@ function renderDailyCompareChart(members, dates) {
 function showDetail(member) {
     const panel = document.getElementById('detailPanel');
     panel.classList.add('visible');
-    document.getElementById('detailTitle').textContent = member.toUpperCase() + ' 상세';
+    document.getElementById('detailTitle').textContent = member;
 
     const md = MEMBERS_DAILY[member] || {};
     const dates = Object.keys(md).sort().slice(-7);
@@ -343,10 +377,10 @@ function showDetail(member) {
         if(s) { total.sessions+=s.sessions; total.messages+=s.messages; total.tools+=s.tool_calls; total.duration+=s.duration_min; }
     });
     document.getElementById('detailStats').innerHTML = `
-        <div class="stat-item"><div class="stat-value">${total.sessions}</div><div class="stat-label">세션 (7일)</div></div>
-        <div class="stat-item"><div class="stat-value">${total.messages}</div><div class="stat-label">대화</div></div>
-        <div class="stat-item"><div class="stat-value">${total.tools}</div><div class="stat-label">도구 호출</div></div>
-        <div class="stat-item"><div class="stat-value">${total.duration}m</div><div class="stat-label">총 시간</div></div>
+        <div class="stat-item"><div class="stat-value">${total.sessions}</div><div class="stat-label">Sessions (7d)</div></div>
+        <div class="stat-item"><div class="stat-value">${fmt(total.messages)}</div><div class="stat-label">Conv</div></div>
+        <div class="stat-item"><div class="stat-value">${fmt(total.tools)}</div><div class="stat-label">Tools</div></div>
+        <div class="stat-item"><div class="stat-value">${fmtH(total.duration)}</div><div class="stat-label">Time</div></div>
     `;
 
     // Daily chart
@@ -356,8 +390,8 @@ function showDetail(member) {
         data: {
             labels: dates.map(d=>d.slice(5)),
             datasets: [
-                { label:'세션', data:dates.map(d=>md[d]?.sessions||0), backgroundColor:'#6366f1' },
-                { label:'도구', data:dates.map(d=>md[d]?.tool_calls||0), backgroundColor:'#22c55e' },
+                { label:'Sessions', data:dates.map(d=>md[d]?.sessions||0), backgroundColor:'#059669', borderRadius:2 },
+                { label:'Tools', data:dates.map(d=>md[d]?.tool_calls||0), backgroundColor:'#0284c7', borderRadius:2 },
             ]
         },
         options: chartOpts(),
@@ -374,9 +408,9 @@ function showDetail(member) {
         type:'doughnut',
         data: {
             labels: topTools.map(([t])=>t.replace('mcp__plugin_ouroboros_ouroboros__','ouroboros:').slice(0,20)),
-            datasets: [{ data:topTools.map(([,c])=>c), backgroundColor:COLORS }]
+            datasets: [{ data:topTools.map(([,c])=>c), backgroundColor:PALETTE, borderWidth:0 }]
         },
-        options: { responsive:true, plugins:{ legend:{ position:'right', labels:{ color:'#6b6b7b', font:{size:10} } } } }
+        options: { responsive:true, cutout:'65%', plugins:{ legend:{ position:'right', labels:{ color:'#a1a1aa', font:{size:9, family:"'JetBrains Mono', monospace"}, padding:8 } } } }
     });
 
     panel.scrollIntoView({ behavior:'smooth' });
@@ -386,20 +420,59 @@ function closeDetail() {
     document.getElementById('detailPanel').classList.remove('visible');
 }
 
+function getMemberTotals(member, dates) {
+    const md = MEMBERS_DAILY[member] || {};
+    let t = {sessions:0, messages:0, tool_calls:0, duration:0, tools:{}, skills:{}};
+    dates.forEach(d => {
+        const s = md[d];
+        if(s) {
+            t.sessions+=s.sessions; t.messages+=s.messages; t.tool_calls+=s.tool_calls; t.duration+=s.duration_min;
+            Object.entries(s.top_tools||{}).forEach(([k,v])=>{t.tools[k]=(t.tools[k]||0)+v;});
+            Object.entries(s.skills_used||{}).forEach(([k,v])=>{t.skills[k]=(t.skills[k]||0)+v;});
+        }
+    });
+    return t;
+}
+
+function renderLeaderboard() {
+    const dates = getPeriodDates();
+    const members = Object.keys(MEMBERS_DAILY);
+    const stats = members.map(m => {
+        const t = getMemberTotals(m, dates);
+        const skillCount = Object.values(t.skills).reduce((a,b)=>a+b, 0);
+        const efficiency = t.sessions > 0 ? Math.round((t.tool_calls / t.sessions) * (Object.keys(t.skills).length + 1)) : 0;
+        return {name:m, ...t, skillCount, uniqueSkills:Object.keys(t.skills).length, efficiency};
+    }).filter(s => s.sessions > 0);
+    const lb = document.getElementById('leaderboard');
+    const boards = [
+        {title:'Most Active',key:'tool_calls',desc:'Total tool invocations'},
+        {title:'Skill Adoption',key:'uniqueSkills',desc:'Unique workflows used'},
+        {title:'Most Efficient',key:'efficiency',desc:'Tools/session × diversity'},
+        {title:'Top Skill Users',key:'skillCount',desc:'Total skill invocations'},
+    ];
+    lb.innerHTML = boards.map(b => {
+        const sorted = [...stats].sort((a,c) => c[b.key] - a[b.key]);
+        const rows = sorted.slice(0,5).map((s,i) =>
+            `<div class="lb-row"><span class="lb-rank">${String(i+1).padStart(2,'0')}</span><span class="lb-name">${esc(s.name)}</span><span class="lb-value">${fmt(s[b.key])}</span></div>`
+        ).join('');
+        return `<div class="lb-block"><div class="lb-block-title">${b.title}</div><div class="lb-block-desc">${b.desc}</div>${rows||'<div style="color:var(--text-tertiary);padding:1rem 0;font-size:0.8rem">Collecting data</div>'}</div>`;
+    }).join('');
+}
+
 function renderMissing() {
-    const participating = new Set(Object.keys(MEMBERS_DAILY).map(m=>m.toUpperCase()));
+    const participating = new Set(Object.keys(MEMBERS_DAILY));
     const allNames = new Set(Object.values(TEAM_MEMBERS));
     const missing = [...allNames].filter(n => !participating.has(n));
     const el = document.getElementById('missingSection');
     if (missing.length) {
-        el.innerHTML = `<div class="missing-section"><h4>미수집 구성원</h4><div class="missing-names">${missing.join(', ')}</div><code>cd ~/Documents/ark_point/repos/ark-agents && bash ai-monitor/install.sh</code></div>`;
+        el.innerHTML = `<div class="missing-block"><h4>Not Yet Connected</h4><div class="missing-names">${missing.join(', ')}</div><code>cd ~/Documents/ark_point/repos/ark-agents && bash ai-monitor/install.sh</code></div>`;
     } else {
         el.innerHTML = '';
     }
 }
 
 function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
-function chartOpts() { return { responsive:true, plugins:{legend:{labels:{color:'#6b6b7b',font:{size:11}}}}, scales:{x:{ticks:{color:'#6b6b7b'},grid:{color:'#1e1e2e'}},y:{ticks:{color:'#6b6b7b'},grid:{color:'#1e1e2e'}}} }; }
+function chartOpts() { return { responsive:true, plugins:{legend:{labels:{color:'#a1a1aa',font:{size:9,family:"'JetBrains Mono', monospace"},padding:12}}}, scales:{x:{ticks:{color:'#a1a1aa',font:{size:9}},grid:{color:'#f0f1f3'}},y:{ticks:{color:'#a1a1aa',font:{size:9}},grid:{color:'#f0f1f3'}}} }; }
 
 init();
 </script>
