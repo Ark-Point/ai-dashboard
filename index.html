@@ -35,19 +35,28 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
 .filter-btn.active { background:var(--text); color:var(--bg); border-color:var(--text); font-weight:600; }
 #memberButtons { display:contents; }
 #memberButtons .filter-btn:first-of-type { border-left:none; }
-.kpi-hero { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; }
-.kpi-hero-card { padding:2rem 0; border-bottom:1px solid var(--border); }
-.kpi-hero-value { font-family:var(--serif); font-size:clamp(3rem,6vw,4.5rem); font-weight:700; line-height:1; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; }
-.kpi-hero-value .unit { font-size:0.5em; color:var(--text-secondary); }
-.kpi-hero-label { font-family:var(--mono); font-size:0.68rem; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.05em; margin-top:0.5rem; }
-.kpi-hero-card.positive .kpi-hero-value { color:var(--accent); }
-.kpi-hero-card.warning .kpi-hero-value { color:var(--text-secondary); }
-.kpi-hero-card.danger .kpi-hero-value { color:var(--text-tertiary); }
-.kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:3.5rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.kpi-cell { padding:1.2rem 1.2rem 1.2rem 0; border-right:1px solid var(--border-light); }
-.kpi-cell:last-child { border-right:none; }
-.kpi-cell-value { font-family:var(--mono); font-size:1.4rem; font-weight:600; color:var(--text); font-variant-numeric:tabular-nums; line-height:1; }
-.kpi-cell-label { font-size:0.7rem; color:var(--text-tertiary); margin-top:0.3rem; }
+.levels-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; margin-bottom:3.5rem; }
+.level-block { border-top:2px solid var(--text); padding-top:1.2rem; }
+.level-block.disabled { border-top-color:var(--border); }
+.level-tag { font-family:var(--mono); font-size:0.6rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+.level-block.disabled .level-tag { color:var(--text-tertiary); }
+.level-kpi { margin-bottom:1.2rem; }
+.level-kpi:last-child { margin-bottom:0; }
+.level-kpi-value { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; }
+.level-kpi-value .unit { font-size:0.5em; color:var(--text-secondary); }
+.level-kpi-value.positive { color:var(--accent); }
+.level-kpi-value.warning { color:var(--text-secondary); }
+.level-kpi-value.danger { color:var(--text-tertiary); }
+.level-kpi-label { font-family:var(--mono); font-size:0.62rem; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.04em; margin-top:0.25rem; }
+.level-kpi-sub { display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--border-light); margin-top:0.8rem; padding-top:0.8rem; }
+.level-kpi-sub-item { }
+.level-kpi-sub-item:first-child { border-right:1px solid var(--border-light); padding-right:0.8rem; }
+.level-kpi-sub-item:last-child { padding-left:0.8rem; }
+.level-sub-value { font-family:var(--mono); font-size:1.1rem; font-weight:600; color:var(--text); font-variant-numeric:tabular-nums; line-height:1; }
+.level-sub-label { font-size:0.6rem; color:var(--text-tertiary); margin-top:0.2rem; }
+.level-block.disabled .level-kpi-value { color:var(--text-tertiary); font-size:clamp(1.6rem,3vw,2.2rem); }
+.level-block.disabled .level-sub-value { color:var(--text-tertiary); }
+.level-coming-soon { font-family:var(--mono); font-size:0.65rem; color:var(--text-tertiary); padding:0.6rem 0; }
 .section-label { font-family:var(--mono); font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-tertiary); margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid var(--border); }
 .lb-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; margin-bottom:3.5rem; }
 .lb-block-title { font-size:0.85rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
@@ -94,7 +103,7 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
 .missing-names { color:var(--accent); font-weight:500; margin-bottom:0.6rem; }
 .missing-block code { display:block; background:var(--surface-dim); padding:0.7rem 1rem; font-family:var(--mono); font-size:0.72rem; color:var(--accent); border-radius:2px; }
 .footer { text-align:left; color:var(--text-tertiary); font-size:0.65rem; font-family:var(--mono); padding-top:1.5rem; border-top:1px solid var(--border); letter-spacing:0.04em; }
-@media (max-width:768px) { .container { padding:1.5rem 1rem; } .kpi-hero { grid-template-columns:1fr; gap:0; } .kpi-row { grid-template-columns:repeat(2,1fr); } .charts-row { grid-template-columns:1fr; } .members-grid { grid-template-columns:1fr; } }
+@media (max-width:768px) { .container { padding:1.5rem 1rem; } .levels-grid { grid-template-columns:1fr; gap:1.5rem; } .charts-row { grid-template-columns:1fr; } .members-grid { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -124,8 +133,7 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
     </div>
 </div>
 
-<div class="kpi-hero" id="kpiHero"></div>
-<div class="kpi-row" id="kpiRow"></div>
+<div class="levels-grid" id="levelsGrid"></div>
 
 <div class="section-label">Leaderboard</div>
 <div class="lb-grid" id="leaderboard"></div>
@@ -230,22 +238,27 @@ function getFilteredData() {
     let totals = { sessions:0, messages:0, tool_calls:0, duration_min:0 };
     const ADVANCED_TOOLS = ['agent','skill','mcp','enterplanmode','exitplanmode'];
     let advancedCalls = 0;
+    let skillAgentCalls = 0;
     let activeMemberSet = new Set();
+    let activeDays = new Set();
     members.forEach(m => {
         const md = MEMBERS_DAILY[m] || {};
         let hasActivity = false;
         dates.forEach(d => {
             const s = md[d];
-            if (s) {
+            if (s && s.sessions > 0) {
                 totals.sessions += s.sessions;
                 totals.messages += s.messages;
                 totals.tool_calls += s.tool_calls;
                 totals.duration_min += s.duration_min;
                 hasActivity = true;
+                activeDays.add(d);
                 Object.entries(s.top_tools || {}).forEach(([t,c]) => {
-                    if (ADVANCED_TOOLS.some(a => t.toLowerCase().includes(a)) || t.toLowerCase().startsWith('mcp_')) advancedCalls += c;
+                    const tl = t.toLowerCase();
+                    if (ADVANCED_TOOLS.some(a => tl.includes(a)) || tl.startsWith('mcp_')) advancedCalls += c;
+                    if (tl === 'agent' || tl === 'skill') skillAgentCalls += c;
                 });
-                Object.values(s.skills_used || {}).forEach(c => { advancedCalls += c; });
+                Object.values(s.skills_used || {}).forEach(c => { advancedCalls += c; skillAgentCalls += c; });
             }
         });
         if (hasActivity) activeMemberSet.add(m);
@@ -253,29 +266,63 @@ function getFilteredData() {
     const totalMembers = members.length;
     const activeRate = totalMembers ? Math.round(activeMemberSet.size / totalMembers * 100) : 0;
     const depthRate = totals.tool_calls ? Math.round(advancedCalls / totals.tool_calls * 100) : 0;
-    return { members, dates, totals, activeRate, depthRate, activeCount: activeMemberSet.size, totalMembers };
+    const avgSessionsPerDay = activeDays.size ? (totals.sessions / activeDays.size) : 0;
+    const toolsPerSession = totals.sessions ? (totals.tool_calls / totals.sessions) : 0;
+    return { members, dates, totals, activeRate, depthRate, activeCount: activeMemberSet.size, totalMembers, avgSessionsPerDay, toolsPerSession, skillAgentCalls };
 }
 
 function updateDashboard() {
-    const { members, dates, totals, activeRate, depthRate, activeCount, totalMembers } = getFilteredData();
-    renderKPIs(totals, members, activeRate, depthRate, activeCount, totalMembers);
-    renderMemberCards(members, dates);
-    renderMemberTrendChart(members, dates);
-    renderDailyCompareChart(members, dates);
-    renderMissing(members);
+    const data = getFilteredData();
+    renderLevels(data);
+    renderMemberCards(data.members, data.dates);
+    renderMemberTrendChart(data.members, data.dates);
+    renderDailyCompareChart(data.members, data.dates);
+    renderMissing(data.members);
 }
 
-function renderKPIs(totals, members, activeRate, depthRate, activeCount, totalMembers) {
+function renderLevels(data) {
+    const { totals, activeRate, depthRate, activeCount, totalMembers, avgSessionsPerDay, toolsPerSession, skillAgentCalls } = data;
     const rc = activeRate>=80?'positive':activeRate>=50?'warning':'danger';
     const dc = depthRate>=30?'positive':depthRate>=10?'warning':'danger';
-    document.getElementById('kpiHero').innerHTML = `
-        <div class="kpi-hero-card ${rc}"><div class="kpi-hero-value">${activeRate}<span class="unit">%</span></div><div class="kpi-hero-label">Team Active Rate (${activeCount} / ${totalMembers})</div></div>
-        <div class="kpi-hero-card ${dc}"><div class="kpi-hero-value">${depthRate}<span class="unit">%</span></div><div class="kpi-hero-label">AI Depth (Advanced / Total)</div></div>`;
-    document.getElementById('kpiRow').innerHTML = `
-        <div class="kpi-cell"><div class="kpi-cell-value">${fmt(totals.sessions)}</div><div class="kpi-cell-label">Sessions</div></div>
-        <div class="kpi-cell"><div class="kpi-cell-value">${fmt(totals.messages)}</div><div class="kpi-cell-label">Conversations</div></div>
-        <div class="kpi-cell"><div class="kpi-cell-value">${fmt(totals.tool_calls)}</div><div class="kpi-cell-label">Tool Calls</div></div>
-        <div class="kpi-cell"><div class="kpi-cell-value">${fmtH(totals.duration_min)}</div><div class="kpi-cell-label">AI Time</div></div>`;
+    document.getElementById('levelsGrid').innerHTML = `
+        <div class="level-block">
+            <div class="level-tag">L1 &middot; Contact</div>
+            <div class="level-kpi">
+                <div class="level-kpi-value ${rc}">${activeRate}<span class="unit">%</span></div>
+                <div class="level-kpi-label">Team Active Rate (${activeCount} / ${totalMembers})</div>
+            </div>
+            <div class="level-kpi-sub">
+                <div class="level-kpi-sub-item"><div class="level-sub-value">${avgSessionsPerDay.toFixed(1)}</div><div class="level-sub-label">Avg Sessions / Day</div></div>
+                <div class="level-kpi-sub-item"><div class="level-sub-value">${fmtH(totals.duration_min)}</div><div class="level-sub-label">Total AI Time</div></div>
+            </div>
+        </div>
+        <div class="level-block">
+            <div class="level-tag">L2 &middot; Depth</div>
+            <div class="level-kpi">
+                <div class="level-kpi-value ${dc}">${depthRate}<span class="unit">%</span></div>
+                <div class="level-kpi-label">AI Depth (Advanced / Total)</div>
+            </div>
+            <div class="level-kpi-sub">
+                <div class="level-kpi-sub-item"><div class="level-sub-value">${toolsPerSession.toFixed(1)}</div><div class="level-sub-label">Tools / Session</div></div>
+                <div class="level-kpi-sub-item"><div class="level-sub-value">${fmt(skillAgentCalls)}</div><div class="level-sub-label">Skill + Agent Calls</div></div>
+            </div>
+        </div>
+        <div class="level-block disabled">
+            <div class="level-tag">L3 &middot; Output</div>
+            <div class="level-kpi">
+                <div class="level-kpi-value">&mdash;</div>
+                <div class="level-kpi-label">Commits / PRs / Deploys</div>
+            </div>
+            <div class="level-coming-soon">Data collection in progress</div>
+        </div>
+        <div class="level-block disabled">
+            <div class="level-tag">L4 &middot; Efficiency</div>
+            <div class="level-kpi">
+                <div class="level-kpi-value">&mdash;</div>
+                <div class="level-kpi-label">Output per Hour / Cycle Time</div>
+            </div>
+            <div class="level-coming-soon">Data collection in progress</div>
+        </div>`;
 }
 
 function renderMemberCards(members, dates) {
@@ -309,12 +356,14 @@ function renderMemberCards(members, dates) {
         const card = document.createElement('div');
         card.className = `member-card ${level}`;
         card.onclick = () => showDetail(m);
+        const tps = totals.sessions ? (totals.tool_calls / totals.sessions).toFixed(1) : '0';
         card.innerHTML = `
             <div class="level-indicator"></div>
             <div class="member-header"><h3>${esc(m)}</h3><span class="member-badge">${totals.sessions} sessions</span></div>
-            <div class="member-stats">
+            <div class="member-stats" style="grid-template-columns:repeat(5,1fr)">
                 <div class="stat-item"><div class="stat-value">${fmt(totals.messages)}</div><div class="stat-label">Conv</div></div>
                 <div class="stat-item"><div class="stat-value">${fmt(totals.tool_calls)}</div><div class="stat-label">Tools</div></div>
+                <div class="stat-item"><div class="stat-value">${tps}</div><div class="stat-label">Tools/Sess</div></div>
                 <div class="stat-item"><div class="stat-value">${fmtH(totals.duration)}</div><div class="stat-label">Time</div></div>
                 <div class="stat-item"><div class="stat-value">${fmtH(totals.sessions ? Math.round(totals.duration/totals.sessions) : 0)}</div><div class="stat-label">Avg</div></div>
             </div>
@@ -440,22 +489,22 @@ function renderLeaderboard() {
     const stats = members.map(m => {
         const t = getMemberTotals(m, dates);
         const skillCount = Object.values(t.skills).reduce((a,b)=>a+b, 0);
-        const efficiency = t.sessions > 0 ? Math.round((t.tool_calls / t.sessions) * (Object.keys(t.skills).length + 1)) : 0;
-        return {name:m, ...t, skillCount, uniqueSkills:Object.keys(t.skills).length, efficiency};
+        const toolsPerSess = t.sessions > 0 ? Math.round(t.tool_calls / t.sessions * 10) / 10 : 0;
+        return {name:m, ...t, skillCount, uniqueSkills:Object.keys(t.skills).length, toolsPerSess};
     }).filter(s => s.sessions > 0);
     const lb = document.getElementById('leaderboard');
     const boards = [
-        {title:'Most Active',key:'tool_calls',desc:'Total tool invocations'},
-        {title:'Skill Adoption',key:'uniqueSkills',desc:'Unique workflows used'},
-        {title:'Most Efficient',key:'efficiency',desc:'Tools/session × diversity'},
-        {title:'Top Skill Users',key:'skillCount',desc:'Total skill invocations'},
+        {title:'Most Active',tag:'L1',key:'sessions',desc:'Total sessions',fmtFn:fmt},
+        {title:'Power User',tag:'L1',key:'duration',desc:'AI active time',fmtFn:v=>fmtH(v)},
+        {title:'Deep User',tag:'L2',key:'toolsPerSess',desc:'Tools per session',fmtFn:v=>v.toFixed(1)},
+        {title:'Skill Master',tag:'L2',key:'uniqueSkills',desc:'Unique skills used',fmtFn:fmt},
     ];
     lb.innerHTML = boards.map(b => {
         const sorted = [...stats].sort((a,c) => c[b.key] - a[b.key]);
         const rows = sorted.slice(0,5).map((s,i) =>
-            `<div class="lb-row"><span class="lb-rank">${String(i+1).padStart(2,'0')}</span><span class="lb-name">${esc(s.name)}</span><span class="lb-value">${fmt(s[b.key])}</span></div>`
+            `<div class="lb-row"><span class="lb-rank">${String(i+1).padStart(2,'0')}</span><span class="lb-name">${esc(s.name)}</span><span class="lb-value">${b.fmtFn(s[b.key])}</span></div>`
         ).join('');
-        return `<div class="lb-block"><div class="lb-block-title">${b.title}</div><div class="lb-block-desc">${b.desc}</div>${rows||'<div style="color:var(--text-tertiary);padding:1rem 0;font-size:0.8rem">Collecting data</div>'}</div>`;
+        return `<div class="lb-block"><div class="lb-block-title">${b.title} <span style="font-size:0.6rem;color:var(--text-tertiary);font-family:var(--mono);font-weight:600;letter-spacing:0.06em">${b.tag}</span></div><div class="lb-block-desc">${b.desc}</div>${rows||'<div style="color:var(--text-tertiary);padding:1rem 0;font-size:0.8rem">Collecting data</div>'}</div>`;
     }).join('');
 }
 
