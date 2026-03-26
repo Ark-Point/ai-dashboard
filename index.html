@@ -250,7 +250,7 @@ function getFilteredData() {
         });
         if (hasActivity) activeMemberSet.add(m);
     });
-    const totalMembers = Object.keys(TEAM_MEMBERS).length;
+    const totalMembers = members.length;
     const activeRate = totalMembers ? Math.round(activeMemberSet.size / totalMembers * 100) : 0;
     const depthRate = totals.tool_calls ? Math.round(advancedCalls / totals.tool_calls * 100) : 0;
     return { members, dates, totals, activeRate, depthRate, activeCount: activeMemberSet.size, totalMembers };
