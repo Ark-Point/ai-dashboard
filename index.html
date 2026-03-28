@@ -63,6 +63,11 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
 .lb-block-desc { font-size:0.7rem; color:var(--text-tertiary); margin-bottom:0.8rem; }
 .lb-row { display:flex; align-items:baseline; padding:0.5rem 0; border-bottom:1px solid var(--border-light); }
 .lb-row:last-child { border-bottom:none; }
+.lb-expand { margin-top:0.2rem; }
+.lb-expand-btn { font-family:var(--mono); font-size:0.68rem; color:var(--text-tertiary); cursor:pointer; padding:0.4rem 0; list-style:none; }
+.lb-expand-btn:hover { color:var(--text-secondary); }
+.lb-expand-btn::-webkit-details-marker { display:none; }
+.lb-expand[open] .lb-expand-btn { color:var(--text-secondary); }
 .lb-rank { font-family:var(--mono); font-size:0.72rem; font-weight:600; color:var(--text-tertiary); width:1.8rem; }
 .lb-row:first-child .lb-rank { color:var(--accent); }
 .lb-name { flex:1; font-size:0.85rem; font-weight:500; color:var(--text); }
@@ -512,10 +517,19 @@ function renderLeaderboard() {
     stats.forEach(s => { s.toolsPerSess = s.sessions > 0 ? s.tool_calls / s.sessions : 0; });
     lb.innerHTML = boards.map(b => {
         const sorted = [...stats].sort((a,c) => c[b.key] - a[b.key]);
-        const rows = sorted.slice(0,5).map((s,i) =>
+        const top = sorted.slice(0,5);
+        const rest = sorted.slice(5);
+        const topRows = top.map((s,i) =>
             `<div class="lb-row"><span class="lb-rank">${String(i+1).padStart(2,'0')}</span><span class="lb-name">${esc(s.name)}</span><span class="lb-value">${b.fmt(s[b.key])}</span></div>`
         ).join('');
-        return `<div class="lb-block"><div class="lb-block-title">${b.title}<span class="lb-level-tag">${b.tag}</span></div><div class="lb-block-desc">${b.desc}</div>${rows||'<div style="color:var(--text-tertiary);padding:1rem 0;font-size:0.8rem">Collecting data</div>'}</div>`;
+        const restRows = rest.map((s,i) =>
+            `<div class="lb-row"><span class="lb-rank">${String(i+6).padStart(2,'0')}</span><span class="lb-name">${esc(s.name)}</span><span class="lb-value">${b.fmt(s[b.key])}</span></div>`
+        ).join('');
+        const expandable = rest.length > 0
+            ? `<details class="lb-expand"><summary class="lb-expand-btn">+${rest.length}명 더 보기</summary>${restRows}</details>`
+            : '';
+        return `<div class="lb-block"><div class="lb-block-title">${b.title}<span class="lb-level-tag">${b.tag}</span></div><div class="lb-block-desc">${b.desc}</div>${topRows||'<div style="color:var(--text-tertiary);padding:1rem 0;font-size:0.8rem">Collecting data</div>'}
+${expandable}</div>`;
     }).join('');
 }
 
