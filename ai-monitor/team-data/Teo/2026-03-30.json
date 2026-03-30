@@ -1,0 +1,291 @@
+{
+  "collector_version": "1.1",
+  "collected_at": "2026-03-30T12:25:31.286241+00:00",
+  "username": "Teo",
+  "period_hours": 96,
+  "summary": {
+    "total_sessions": 13,
+    "total_user_messages": 240,
+    "total_tool_calls": 192,
+    "total_duration_min": 918,
+    "avg_session_min": 71,
+    "top_tools": {
+      "Bash": 101,
+      "Read": 23,
+      "Edit": 11,
+      "ToolSearch": 9,
+      "WebSearch": 9,
+      "Write": 8,
+      "mcp__claude_ai_Slack__slack_search_public": 8,
+      "Agent": 7,
+      "WebFetch": 5,
+      "Glob": 3
+    },
+    "skills_used": {
+      "find-skills": 1
+    }
+  },
+  "sessions": [
+    {
+      "session_id": "e9c61e46-74ea-47f8-a8ed-86b366648feb",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T20:54:12.032000+09:00",
+      "ended_at": "2026-03-30T21:08:47.204000+09:00",
+      "duration_min": 15,
+      "cwd": "~",
+      "user_messages": 14,
+      "assistant_messages": 16,
+      "total_tool_calls": 8,
+      "tools": {
+        "Bash": 5,
+        "ToolSearch": 1,
+        "WebFetch": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-Teo"
+    },
+    {
+      "session_id": "9fc50dec-a724-427e-9bcc-bdc5b349d94a",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T20:19:49.798000+09:00",
+      "ended_at": "2026-03-30T20:55:32.387000+09:00",
+      "duration_min": 36,
+      "cwd": "~",
+      "user_messages": 33,
+      "assistant_messages": 47,
+      "total_tool_calls": 28,
+      "tools": {
+        "Bash": 7,
+        "WebSearch": 6,
+        "WebFetch": 4,
+        "Edit": 4,
+        "Write": 3,
+        "Read": 3,
+        "Grep": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-Teo"
+    },
+    {
+      "session_id": "501510c2-0607-4be5-86c1-65f1ba8554b8",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T20:54:51.101000+09:00",
+      "ended_at": "2026-03-30T20:55:02.876000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 1,
+      "assistant_messages": 2,
+      "total_tool_calls": 0,
+      "tools": {},
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-Teo"
+    },
+    {
+      "session_id": "51dff5fa-065f-4592-bcf0-b6aaeacfeb86",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T20:54:27.855000+09:00",
+      "ended_at": "2026-03-30T20:54:39.606000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 3,
+      "assistant_messages": 4,
+      "total_tool_calls": 1,
+      "tools": {
+        "Skill": 1
+      },
+      "skills_used": {
+        "find-skills": 1
+      },
+      "agents_used": {},
+      "project": "C--Users-Teo"
+    },
+    {
+      "session_id": "475d42bc-969e-41e4-986f-d8c4f8c8a2d9",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T16:26:54.428000+09:00",
+      "ended_at": "2026-03-30T18:17:17.973000+09:00",
+      "duration_min": 110,
+      "cwd": "~",
+      "user_messages": 12,
+      "assistant_messages": 16,
+      "total_tool_calls": 5,
+      "tools": {
+        "Agent": 2,
+        "WebSearch": 2,
+        "ToolSearch": 1
+      },
+      "skills_used": {},
+      "agents_used": {
+        "Explore": 2
+      },
+      "project": "C--Users-Teo"
+    },
+    {
+      "session_id": "d2128827-d457-4944-89a4-01497e835086",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T16:28:34.855000+09:00",
+      "ended_at": "2026-03-30T16:29:00.257000+09:00",
+      "duration_min": 0,
+      "cwd": "~",
+      "user_messages": 3,
+      "assistant_messages": 4,
+      "total_tool_calls": 2,
+      "tools": {
+        "Read": 1,
+        "Edit": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-Teo"
+    },
+    {
+      "session_id": "ac3cabbf-063e-4691-9d1c-0aa028029c61",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T16:14:29.719000+09:00",
+      "ended_at": "2026-03-30T16:25:07.600000+09:00",
+      "duration_min": 11,
+      "cwd": "~",
+      "user_messages": 44,
+      "assistant_messages": 75,
+      "total_tool_calls": 41,
+      "tools": {
+        "Bash": 35,
+        "Write": 2,
+        "Read": 2,
+        "Edit": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "C--Users-Teo"
+    },
+    {
+      "session_id": "96d8353b-5134-4746-a4fc-38ba7ed84a98",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T15:33:10.543000+09:00",
+      "ended_at": "2026-03-30T21:25:29.008000+09:00",
+      "duration_min": 352,
+      "cwd": "G:\\내 드라이브\\클로드코드 드라이브",
+      "user_messages": 33,
+      "assistant_messages": 53,
+      "total_tool_calls": 32,
+      "tools": {
+        "Bash": 27,
+        "Read": 2,
+        "ToolSearch": 1,
+        "WebSearch": 1,
+        "Glob": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "G-------------------"
+    },
+    {
+      "session_id": "b65b25f6-7b03-4816-a66b-f26eb00490e2",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T21:13:41.633000+09:00",
+      "ended_at": "2026-03-30T21:20:17.497000+09:00",
+      "duration_min": 7,
+      "cwd": "G:\\내 드라이브\\클로드코드 드라이브",
+      "user_messages": 8,
+      "assistant_messages": 10,
+      "total_tool_calls": 6,
+      "tools": {
+        "Read": 4,
+        "TodoWrite": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "G-------------------"
+    },
+    {
+      "session_id": "c7212042-f85a-4fb4-94af-135812116ab5",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T15:43:53.838000+09:00",
+      "ended_at": "2026-03-30T20:42:46.217000+09:00",
+      "duration_min": 299,
+      "cwd": "G:\\내 드라이브\\클로드코드 드라이브",
+      "user_messages": 14,
+      "assistant_messages": 20,
+      "total_tool_calls": 10,
+      "tools": {
+        "Bash": 4,
+        "Read": 2,
+        "Edit": 2,
+        "Glob": 1,
+        "Write": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "G-------------------"
+    },
+    {
+      "session_id": "64f775c5-394f-43e0-91f5-1d9ca56acdb8",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T15:42:19.294000+09:00",
+      "ended_at": "2026-03-30T16:06:37.994000+09:00",
+      "duration_min": 24,
+      "cwd": "G:\\내 드라이브\\클로드코드 드라이브",
+      "user_messages": 9,
+      "assistant_messages": 17,
+      "total_tool_calls": 5,
+      "tools": {
+        "Agent": 5
+      },
+      "skills_used": {},
+      "agents_used": {
+        "Explore": 1,
+        "general": 4
+      },
+      "project": "G-------------------"
+    },
+    {
+      "session_id": "c13fc0e0-c925-4625-bf24-f78410f4d13f",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T09:12:48.552000+09:00",
+      "ended_at": "2026-03-30T09:32:02.249000+09:00",
+      "duration_min": 19,
+      "cwd": "g:\\내 드라이브\\클로드코드 드라이브",
+      "user_messages": 46,
+      "assistant_messages": 58,
+      "total_tool_calls": 36,
+      "tools": {
+        "Bash": 12,
+        "mcp__claude_ai_Slack__slack_search_public": 8,
+        "ToolSearch": 6,
+        "Read": 4,
+        "mcp__claude_ai_Slack__slack_read_channel": 2,
+        "AskUserQuestion": 1,
+        "Glob": 1,
+        "mcp__claude_ai_Slack__slack_search_channels": 1,
+        "ListMcpResourcesTool": 1
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "G-------------------"
+    },
+    {
+      "session_id": "170fa976-9d41-457b-9735-0595018d2b38",
+      "date": "2026-03-30",
+      "started_at": "2026-03-30T08:24:30.568000+09:00",
+      "ended_at": "2026-03-30T09:09:25.319000+09:00",
+      "duration_min": 45,
+      "cwd": "G:\\내 드라이브\\클로드코드 드라이브",
+      "user_messages": 20,
+      "assistant_messages": 30,
+      "total_tool_calls": 18,
+      "tools": {
+        "Bash": 11,
+        "Read": 5,
+        "Edit": 2
+      },
+      "skills_used": {},
+      "agents_used": {},
+      "project": "G-------------------"
+    }
+  ]
+}
