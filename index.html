@@ -237,19 +237,20 @@ function getPeriodDates() {
     return ALL_DATES.slice(-currentPeriod);
 }
 
+const ADVANCED_TOOLS = ['agent','skill','enterplanmode','exitplanmode'];
+const BROWSER_MCP = ['chrome','browser','navigate','computer','javascript_tool','read_console','screenshot'];
+function isAdvancedTool(name) {
+    const n = name.toLowerCase();
+    if (BROWSER_MCP.some(b => n.includes(b))) return false;
+    if (ADVANCED_TOOLS.some(a => n.includes(a))) return true;
+    if (n.startsWith('mcp_') || n.startsWith('mcp__')) return true;
+    return false;
+}
+
 function getFilteredData() {
     const members = currentMemberFilter === 'all' ? Object.keys(MEMBERS_DAILY) : [currentMemberFilter];
     const dates = getPeriodDates();
     let totals = { sessions:0, messages:0, tool_calls:0, duration_min:0 };
-    const ADVANCED_TOOLS = ['agent','skill','enterplanmode','exitplanmode'];
-    const BROWSER_MCP = ['chrome','browser','navigate','computer','javascript_tool','read_console','screenshot'];
-    function isAdvancedTool(name) {
-        const n = name.toLowerCase();
-        if (BROWSER_MCP.some(b => n.includes(b))) return false;
-        if (ADVANCED_TOOLS.some(a => n.includes(a))) return true;
-        if (n.startsWith('mcp_') || n.startsWith('mcp__')) return true;
-        return false;
-    }
     let advancedCalls = 0;
     let activeMemberSet = new Set();
     members.forEach(m => {
