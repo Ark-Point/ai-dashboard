@@ -241,7 +241,15 @@ function getFilteredData() {
     const members = currentMemberFilter === 'all' ? Object.keys(MEMBERS_DAILY) : [currentMemberFilter];
     const dates = getPeriodDates();
     let totals = { sessions:0, messages:0, tool_calls:0, duration_min:0 };
-    const ADVANCED_TOOLS = ['agent','skill','mcp','enterplanmode','exitplanmode'];
+    const ADVANCED_TOOLS = ['agent','skill','enterplanmode','exitplanmode'];
+    const BROWSER_MCP = ['chrome','browser','navigate','computer','javascript_tool','read_console','screenshot'];
+    function isAdvancedTool(name) {
+        const n = name.toLowerCase();
+        if (BROWSER_MCP.some(b => n.includes(b))) return false;
+        if (ADVANCED_TOOLS.some(a => n.includes(a))) return true;
+        if (n.startsWith('mcp_') || n.startsWith('mcp__')) return true;
+        return false;
+    }
     let advancedCalls = 0;
     let activeMemberSet = new Set();
     members.forEach(m => {
@@ -256,7 +264,7 @@ function getFilteredData() {
                 totals.duration_min += s.duration_min;
                 hasActivity = true;
                 Object.entries(s.top_tools || {}).forEach(([t,c]) => {
-                    if (ADVANCED_TOOLS.some(a => t.toLowerCase().includes(a)) || t.toLowerCase().startsWith('mcp_')) advancedCalls += c;
+                    if (isAdvancedTool(t)) advancedCalls += c;
                 });
                 Object.values(s.skills_used || {}).forEach(c => { advancedCalls += c; });
             }
@@ -297,7 +305,6 @@ function renderKPIs(totals, members, activeRate, depthRate, activeCount, totalMe
     members.forEach(m => { dates.forEach(d => { if ((MEMBERS_DAILY[m]||{})[d]?.sessions) activeDays.add(d); }); });
     const avgSessDay = activeDays.size ? (totals.sessions / activeDays.size).toFixed(1) : '0';
     const toolsPerSess = totals.sessions ? (totals.tool_calls / totals.sessions).toFixed(1) : '0';
-    const ADVANCED_TOOLS = ['agent','skill','mcp','enterplanmode','exitplanmode'];
     let skillAgentCalls = 0;
     const filteredMembers = currentMemberFilter === 'all' ? Object.keys(MEMBERS_DAILY) : [currentMemberFilter];
     filteredMembers.forEach(m => {
@@ -305,7 +312,7 @@ function renderKPIs(totals, members, activeRate, depthRate, activeCount, totalMe
             const s = (MEMBERS_DAILY[m]||{})[d];
             if (!s) return;
             Object.entries(s.top_tools||{}).forEach(([t,c]) => {
-                if (ADVANCED_TOOLS.some(a => t.toLowerCase().includes(a)) || t.toLowerCase().startsWith('mcp_')) skillAgentCalls += c;
+                if (isAdvancedTool(t)) skillAgentCalls += c;
             });
             Object.values(s.skills_used||{}).forEach(c => { skillAgentCalls += c; });
         });
@@ -528,11 +535,20 @@ function renderLeaderboard() {
     const boards = [
         {title:'Most Active',tag:'L1',key:'sessions',desc:'Total sessions',fmt:v=>fmt(v)},
         {title:'Power User',tag:'L1',key:'duration',desc:'AI active time',fmt:v=>fmtH(v)},
-        {title:'Deep User',tag:'L2',key:'toolsPerSess',desc:'Tools per session',fmt:v=>v.toFixed(1)},
+        {title:'Deep User',tag:'L2',key:'delegationCount',desc:'Agent + Skill delegations',fmt:v=>fmt(v)},
         {title:'Skill Master',tag:'L2',key:'uniqueSkills',desc:'Unique skills used',fmt:v=>fmt(v)},
         {title:'Top Contributor',tag:'L3',key:'commits',desc:'Total commits',fmt:v=>fmt(v)},
     ];
-    stats.forEach(s => { s.toolsPerSess = s.sessions > 0 ? s.tool_calls / s.sessions : 0; });
+    stats.forEach(s => {
+        s.toolsPerSess = s.sessions > 0 ? s.tool_calls / s.sessions : 0;
+        const agentSkillKeys = ['agent','task','skill','sendmessage'];
+        let dc = 0;
+        Object.entries(s.tools).forEach(([t,c]) => {
+            if (agentSkillKeys.some(k => t.toLowerCase().includes(k))) dc += c;
+        });
+        dc += Object.values(s.skills).reduce((a,b)=>a+b, 0);
+        s.delegationCount = dc;
+    });
     lb.innerHTML = boards.map(b => {
         const sorted = [...stats].sort((a,c) => c[b.key] - a[b.key]);
         const top = sorted.slice(0,5);
